@@ -1,0 +1,105 @@
+ class OnceOrMany {
+ 
+         public static boolean singelton(String literal, String aNewString)    {
+               return ( literal == aNewString );
+         }
+         public static void main( String args[] ) {
+               String aString = "xyz";
+               System.out.println("1.  xyz == aString: " +     "xyz" == aString   );
+               /**
+               OUTPUT = false
+               precidence of + operetor is more than comparing(==) operator so after 
+               concatenation between string "1.  xyz == aString: " and "xyz"
+               resultant string will be stored in String pool.
+               Now compiler is comparing reference of these two different strings but 
+               both string are stored at different location in String pool as string 
+               content is not same so == opereator will return false 
+               */
+
+               System.out.println("2.  xyz == aString: " +   ( "xyz" == aString ) );
+               /**
+               OUTPUT:  2.  xyz == aString: true
+               While Solving braket first before concatenation reference of String "xyz" was compared with 
+               aString and both has same content because of that, these Strings are stored at same location in String pool.
+               . == operetor retured true which was concatenated with rest of the String.
+               */
+               
+
+              String newString = new String("xyz");
+              /**
+                   Above Statement created a new String object with value "xyz". A new memory location
+                   has been allocated in heap for this instance. compiler didn't checked existing Strings 
+                   with same values in String pool because. 
+              */
+               
+               System.out.println("xyz == new String(xyz)\n    " + ("xyz" == newString) );
+              /** Output: "xyz == new String(xyz)\n   xyz False" 
+               While solving braket first == operator is trying to compare reference two strings as both
+               strings are present at different location in heap, opreration will result false which was
+               later concatenate with rest of the string in print statement.
+              */
+              
+              System.out.println("1: " + singelton("xyz", "xyz"));
+              /** Output: 1: true
+              Above statement gives output true because we are comparing two String literals and 
+              All literals refer to same memory as Java keeps only one copy-- in Strings pool 
+              inside main heap memory (java 1.7 and above) --which are assigned with same value.
+              Thus Boolean operation ==  in singlton method returns True
+              */
+              
+              System.out.println("2: " + singelton("xyz", new String("xyz") ));
+              /**Output: 2: false 
+                While creating an string object compiler allocate them new memory on different 
+                location from the memory location of the same valued literals'.Because we are comparing
+                reference of String literal with String object, thus Boolean operation ==  in singlton method 
+                returns False
+              */
+
+              System.out.println("3: " + singelton("xyz", "xy" + "z"));
+              /**Output = 3: true
+               While solving () concatenation between string "xy" and "z", String "xyz" was passed to
+               the method singlton. As compiler is comparing reference of two String Literals with same values, 
+               all literals refer to same memory as Java keeps only one copy-- in Strings pool 
+               inside main heap memory (java 1.7 and above) --which are assigned with same value.
+               Thus Boolean operation ==  in singlton method returns True
+              */
+              
+              System.out.println("4: " + singelton("x" + "y" + "z", "xyz"));
+              /** Output = 4: true
+               While solving () concatenation between string "x","y" and "z" String "xyz" was passed to
+               the method singlton. As compiler is comparing reference of two String Literals with same values, 
+               all literals refer to same memory as Java keeps only one copy-- in Strings pool 
+               inside main heap memory (java 1.7 and above) --which are assigned with same value.
+               Thus Boolean operation ==  in singlton method returns True
+                */
+
+              System.out.println("5: " + singelton("x" + "y" + new String("z"), "xyz"));
+              /** Output = 5: false
+                above statement gives output false as memory to the string "z" was allocated during run time
+                so resultant concatenated string "xyz" was created on run time. Now both Strings "xyz" are not 
+                present at same memory location in heap thus Boolean operation ==  in singlton method returns False.
+              */
+              System.out.println("6: " + singelton("x" + ( "y" + "z"), "xyz"));
+              /**Output = 6: true
+
+               above statement gives output true as we are comparing reference of two String Literals with same values 
+               as after concatenation between string "y" and "z" String "yz" was further concatenated with 
+               String "x" and result "xyz" was passed to the method singlton. j
+               All literals refer to same memory as Java keeps only one copy-- in Strings pool 
+               inside main heap memory (java 1.7 and above) --which are assigned with same value.
+               Thus Boolean operation ==  in singlton method returns True
+              */
+              
+
+              System.out.println("7: " + singelton('x' +  "y" + "z", "xyz"));
+              /**
+               above statement gives output true as we are comparing reference of String Literals with same values
+               as after concatination between Char 'x' and String "y" String "xy" was created which
+               further concatenated with String "z" and resultant String "xyz" was passed to the 
+               method singlton. Java keeps only one copy-- on a particular location in main heap memory
+               (java 1.7 and above) --for all  the literal which are assigned with same value. 
+               Thus Boolean operation ==  in singlton method returns True 
+              */
+        }
+      }
+
