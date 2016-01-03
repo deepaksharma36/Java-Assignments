@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html class=" js" prefix="og: http://ogp.me/ns#" lang="en-US"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+<meta property="og:image" content="http://d1gjlxt8vb0knt.cloudfront.net//wp-content/uploads/gfg_200X200.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="200">
+<meta property="og:image:height" content="200">
+
+<title>Applications of Depth First Search - GeeksforGeeks</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.geeksforgeeks.org/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://d1gjlxt8vb0knt.cloudfront.net//wp-content/themes/iconic-one/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<!-- This site is optimized with the Yoast SEO plugin v2.3.5 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="is_files/a_003.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Applications of Depth First Search - GeeksforGeeks">
+<meta property="og:description" content="Depth-first search (DFS) is an algorithm (or technique) for traversing a graph. Following are the problems that use DFS as a bulding block. 1) For an unweighted graph, DFS traversal of the graph produces the minimum spanning tree and all pair shortest path tree. 2) Detecting cycle in a graph A graph has cycle if… Read More »">
+<meta property="og:url" content="http://www.geeksforgeeks.org/applications-of-depth-first-search/">
+<meta property="og:site_name" content="GeeksforGeeks">
+<meta property="article:tag" content="Graph">
+<meta property="article:section" content="Graph">
+<meta property="article:published_time" content="2011-03-25T16:31:51+00:00">
+<meta property="article:modified_time" content="2014-02-09T19:37:12+00:00">
+<meta property="og:updated_time" content="2014-02-09T19:37:12+00:00">
+<!-- / Yoast SEO plugin. -->
+
+		<script src="is_files/async-ads.js" async=""></script><script src="is_files/ga.js" async="" type="text/javascript"></script><script src="is_files/sdk.js" id="facebook-jssdk"></script><script src="is_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.geeksforgeeks.org\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script type="text/javascript" src="is_files/wp-emoji-release.js"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="wp-pagenavi-css" href="is_files/pagenavi-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="themonic-fonts-css" href="is_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="themonic-style-css" href="is_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="custom-style-css" href="is_files/custom.css" type="text/css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='themonic-ie-css'  href='http://d1gjlxt8vb0knt.cloudfront.net//wp-content/themes/iconic-one/css/ie.css' type='text/css' media='all' />
+<![endif]-->
+<meta name="generator" content="WordPress 4.2.4">
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<script async="" src="is_files/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9465609616171866",
+    enable_page_level_ads: true
+  });
+</script>
+<script src="is_files/embed.js" async="" type="text/javascript"></script><script src="is_files/count.js" type="text/javascript" async=""></script><script type="text/javascript" src="is_files/jsapi"></script><link rel="stylesheet" href="is_files/defaulten.css" type="text/css"><link rel="stylesheet" href="is_files/default.css" type="text/css"><script src="is_files/defaulten.js" type="text/javascript"></script><script src="is_files/count-data.js"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #6AA84F;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #000000;
+background-color: #6AA84F;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #E9E9E9;
+background-color: #E9E9E9;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #FF9900;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #FF9900;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #006600;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #EC4E20;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #CA7700;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #006600;
+}
+.gsc-cursor-page {
+color: #006600;
+}
+a.gsc-trailing-more-results:link {
+color: #006600;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #000000;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #008000;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #008000;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #E9E9E9;
+background-color: #FFFFFF;
+color: #006600;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #FF9900;
+background-color: #FFFFFF;
+color: #EC4E20;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #336699;
+background-color: #FFFFFF;
+}
+.gsc-completion-title {
+color: #006600;
+}
+.gsc-completion-snippet {
+color: #000000;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #006600;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #EC4E20;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #CA7700;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #006600;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #000000;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #008000;
+}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gscsep_a{display:none}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+<body class="single single-post postid-11644 single-format-standard custom-background custom-background-white custom-font-enabled">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+					<hgroup>
+			<a href="http://www.geeksforgeeks.org/" title="GeeksforGeeks" rel="home">GeeksforGeeks</a>
+				<br ...=""> <a class="site-description">A computer science portal for geeks</a>
+		</hgroup>
+
+<div style="float:right;">
+<hgroup style="float:right;">   
+
+<a style="padding:0px 25px 0px 0px; font-size:25px; font-family: Georgia,Times New Roman,Times,Helvetica,Arial,serif; font-weight: lighter; letter-spacing: -0.05em; text-decoration:none;" href="http://code.geeksforgeeks.org/">IDE</a>
+
+<a style="padding:0px 25px 0px 0px; font-size:25px; font-family: Georgia,Times New Roman,Times,Helvetica,Arial,serif; font-weight: lighter; letter-spacing: -0.05em; text-decoration:none;" href="http://qa.geeksforgeeks.org/">Q&amp;A</a>
+
+<a style="padding:0px 30px 0px 0px; font-size:25px; font-family: Georgia,Times New Roman,Times,Helvetica,Arial,serif; font-weight: lighter; letter-spacing: -0.05em; text-decoration:none;" href="http://geeksquiz.com/">GeeksQuiz</a>
+
+</hgroup><br><br>
+
+<span style="display:inline-block; width:300px;float:right;">
+<script>
+  (function() {
+    var cx = '009682134359037907028:tj6eafkv_be';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="___gcse_0"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_50 " id="gs_id50" style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti50"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none; background: rgb(255, 255, 255) url(&quot;http://www.google.com/cse/static/en/google_custom_search_watermark.gif&quot;) no-repeat scroll left center;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st50" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb50" class="gscb_a">×</span></a></div></td></tr></tbody></table></div><input id="bgresponse" name="bgresponse" type="hidden"></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="is_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="is_files/small-logo.png"></td></tr></tbody></table></form><div class="gsc-results-wrapper-overlay"><div tabindex="0" class="gsc-results-close-btn"></div><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td><td class="gsc-orderby-container"><div class="gsc-orderby-invisible"><div class="gsc-orderby-label gsc-inline-block">Sort by:</div><div class="gsc-option-menu-container gsc-inline-block"><div class="gsc-selected-option-container gsc-inline-block"><div class="gsc-selected-option">Relevance</div><div class="gsc-option-selector"></div></div><div class="gsc-option-menu-invisible"><div class="gsc-option-menu-item gsc-option-menu-item-highlighted"><div class="gsc-option">Relevance</div></div><div class="gsc-option-menu-item"><div class="gsc-option">Date</div></div></div></div></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div><div tabindex="0" class="gsc-modal-background-image"></div></div></div></div>
+
+<style type="text/css">
+  .gsc-control-cse {
+     padding: 0px 10px;
+  } 
+
+  .gsc-control-cse {
+    font-family: "Trebuchet MS", sans-serif;
+    /*border-color: #E1F3DA;*/
+    /*background-color: #E1F3DA;*/
+  }
+  input.gsc-input {
+    border-color: #94CC7A;
+  }
+  input.gsc-search-button {
+    border-color: #94CC7A;
+    background-color: #4CB96B;
+    margin-top:7px;
+  }
+  .gsc-tabHeader.gsc-tabhInactive {
+    border-color: #A9DA92;
+    background-color: #FFFFFF;
+  }
+  .gsc-tabHeader.gsc-tabhActive {
+    border-color: #A9DA92;
+    background-color: #A9DA92;
+  }
+  .gsc-tabsArea {
+    border-color: #A9DA92;
+  }
+  .gsc-webResult.gsc-result {
+    border-color: #A9DA92;
+    background-color: #FFFFFF;
+  }
+  .gsc-webResult.gsc-result:hover {
+    border-color: #A9DA92;
+    background-color: #FFFFFF;
+  }
+  .gs-webResult.gs-result a.gs-title:link,
+  .gs-webResult.gs-result a.gs-title:link b {
+    color: #009900;
+  }
+  .gs-webResult.gs-result a.gs-title:visited,
+  .gs-webResult.gs-result a.gs-title:visited b {
+    color: #009900;
+  }
+  .gs-webResult.gs-result a.gs-title:hover,
+  .gs-webResult.gs-result a.gs-title:hover b {
+    color: #003300;
+  }
+  .gs-webResult.gs-result a.gs-title:active,
+  .gs-webResult.gs-result a.gs-title:active b {
+    color: #009900;
+  }
+  .gsc-cursor-page {
+    color: #009900;
+  }
+  a.gsc-trailing-more-results:link {
+    color: #009900;
+  }
+  .gs-webResult.gs-result .gs-snippet {
+    color: #454545;
+  }
+  .gs-webResult.gs-result .gs-visibleUrl {
+    color: #33cc00;
+  }
+  .gs-webResult.gs-result .gs-visibleUrl-short {
+    color: #33cc00;
+  }
+  .gs-webResult.gs-result .gs-visibleUrl-short {
+    display: none;
+  }
+  .gs-webResult.gs-result .gs-visibleUrl-long {
+    display: block;
+  }
+  .gsc-cursor-box {
+    border-color: #A9DA92;
+  }
+  .gsc-results .gsc-cursor-page {
+    border-color: #A9DA92;
+    background-color: #FFFFFF;
+  }
+  .gsc-results .gsc-cursor-page.gsc-cursor-current-page {
+    border-color: #A9DA92;
+    background-color: #A9DA92;
+  }
+  .gs-promotion.gs-result {
+    border-color: #94CC7A;
+    background-color: #CBE8B4;
+  }
+  .gs-promotion.gs-result a.gs-title:link {
+    color: #0066CC;
+  }
+  .gs-promotion.gs-result a.gs-title:visited {
+    color: #0066CC;
+  }
+  .gs-promotion.gs-result a.gs-title:hover {
+    color: #0066CC;
+  }
+  .gs-promotion.gs-result a.gs-title:active {
+    color: #0066CC;
+  }
+  .gs-promotion.gs-result .gs-snippet {
+    color: #454545;
+  }
+  .gs-promotion.gs-result .gs-visibleUrl,
+  .gs-promotion.gs-result .gs-visibleUrl-short {
+    color: #815FA7;
+  }
+  .gsib_a {
+    padding : 2px;
+  }
+</style>    
+</span>
+</div>
+
+		
+		
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div class="menu-iconic-container"><ul id="menu-top" class="nav-menu"><li id="menu-item-135003" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-135003"><a href="http://www.geeksforgeeks.org/">Home</a></li>
+<li id="menu-item-135004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-135004"><a title="Algorithms" href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/">Algo</a>
+<ul class="sub-menu">
+	<li id="menu-item-135030" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135030"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#AnalysisofAlgorithms">Analysis of Algorithms</a></li>
+	<li id="menu-item-135031" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135031"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#SearchingandSorting">Searching and Sorting</a></li>
+	<li id="menu-item-135032" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135032"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GreedyAlgorithms">Greedy Algorithms</a></li>
+	<li id="menu-item-135033" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135033"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#DynamicProgramming">Dynamic Programming</a></li>
+	<li id="menu-item-135034" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135034"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#PatternSearching">Pattern Searching</a></li>
+	<li id="menu-item-135035" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135035"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#OtherStringAlgorithms">Other String Algorithms</a></li>
+	<li id="menu-item-135036" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135036"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#Backtracking">Backtracking</a></li>
+	<li id="menu-item-135037" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135037"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#DivideandConquer">Divide and Conquer</a></li>
+	<li id="menu-item-135038" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135038"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GeometricAlgorithms">Geometric Algorithms</a></li>
+	<li id="menu-item-135039" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135039"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#MathematicalAlgorithms">Mathematical Algorithms</a></li>
+	<li id="menu-item-135040" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135040"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#BitAlgorithms">Bit Algorithms</a></li>
+	<li id="menu-item-135041" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135041"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GraphAlgorithms">Graph Algorithms</a></li>
+	<li id="menu-item-135042" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135042"><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#RandomizedAlgorithms">Randomized Algorithms</a></li>
+</ul>
+</li>
+<li id="menu-item-135010" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-135010"><a title="Data Structures" href="http://www.geeksforgeeks.org/data-structures/">DS</a>
+<ul class="sub-menu">
+	<li id="menu-item-135045" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135045"><a href="http://www.geeksforgeeks.org/data-structures/#LinkedList">Linked List</a></li>
+	<li id="menu-item-135046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135046"><a href="http://www.geeksforgeeks.org/data-structures/#Stack">Stack</a></li>
+	<li id="menu-item-135047" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135047"><a href="http://www.geeksforgeeks.org/data-structures/#Queue">Queue</a></li>
+	<li id="menu-item-135048" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135048"><a href="http://www.geeksforgeeks.org/data-structures/#BinaryTree">Binary Tree</a></li>
+	<li id="menu-item-135049" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135049"><a href="http://www.geeksforgeeks.org/data-structures/#BinarySearchTree">Binary Search Tree</a></li>
+	<li id="menu-item-135050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135050"><a href="http://www.geeksforgeeks.org/data-structures/#Heap">Heap</a></li>
+	<li id="menu-item-135051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135051"><a href="http://www.geeksforgeeks.org/data-structures/#Hashing">Hashing</a></li>
+	<li id="menu-item-135052" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135052"><a href="http://www.geeksforgeeks.org/data-structures/#Graph">Graph</a></li>
+	<li id="menu-item-135053" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135053"><a href="http://www.geeksforgeeks.org/data-structures/#AdvancedDataStructure">Advanced Data Structure</a></li>
+	<li id="menu-item-135054" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135054"><a href="http://www.geeksforgeeks.org/data-structures/#Array">Array</a></li>
+	<li id="menu-item-135055" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135055"><a href="http://www.geeksforgeeks.org/data-structures/#Matrix">Matrix</a></li>
+	<li id="menu-item-135056" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135056"><a href="http://www.geeksforgeeks.org/data-structures/#Misc">Misc</a></li>
+</ul>
+</li>
+<li id="menu-item-135011" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135011"><a href="http://www.geeksforgeeks.org/gate-corner/">GATE</a></li>
+<li id="menu-item-135014" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135014"><a href="http://www.geeksforgeeks.org/about/interview-corner/">Interview</a></li>
+<li id="menu-item-135015" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135015"><a href="http://qa.geeksforgeeks.org/">Q&amp;A</a></li>
+<li id="menu-item-135006" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135006"><a href="http://www.geeksforgeeks.org/c/">C</a></li>
+<li id="menu-item-135007" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135007"><a href="http://www.geeksforgeeks.org/c-plus-plus/">C++</a></li>
+<li id="menu-item-135012" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135012"><a href="http://www.geeksforgeeks.org/java/">Java</a></li>
+<li id="menu-item-135748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135748"><a href="http://geeksquiz.com/books/">Book</a></li>
+<li id="menu-item-135009" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135009"><a href="http://www.geeksforgeeks.org/contribute/">Contribute</a></li>
+<li id="menu-item-135016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135016"><a href="http://qa.geeksforgeeks.org/index.php?qa=ask">Ask a Q</a></li>
+<li id="menu-item-135077" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135077"><a href="https://play.google.com/store/apps/details?id=free.programming.programming">AndroidApp</a></li>
+<li id="menu-item-135367" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135367"><a href="http://www.geeksforgeeks.org/category/guestblogs/">GBlog</a></li>
+<li id="menu-item-136004" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-136004"><a href="http://www.geeksforgeeks.org/category/project/">Project</a></li>
+<li id="menu-item-135019" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135019"><a href="http://www.geeksforgeeks.org/category/c-arrays/">Array</a></li>
+<li id="menu-item-135022" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135022"><a href="http://www.geeksforgeeks.org/category/c-strings/">String</a></li>
+<li id="menu-item-135937" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135937"><a href="http://www.geeksforgeeks.org/category/matrix/">Matrix</a></li>
+<li id="menu-item-135023" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135023"><a href="http://www.geeksforgeeks.org/category/linked-list/">Linked List</a></li>
+<li id="menu-item-135029" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135029"><a href="http://www.geeksforgeeks.org/category/stack/">Stack</a></li>
+<li id="menu-item-135932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135932"><a href="http://www.geeksforgeeks.org/category/queue/">Queue</a></li>
+<li id="menu-item-135941" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135941"><a href="http://www.geeksforgeeks.org/category/heap/">Heap</a></li>
+<li id="menu-item-135020" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135020"><a href="http://www.geeksforgeeks.org/category/tree/">Tree</a></li>
+<li id="menu-item-135940" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135940"><a href="http://www.geeksforgeeks.org/category/binary-search-tree/">BST</a></li>
+<li id="menu-item-135024" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-135024"><a href="http://www.geeksforgeeks.org/category/graph/">Graph</a></li>
+<li id="menu-item-135017" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135017"><a href="http://www.geeksforgeeks.org/category/c-puzzles/">C/C++</a></li>
+<li id="menu-item-135027" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135027"><a href="http://www.geeksforgeeks.org/category/bit-magic/">Bit</a></li>
+<li id="menu-item-135021" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135021"><a href="http://www.geeksforgeeks.org/category/multiple-choice-question/">MCQ</a></li>
+<li id="menu-item-135018" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135018"><a href="http://www.geeksforgeeks.org/category/c-programs/">Misc</a></li>
+<li id="menu-item-135025" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135025"><a href="http://www.geeksforgeeks.org/category/program-output/">O/P</a></li>
+<li id="menu-item-135028" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135028"><a href="http://www.geeksforgeeks.org/category/gfact/">GFact</a></li>
+</ul><select class="selectnav" id="selectnav1"><option selected="selected" value="">Menu</option><option value="http://www.geeksforgeeks.org/">Home</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/">Algo</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#AnalysisofAlgorithms">- Analysis of Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#SearchingandSorting">- Searching and Sorting</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GreedyAlgorithms">- Greedy Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#DynamicProgramming">- Dynamic Programming</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#PatternSearching">- Pattern Searching</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#OtherStringAlgorithms">- Other String Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#Backtracking">- Backtracking</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#DivideandConquer">- Divide and Conquer</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GeometricAlgorithms">- Geometric Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#MathematicalAlgorithms">- Mathematical Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#BitAlgorithms">- Bit Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#GraphAlgorithms">- Graph Algorithms</option><option value="http://www.geeksforgeeks.org/fundamentals-of-algorithms/#RandomizedAlgorithms">- Randomized Algorithms</option><option value="http://www.geeksforgeeks.org/data-structures/">DS</option><option value="http://www.geeksforgeeks.org/data-structures/#LinkedList">- Linked List</option><option value="http://www.geeksforgeeks.org/data-structures/#Stack">- Stack</option><option value="http://www.geeksforgeeks.org/data-structures/#Queue">- Queue</option><option value="http://www.geeksforgeeks.org/data-structures/#BinaryTree">- Binary Tree</option><option value="http://www.geeksforgeeks.org/data-structures/#BinarySearchTree">- Binary Search Tree</option><option value="http://www.geeksforgeeks.org/data-structures/#Heap">- Heap</option><option value="http://www.geeksforgeeks.org/data-structures/#Hashing">- Hashing</option><option value="http://www.geeksforgeeks.org/data-structures/#Graph">- Graph</option><option value="http://www.geeksforgeeks.org/data-structures/#AdvancedDataStructure">- Advanced Data Structure</option><option value="http://www.geeksforgeeks.org/data-structures/#Array">- Array</option><option value="http://www.geeksforgeeks.org/data-structures/#Matrix">- Matrix</option><option value="http://www.geeksforgeeks.org/data-structures/#Misc">- Misc</option><option value="http://www.geeksforgeeks.org/gate-corner/">GATE</option><option value="http://www.geeksforgeeks.org/about/interview-corner/">Interview</option><option value="http://qa.geeksforgeeks.org/">Q&amp;A</option><option value="http://www.geeksforgeeks.org/c/">C</option><option value="http://www.geeksforgeeks.org/c-plus-plus/">C++</option><option value="http://www.geeksforgeeks.org/java/">Java</option><option value="http://geeksquiz.com/books/">Book</option><option value="http://www.geeksforgeeks.org/contribute/">Contribute</option><option value="http://qa.geeksforgeeks.org/index.php?qa=ask">Ask a Q</option><option value="https://play.google.com/store/apps/details?id=free.programming.programming">AndroidApp</option><option value="http://www.geeksforgeeks.org/category/guestblogs/">GBlog</option><option value="http://www.geeksforgeeks.org/category/project/">Project</option><option value="http://www.geeksforgeeks.org/category/c-arrays/">Array</option><option value="http://www.geeksforgeeks.org/category/c-strings/">String</option><option value="http://www.geeksforgeeks.org/category/matrix/">Matrix</option><option value="http://www.geeksforgeeks.org/category/linked-list/">Linked List</option><option value="http://www.geeksforgeeks.org/category/stack/">Stack</option><option value="http://www.geeksforgeeks.org/category/queue/">Queue</option><option value="http://www.geeksforgeeks.org/category/heap/">Heap</option><option value="http://www.geeksforgeeks.org/category/tree/">Tree</option><option value="http://www.geeksforgeeks.org/category/binary-search-tree/">BST</option><option value="http://www.geeksforgeeks.org/category/graph/">Graph</option><option value="http://www.geeksforgeeks.org/category/c-puzzles/">C/C++</option><option value="http://www.geeksforgeeks.org/category/bit-magic/">Bit</option><option value="http://www.geeksforgeeks.org/category/multiple-choice-question/">MCQ</option><option value="http://www.geeksforgeeks.org/category/c-programs/">Misc</option><option value="http://www.geeksforgeeks.org/category/program-output/">O/P</option><option value="http://www.geeksforgeeks.org/category/gfact/">GFact</option></select></div>		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+							
+	<article id="post-11644" class="post-11644 post type-post status-publish format-standard hentry category-graph tag-graph">
+				<header class="entry-header">
+						<h1 class="entry-title">Applications of Depth First Search</h1>
+				
+			</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<p>Depth-first search (DFS) is an algorithm (or technique) for traversing a graph. <span id="more-11644"></span></p>
+<p>Following are the problems that use DFS as a bulding block.</p>
+<p><strong>1)</strong> For an unweighted graph, DFS traversal of the graph produces the minimum spanning tree and all pair shortest path tree.</p>
+<p><strong>2) Detecting cycle in a graph </strong><br>
+A graph has cycle if and only if we see a back edge during DFS.  So we 
+can run DFS for the graph and check for back edges.  (See <a href="http://people.csail.mit.edu/thies/6.046-web/recitation9.txt">this </a> for details)</p>
+<p><strong>3) Path Finding</strong><br>
+We can specialize the DFS algorithm to find a path between two given vertices u and z.<br>
+i) Call DFS(G, u) with u as the start vertex.<br>
+ii) Use a stack S to keep track of the path between the start vertex and the current vertex.<br>
+iii) As soon as destination vertex z is encountered, return the path as the<br>
+contents of the stack</p>
+<p>See <a href="http://ww3.algorithmdesign.net/handouts/DFS.pdf">this </a>for details.</p>
+<p><strong>4) <a href="http://en.wikipedia.org/wiki/Topological_sorting">Topological Sorting</a></strong><br>
+See <a href="http://cow.ceng.metu.edu.tr/Courses/download_courseFile.php?id=2027">this </a> for details.</p>
+<p><strong>5) To test if a graph is <a href="http://en.wikipedia.org/wiki/Bipartite_graph">bipartite</a></strong><br>
+We can augment either BFS or DFS when we first discover a new vertex, 
+color it opposited its parents, and for each other edge, check it 
+doesn’t link two vertices of the same color. The first vertex in any 
+connected component can be red or black!  See <a href="http://www8.cs.umu.se/kurser/TDBAfl/VT06/algorithms/LEC/LECTUR16/NODE16.HTM">this </a>for details.</p>
+<p><strong>6) Finding <a href="http://en.wikipedia.org/wiki/Strongly_connected_component">Strongly Connected Components</a> of a graph</strong> A directed graph is called strongly connected if there is a path from each vertex in the graph to every other vertex.  (See <a href="http://www.personal.kent.edu/%7Ermuhamma/Algorithms/MyAlgorithms/GraphAlgor/strongComponent.htm">this </a>for DFS based algo for finding Strongly Connected Components)<br>
+<strong><br>
+7) Solving puzzles with only one solution</strong>, such as mazes. (DFS 
+can be adapted to find all solutions to a maze by only including nodes 
+on the current path in the visited set.)<br>
+<strong><br>
+Sources:</strong><br>
+<a href="http://www8.cs.umu.se/kurser/TDBAfl/VT06/algorithms/LEC/LECTUR16/NODE16.HTM">http://www8.cs.umu.se/kurser/TDBAfl/VT06/algorithms/LEC/LECTUR16/NODE16.HTM</a><br>
+<a href="http://en.wikipedia.org/wiki/Depth-first_search">http://en.wikipedia.org/wiki/Depth-first_search</a><br>
+<a href="http://www.personal.kent.edu/%7Ermuhamma/Algorithms/MyAlgorithms/GraphAlgor/depthSearch.htm">http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/GraphAlgor/depthSearch.htm</a><br>
+<a href="http://ww3.algorithmdesign.net/handouts/DFS.pdf">http://ww3.algorithmdesign.net/handouts/DFS.pdf</a></p>
+
+			<script async="" src="is_files/adsbygoogle.js"></script>
+<!-- Big Rectangle Blog Bottom -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-9465609616171866" data-ad-slot="4061219431"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br><br>
+		</div><!-- .entry-content -->
+				
+		
+
+		<footer class="entry-meta">
+		<span class="post-comment"><a data-disqus-identifier="11644 http://geeksforgeeks.org/?p=11644" href="http://www.geeksforgeeks.org/applications-of-depth-first-search/#disqus_thread" class="commentslink">28 Comments</a> <!--added for comments by Shubham-->
+		</span><span>Category: <a href="http://www.geeksforgeeks.org/category/graph/" rel="category tag">Graph</a></span> <span>Tags: <a href="http://www.geeksforgeeks.org/tag/graph/" rel="tag">Graph</a></span> 
+           	          	
+					</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+<div class="related_posts"><h3>Related Posts:</h3><ul><li><a href="http://www.geeksforgeeks.org/iterative-depth-first-traversal/" title="Iterative Depth First Traversal of Graph">Iterative Depth First Traversal of Graph</a></li><li><a href="http://www.geeksforgeeks.org/print-all-jumping-numbers-smaller-than-or-equal-to-a-given-value/" title="Print all Jumping Numbers smaller than or equal to a given value">Print all Jumping Numbers smaller than or equal to a given value</a></li><li><a href="http://www.geeksforgeeks.org/hopcroft-karp-algorithm-for-maximum-matching-set-2-implementation/" title="Hopcroft–Karp Algorithm for Maximum Matching | Set 2 (Implementation)">Hopcroft–Karp Algorithm for Maximum Matching | Set 2 (Implementation)</a></li><li><a href="http://www.geeksforgeeks.org/hopcroft-karp-algorithm-for-maximum-matching-set-1-introduction/" title="Hopcroft–Karp Algorithm for Maximum Matching | Set 1 (Introduction)">Hopcroft–Karp Algorithm for Maximum Matching | Set 1 (Introduction)</a></li><li><a href="http://www.geeksforgeeks.org/length-of-shortest-chain-to-reach-a-target-word/" title="Length of shortest chain to reach a target word">Length of shortest chain to reach a target word</a></li><li><a href="http://www.geeksforgeeks.org/find-same-contacts-in-a-list-of-contacts/" title="Find same contacts in a list of contacts">Find same contacts in a list of contacts</a></li><li><a href="http://www.geeksforgeeks.org/minimum-time-required-so-that-all-oranges-become-rotten/" title="Minimum time required to rot all oranges">Minimum time required to rot all oranges</a></li><li><a href="http://www.geeksforgeeks.org/kargers-algorithm-for-minimum-cut-set-2-analysis-and-applications/" title="Karger’s algorithm for Minimum Cut | Set 2 (Analysis and Applications)">Karger’s algorithm for Minimum Cut | Set 2 (Analysis and Applications)</a></li></ul></div><br><br>
+
+<!-- Added on 29 Oct 2015 for next and previous from same category -->
+<nav class="nav-single">
+					<div class="assistive-text">Post navigation</div>
+					<span class="nav-previous"><a href="http://www.geeksforgeeks.org/applications-of-minimum-spanning-tree/" rel="prev">Previous post in category</a></span>
+					<span class="nav-next"><a href="http://www.geeksforgeeks.org/g-fact-83/" rel="next">Next post in category</a></span>
+				</nav><!-- .nav-single -->
+
+
+<script src="is_files/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        function request(payload){
+            $.ajax({
+                url:"http://qa.geeksforgeeks.org/gfgRatings.php",
+                method:"POST",
+                dataType:"html",
+                data:payload,
+                xhrFields:{withCredentials:true},
+                success:function(response){
+                    $("#ratePlugin").html(response);
+                },
+                complete:function(){
+                    $(".box").click(function(){
+                        request({post_id:$("#ratePlugin").attr("pid"),rating:$(this).attr("rating"),url:window.location.href});
+                    });
+                }
+            });
+        }
+        request({post_id:$("#ratePlugin").attr("pid"),url:window.location.href});
+    });
+</script>
+
+<div pid="11644" id="ratePlugin">		<div class="techno">
+			
+			<span id="rating_box" class="avg-rating level-0">0</span>
+			<span class="rating-desc"> Average Difficulty : <b id="diff-rating">0/5.0</b><br>
+									<span id="vote_count">No votes yet.</span>
+							</span>
+			<br>
+			<br>
+							(<a href="http://auth.geeksforgeeks.org/?to=http://www.geeksforgeeks.org/applications-of-depth-first-search/">Login</a> to Rate)
+						<br>
+		</div>
+
+</div>
+
+<br><br>
+
+<script>
+  window.fbAsyncInit=function() {
+    FB.init({
+      appId      : \'380853768781431\',
+      xfbml      : true,
+      version    : \'v2.3\'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, \'script\', \'facebook-jssdk\'));
+</script>
+<div fb-iframe-plugin-query="app_id=138031159685820&amp;container_width=656&amp;href=http%3A%2F%2Fwww.geeksforgeeks.org%2Fapplications-of-depth-first-search%2F&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=450" fb-xfbml-state="rendered" class="fb-like fb_iframe_widget" data-share="true" data-width="450" data-show-faces="true"><span style="vertical-align: bottom; width: 450px; height: 25px;"><iframe class="" src="http://www.facebook.com/v2.3/plugins/like.php?app_id=138031159685820&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FTlA_zCeMkxl.js%3Fversion%3D41%23cb%3Df137408f49a5474%26domain%3Dwww.geeksforgeeks.org%26origin%3Dhttp%253A%252F%252Fwww.geeksforgeeks.org%252Ff32670a0942a4dc%26relation%3Dparent.parent&amp;container_width=656&amp;href=http%3A%2F%2Fwww.geeksforgeeks.org%2Fapplications-of-depth-first-search%2F&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=450" style="border: medium none; visibility: visible; width: 450px; height: 25px;" title="fb:like Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f2267debeb080be" width="450px" frameborder="0" height="1000px"></iframe></span></div>
+
+<br><br>
+<p>Writing code in comment? Please use <a href="http://code.geeksforgeeks.org/">code.geeksforgeeks.org</a>, generate link and share the link here.
+				
+</p><div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="is_files/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 3941px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="dsq-app1" id="dsq-app1" width="100%" frameborder="0"></iframe><iframe style="width: 656px ! important; border: medium none ! important; overflow: hidden ! important; top: 0px ! important; min-width: 656px ! important; max-width: 656px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="indicator-north" id="indicator-north" frameborder="0"></iframe><iframe style="width: 656px ! important; border: medium none ! important; overflow: hidden ! important; bottom: 0px ! important; min-width: 656px ! important; max-width: 656px ! important; position: fixed ! important; z-index: 2147483646 ! important; height: 29px ! important; min-height: 29px ! important; max-height: 29px ! important; display: none ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="indicator-south" id="indicator-south" frameborder="0"></iframe></div>
+
+<script type="text/javascript">
+var disqus_url = 'http://www.geeksforgeeks.org/applications-of-depth-first-search/';
+var disqus_identifier = '11644 http://geeksforgeeks.org/?p=11644';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'geeksforgeeks';
+var disqus_title = "Applications of Depth First Search";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-9" class="widget widget_text">			<div class="textwidget"><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="is_files/TlA_zCeMkxl.html" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="is_files/TlA_zCeMkxl_002.html" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="is_files/ping.html" style="display: none;" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f3a9c212e8c3d88" frameborder="0"></iframe></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=138031159685820";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div fb-iframe-plugin-query="adapt_container_width=false&amp;app_id=138031159685820&amp;container_width=298&amp;height=180&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FGeeksforGeeks%2F316764689022&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false&amp;small_header=true&amp;width=300" fb-xfbml-state="rendered" class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/pages/GeeksforGeeks/316764689022" data-width="300" data-height="180" data-small-header="true" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="true" data-show-posts="false"><span style="vertical-align: bottom; width: 300px; height: 154px;"><iframe class="" src="http://www.facebook.com/v2.3/plugins/page.php?adapt_container_width=false&amp;app_id=138031159685820&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FTlA_zCeMkxl.js%3Fversion%3D41%23cb%3Df525e8af3542e8%26domain%3Dwww.geeksforgeeks.org%26origin%3Dhttp%253A%252F%252Fwww.geeksforgeeks.org%252Ff32670a0942a4dc%26relation%3Dparent.parent&amp;container_width=298&amp;height=180&amp;hide_cover=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FGeeksforGeeks%2F316764689022&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=false&amp;small_header=true&amp;width=300" style="border: medium none; visibility: visible; width: 300px; height: 154px;" title="fb:page Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f324da25cf4bb64" width="300px" frameborder="0" height="180px"></iframe></span></div></div>
+		</aside><aside id="text-18" class="widget widget_text">			<div class="textwidget"><script async="" src="is_files/adsbygoogle.js"></script>
+<!-- LargeRectangleSide -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-9465609616171866" data-ad-slot="1884636833"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-13" class="widget widget_text">			<div class="textwidget"><ul><li><a href="http://geeksquiz.com/category/articles/puzzle/">Common Interview Puzzles</a></li><li><a href="http://www.geeksforgeeks.org/category/interview-experiences/">Interview Experiences</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/advanced-data-structure/">Advanced Data Structures</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/dynamic-programming">Dynamic Programming</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/Greedy-Algorithm/">Greedy Algorithms</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/backtracking">Backtracking</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/pattern-searching/">Pattern Searching</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/divide-and-conquer">Divide &amp; Conquer</a></li>
+</ul></div>
+		</aside><aside id="text-17" class="widget widget_text">			<div class="textwidget"><script async="" src="is_files/adsbygoogle.js"></script>
+<!-- Big 300x600 Sidebar -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-9465609616171866" data-ad-slot="4402736037"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-30" class="widget widget_text">			<div class="textwidget"><ul><li><a href="http://www.geeksforgeeks.org/tag/geometric-algorithms/">Geometric Algorithms</a></li><li><a href="http://www.geeksforgeeks.org/category/searching/">Searching</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/sorting/">Sorting</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/Hash/">Hashing</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/algorithm/analysis/">Analysis of Algorithms</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/MathematicalAlgo">Mathematical Algorithms</a></li>
+<li><a href="http://www.geeksforgeeks.org/category/algorithm/randomized/">Randomized Algorithms</a></li>
+<li><a href="http://www.geeksforgeeks.org/tag/recursion">Recursion</a></li>
+
+</ul>
+
+
+
+
+</div>
+		</aside><aside id="text-26" class="widget widget_text">			<div class="textwidget"><form style="border:1px solid #ccc;padding:3px;text-align:center;" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=Geeksforgeeks', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><p>Subscribe and Never Miss an Article</p><input style="width:140px" placeholder="Email Address" name="email" type="text"><input value="Geeksforgeeks" name="uri" type="hidden"><input name="loc" value="en_US" type="hidden">&nbsp;&nbsp;<input style="background-color: #4cb96b;" value="Subscribe" type="submit"></form></div>
+		</aside><aside id="text-21" class="widget widget_text"><p class="widget-title">Recent Comments</p>			<div class="textwidget"><script type="text/javascript" src="is_files/recent_comments_widget.js"></script> <style type="text/css" media="screen">	 .dsq-widget ul.dsq-widget-list {	 padding: 0;	 margin: 0;	 text-align: left;	 }	 img.dsq-widget-avatar {	 width: 32px;	 height: 32px;	 border: 0px;	 margin: 0px;	 padding: 0px 3px 3px 0px;	 float: left;	 }	 a.dsq-widget-user {	 font-weight: bold;	 }	 a.dsq-widget-thread {	 font-weight: bold;	 }	 p.dsq-widget-meta {	 clear: both;	 font-size: 80%;	 padding: 0;	 margin: 0;	 }	 li.dsq-widget-item {	 margin: 15px 0;	 list-style-type: none;	 clear: both;	 }	 span.dsq-widget-clout {	 padding: 0 2px;	 background-color: #ff7300;	 color: #fff;	 }	 table.dsq-widget-horiz td {	 padding-right: 15px;	 }	 .dsq-widget-comment p {	 display: inline;	 }	 </style>	 <ul class="dsq-widget-list">	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/tulasikrishna/">Tulasi Krishna</a>	 <span class="dsq-widget-comment"><p>Or u can use two stacks to store linked lists...</p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/sum-of-two-linked-lists/">Add two numbers represented by linked lists | Set 2</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/sum-of-two-linked-lists/#comment-2368903688">5 minutes ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/bhargavsridhar/">Bhargav Sridhar</a>	 <span class="dsq-widget-comment"><p>if(((x-low)|(high-x))&lt;0) then print NO. Else...</p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/?p=136074">How to check whether a number is in the range[low, high] using one comparison ?</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/?p=136074#comment-2368774491">1 hour ago</a></p>	 </li>	 <li class="dsq-widget-item">	 Kamal	 <span class="dsq-widget-comment"><p><a href="http://code.geeksforgeeks.org/ZvWAga" rel="nofollow">http://code.geeksforgeeks.org/...</a></p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/find-maximum-value-of-sum-iarri-with-only-rotations-on-given-array-allowed/">Find maximum value of Sum( i*arr[i]) with only rotations on given array allowed</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/find-maximum-value-of-sum-iarri-with-only-rotations-on-given-array-allowed/#comment-2368708776">1 hour ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/disqus_shfYsCJlFa/">Amit Singla</a>	 <span class="dsq-widget-comment"><p>I think the below implementation is lot...</p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/">Find Maximum Path Sum in a Binary Tree</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/#comment-2368691295">2 hours ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/geeksforgeeks/">GeeksforGeeks</a>	 <span class="dsq-widget-comment"><p>Thanks for pointing this out, We have updated...</p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/data-structures-algorithms-set-33/">Data Structures and Algorithms | Set 33</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/data-structures-algorithms-set-33/#comment-2368605528">3 hours ago</a></p>	 </li>	 <li class="dsq-widget-item">	 <a class="dsq-widget-user" href="https://disqus.com/by/disqus_dusvhD8qNF/">Ishaan Arora</a>	 <span class="dsq-widget-comment"><p>Java Code for the same problem import...</p></span>	 <p class="dsq-widget-meta"><a href="http://www.geeksforgeeks.org/compare-two-strings-represented-as-linked-lists/">Compare two strings represented as linked lists</a>&nbsp;·&nbsp;<a href="http://www.geeksforgeeks.org/compare-two-strings-represented-as-linked-lists/#comment-2368589278">3 hours ago</a></p>	 </li>	 </ul></div>
+		</aside><aside id="text-14" class="widget widget_text"><p class="widget-title">Popular Posts</p>			<div class="textwidget"><ul>
+<li><a href="http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/">  All permutations of a given string </a></li>
+<li><a href="http://www.geeksforgeeks.org/memory-layout-of-c-program/"> Memory Layout of C Programs</a> </li>
+<li><a href="http://www.geeksforgeeks.org/understanding-extern-keyword-in-c/"> Understanding “extern” keyword in C</a> </li>
+<li><a href="http://www.geeksforgeeks.org/median-of-two-sorted-arrays/">Median of two sorted arrays</a> </li>
+<li><a href="http://www.geeksforgeeks.org/topological-sorting/">Topological Sorting </a></li>
+<li><a href="http://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/"> Intersection point of two Linked Lists</a> </li>
+<li><a href="http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/"> Lowest Common Ancestor in a BST.</a> </li>
+<li><a href="http://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/"> Check if a binary tree is BST or not</a> </li>
+<li><a href="http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/"> Sorted Linked List to Balanced BST</a></li>
+</ul></div>
+		</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><p class="widget-title">Tags</p><div class="tagcloud"><a href="http://www.geeksforgeeks.org/tag/adobe/" class="tag-link-148" title="31 topics" style="font-size: 13.173913043478pt;">Adobe</a>
+<a href="http://www.geeksforgeeks.org/tag/advance-data-structures/" class="tag-link-152" title="31 topics" style="font-size: 13.173913043478pt;">Advance Data Structures</a>
+<a href="http://www.geeksforgeeks.org/tag/advanced-data-structures/" class="tag-link-150" title="38 topics" style="font-size: 13.985507246377pt;">Advanced Data Structures</a>
+<a href="http://www.geeksforgeeks.org/tag/amazon/" class="tag-link-141" title="240 topics" style="font-size: 22pt;">Amazon</a>
+<a href="http://www.geeksforgeeks.org/tag/array/" class="tag-link-68" title="12 topics" style="font-size: 9.1159420289855pt;">array</a>
+<a href="http://www.geeksforgeeks.org/tag/backtracking/" class="tag-link-112" title="11 topics" style="font-size: 8.8115942028986pt;">Backtracking</a>
+<a href="http://www.geeksforgeeks.org/tag/bharti-softbank-hike/" class="tag-link-1214" title="10 topics" style="font-size: 8.4057971014493pt;">Bharti SoftBank (HIKE)</a>
+<a href="http://www.geeksforgeeks.org/tag/bit-magic/" class="tag-link-17" title="15 topics" style="font-size: 10.028985507246pt;">Bit Magic</a>
+<a href="http://www.geeksforgeeks.org/tag/c/" class="tag-link-86" title="16 topics" style="font-size: 10.333333333333pt;">C++</a>
+<a href="http://www.geeksforgeeks.org/tag/cn/" class="tag-link-142" title="12 topics" style="font-size: 9.1159420289855pt;">CN</a>
+<a href="http://www.geeksforgeeks.org/tag/c-puzzle/" class="tag-link-69" title="15 topics" style="font-size: 10.028985507246pt;">c puzzle</a>
+<a href="http://www.geeksforgeeks.org/tag/d-e-shaw/" class="tag-link-823" title="16 topics" style="font-size: 10.333333333333pt;">D-E-Shaw</a>
+<a href="http://www.geeksforgeeks.org/tag/dbms/" class="tag-link-139" title="11 topics" style="font-size: 8.8115942028986pt;">DBMS</a>
+<a href="http://www.geeksforgeeks.org/tag/divide-and-conquer/" class="tag-link-113" title="27 topics" style="font-size: 12.565217391304pt;">Divide and Conquer</a>
+<a href="http://www.geeksforgeeks.org/tag/dynamic-programming/" class="tag-link-111" title="82 topics" style="font-size: 17.333333333333pt;">Dynamic Programming</a>
+<a href="http://www.geeksforgeeks.org/tag/flipkart/" class="tag-link-173" title="42 topics" style="font-size: 14.391304347826pt;">Flipkart</a>
+<a href="http://www.geeksforgeeks.org/tag/gate/" class="tag-link-114" title="88 topics" style="font-size: 17.63768115942pt;">GATE</a>
+<a href="http://www.geeksforgeeks.org/tag/gate-cs-2012/" class="tag-link-133" title="10 topics" style="font-size: 8.4057971014493pt;">GATE-CS-2012</a>
+<a href="http://www.geeksforgeeks.org/tag/gate-cs-c-language/" class="tag-link-72" title="10 topics" style="font-size: 8.4057971014493pt;">GATE-CS-C-Language</a>
+<a href="http://www.geeksforgeeks.org/tag/gate-cs-ds-algo/" class="tag-link-79" title="35 topics" style="font-size: 13.68115942029pt;">GATE-CS-DS-&amp;-Algo</a>
+<a href="http://www.geeksforgeeks.org/tag/gate-cs-older/" class="tag-link-145" title="15 topics" style="font-size: 10.028985507246pt;">GATE-CS-Older</a>
+<a href="http://www.geeksforgeeks.org/tag/gfact/" class="tag-link-67" title="20 topics" style="font-size: 11.246376811594pt;">GFacts</a>
+<a href="http://www.geeksforgeeks.org/tag/goldman-sachs/" class="tag-link-590" title="19 topics" style="font-size: 11.04347826087pt;">Goldman Sachs</a>
+<a href="http://www.geeksforgeeks.org/tag/google/" class="tag-link-155" title="15 topics" style="font-size: 10.028985507246pt;">Google</a>
+<a href="http://www.geeksforgeeks.org/tag/graph/" class="tag-link-97" title="45 topics" style="font-size: 14.695652173913pt;">Graph</a>
+<a href="http://www.geeksforgeeks.org/tag/greedy-algorithm/" class="tag-link-159" title="20 topics" style="font-size: 11.246376811594pt;">Greedy Algorithm</a>
+<a href="http://www.geeksforgeeks.org/tag/hashing/" class="tag-link-250" title="15 topics" style="font-size: 10.028985507246pt;">Hashing</a>
+<a href="http://www.geeksforgeeks.org/tag/interview-experience/" class="tag-link-126" title="216 topics" style="font-size: 21.594202898551pt;">Interview Experience</a>
+<a href="http://www.geeksforgeeks.org/tag/intuit/" class="tag-link-1365" title="10 topics" style="font-size: 8.4057971014493pt;">Intuit</a>
+<a href="http://www.geeksforgeeks.org/tag/java/" class="tag-link-87" title="42 topics" style="font-size: 14.391304347826pt;">Java</a>
+<a href="http://www.geeksforgeeks.org/tag/makemytrip/" class="tag-link-1456" title="10 topics" style="font-size: 8.4057971014493pt;">MakeMyTrip</a>
+<a href="http://www.geeksforgeeks.org/tag/mathematicalalgo/" class="tag-link-154" title="73 topics" style="font-size: 16.826086956522pt;">MathematicalAlgo</a>
+<a href="http://www.geeksforgeeks.org/tag/matrix/" class="tag-link-211" title="21 topics" style="font-size: 11.449275362319pt;">Matrix</a>
+<a href="http://www.geeksforgeeks.org/tag/microsoft/" class="tag-link-104" title="87 topics" style="font-size: 17.536231884058pt;">Microsoft</a>
+<a href="http://www.geeksforgeeks.org/tag/morgan-stanley/" class="tag-link-167" title="17 topics" style="font-size: 10.63768115942pt;">Morgan Stanley</a>
+<a href="http://www.geeksforgeeks.org/tag/operating-systems/" class="tag-link-110" title="18 topics" style="font-size: 10.840579710145pt;">Operating systems</a>
+<a href="http://www.geeksforgeeks.org/tag/oracle/" class="tag-link-171" title="22 topics" style="font-size: 11.652173913043pt;">Oracle</a>
+<a href="http://www.geeksforgeeks.org/tag/pattern-searching/" class="tag-link-107" title="26 topics" style="font-size: 12.36231884058pt;">Pattern Searching</a>
+<a href="http://www.geeksforgeeks.org/tag/puzzle/" class="tag-link-70" title="15 topics" style="font-size: 10.028985507246pt;">puzzle</a>
+<a href="http://www.geeksforgeeks.org/tag/recursion/" class="tag-link-85" title="21 topics" style="font-size: 11.449275362319pt;">Recursion</a>
+<a href="http://www.geeksforgeeks.org/tag/sap-labs/" class="tag-link-1414" title="17 topics" style="font-size: 10.63768115942pt;">SAP Labs</a>
+<a href="http://www.geeksforgeeks.org/tag/snapdeal/" class="tag-link-1246" title="16 topics" style="font-size: 10.333333333333pt;">SnapDeal</a>
+<a href="http://www.geeksforgeeks.org/tag/stack/" class="tag-link-94" title="17 topics" style="font-size: 10.63768115942pt;">stack</a>
+<a href="http://www.geeksforgeeks.org/tag/stack-queue/" class="tag-link-899" title="12 topics" style="font-size: 9.1159420289855pt;">Stack-Queue</a>
+<a href="http://www.geeksforgeeks.org/tag/tree-traveral/" class="tag-link-21" title="9 topics" style="font-size: 8pt;">Tree Traveral</a></div>
+</aside><aside id="text-25" class="widget widget_text">			<div class="textwidget"><ul>
+<li><h2><a href="http://geeksquiz.com/">GeeksQuiz</a></h2></li>
+
+<li><h2><a href="http://code.geeksforgeeks.org/">GeeksforGeeksIDE</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/data-structures/">Data Structures</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/fundamentals-of-algorithms/">Algorithms</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/c/">C Programming</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/c-plus-plus/">C++ Programming</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/java/">Java Programming</a></h2></li>
+
+<li><h2><a href="http://geeksquiz.com/books/">Books</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/about/interview-corner/">Interview Experiences</a></h2></li>
+
+<li><h2><a href="http://www.geeksforgeeks.org/gate-corner/">GATE CS</a></h2></li>
+
+<li><h2><a href="http://www.gatecs.geeksquiz.com/">GATE CS Forum</a></h2></li>
+
+<li><h2><a href="https://play.google.com/store/apps/details?id=free.programming.programming">Android App</a></h2></li>
+</ul>
+
+</div>
+		</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+		<div class="clear"></div>
+		</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+<center>
+<div class="iconic-footer">
+
+@geeksforgeeks, <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/deed.en_US" title="Valid XHTML Strict 1.0">Some rights reserved</a>  <a href="http://www.geeksforgeeks.org/about/contact-us/"> &nbsp; &nbsp; &nbsp; &nbsp;Contact Us!</a>  <a href="http://www.geeksforgeeks.org/about/"> &nbsp; &nbsp; &nbsp; &nbsp;About Us!&nbsp; &nbsp; &nbsp; &nbsp;</a><a href="http://www.geeksforgeeks.org/new/ad.htm"> &nbsp; &nbsp; &nbsp; &nbsp;Advertise with us!&nbsp; &nbsp; &nbsp; &nbsp;</a>
+
+      			</div></center><!-- .site-info -->
+
+				<div class="clear"></div>
+</div><!-- #page -->
+
+        <script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'geeksforgeeks';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); 
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+        <script type="text/javascript" src="is_files/comment-reply.js"></script>
+<script type="text/javascript" src="is_files/selectnav.js"></script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12148232-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>  
+<script async="" type="text/javascript" src="is_files/fancybar.js" id="_fancybar_js"></script>
+
+
+
+
+
+<table class="gstl_50 gssb_c" style="width: 225px; display: none; top: 95px; left: 862px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table></body></html>
+<!-- Dynamic page generated in 0.239 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-11-18 09:55:07 -->
+<!-- Compression = gzip -->

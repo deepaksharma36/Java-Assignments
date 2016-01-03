@@ -1,0 +1,3 @@
+grant codeBase "file:/JWork/RemoteOrNot/src" {
+    permission java.security.AllPermission;
+};

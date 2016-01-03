@@ -1,0 +1,55 @@
+/**  
+  * This class implements a Swing Frame that displays "My First GUI"
+  * in the frame name. 
+  *  
+  * @version    $Id$  
+  *  
+  * @author     Paul Tymann  
+  *  
+  * Revisions:  
+  *     $Log$  
+  */  
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.lang.reflect.Modifier;
+
+public class SwingFrame1 implements ActionListener {
+    private JFrame win;
+    
+    public SwingFrame1( String title ) {
+	win = new JFrame( title );
+	
+	win.addWindowListener(
+	    new WindowAdapter() {
+		    public void windowClosing( WindowEvent e ) {
+	            System.exit ( 0 );
+		} 
+	    }
+        );
+
+	win.getContentPane().setLayout( new FlowLayout() );
+	
+	for ( int i = 0; i < 10; i++ ) {
+	    JButton button = new JButton( 
+				   String.valueOf( i ) );
+	    button.addActionListener( this );
+	    win.getContentPane().add( button );
+	}
+
+	win.pack();
+	win.show();
+    }
+
+    public void actionPerformed( ActionEvent event ) {
+	System.out.println( "Button " + 
+			    event.getActionCommand() + Modifier.toString(event.getModifiers()) +
+			    " was pressed " );
+    }
+
+    public static void main( String args[] ) {
+	SwingFrame1 frame = new SwingFrame1( "My second GUI" );
+    }
+
+} // SwingFrame

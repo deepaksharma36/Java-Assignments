@@ -1,0 +1,37 @@
+Keep all assets that have scale factor that is given on the command line present scale factors will not be removed if there is no fallback available.Keep all assets that have memory class that is given on the command
+line, present memory class will not be removed if there is no fallback available.
+Keep all assets that have graphics class that is given on the command
+line. The present graphics class will not be removed if there is no fallback available.
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+Use the .Nm macro to refer to your program throughout the man page like such:
+Underlining is accomplished with the .Ar macro like this:
+A list of items with descriptions:
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+Use the .Nm macro to refer to your program throughout the man page like such:
+Underlining is accomplished with the .Ar macro like this:
+A list of items with descriptions:
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+standard output.
+Options include:
+sets debugging flags.
+switch.
+
+

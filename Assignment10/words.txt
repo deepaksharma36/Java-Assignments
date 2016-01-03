@@ -1,0 +1,2332 @@
+How to run the AppleFileServer
+The AppleFileServer is typically launched using the Sharing Preference. Launch System Preferences. Select Sharing. Select the Services tab. Select Personal File Sharing and click start.
+Please refer to Server help
+AppleFileServer [-d]
+The -d option will prevent daemonization.
+AppleFileServer -v
+Use the .Nm macro to refer to your program throughout the man page like such:
+Underlining is accomplished with the .Ar macro like this:
+A list of items with descriptions:
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+Use the .Nm macro to refer to your program throughout the man page like such:
+Underlining is accomplished with the .Ar macro like this:
+A list of items with descriptions:
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+Use the .Nm macro to refer to your program throughout the man page like such:
+Underlining is accomplished with the .Ar macro like this:
+A list of items with descriptions:
+Description of item a
+Description of item b
+A list of flags and their descriptions:
+Description of -a flag
+Description of -b flag
+FILE_1 description
+FILE_2 description
+standard output.
+Options include:
+sets debugging flags.
+switch.
+specifies the names of the input fields if input does not have to be
+split into an array.  If you were translating an awk script that
+processes the password file, you might say:
+Any delimiter can be used to separate the field names.
+causes a2p to assume that input will always have that many fields.
+tells a2p to use old awk behavior.  The only current differences are:
+Old awk always has a line loop, even if there are no line
+actions, whereas new awk does not.
+In old awk, sprintf is extremely greedy about its arguments.
+For example, given the statement
+A2p cannot do as good a job translating as a human would, but it
+usually does pretty well.  There are some areas where you may want to
+examine the perl script produced and tweak it some.  Here are some of
+them, in no particular order.
+force numeric interpretation, even though the argument is always
+integer anyway.  This is generally unneeded in perl, but a2p can't
+tell if the argument is always going to be integer, so it leaves it
+in.  You may wish to remove it.
+Perl differentiates numeric comparison from string comparison.  Awk
+has one operator for both that decides at run time which comparison to
+do.  A2p does not try to do a complete job of awk emulation at this
+point.  Instead it guesses which one you want.  It's almost always
+right, but it can be spoofed.  All such guesses are marked with the
+warn you if you use == where you should have used eq.
+Perl does not attempt to emulate the behavior of awk in which
+nonexistent array elements spring into existence simply by being
+referenced.  If somehow you are relying on this mechanism to create
+null entries for a subsequent for...in, they won't be there in perl.
+If a2p makes a split line that assigns to a list of variables that
+looks like (Fld1, Fld2, Fld3...) you may want to rerun a2p using the
+throughout the script.  If it splits to an array instead, the script
+is probably referring to the number of fields somewhere.
+block to bypass the block under such circumstances can be simplified
+from the perl script.
+Perl has two kinds of array, numerically-indexed and associative.
+translated to hashes, but if you happen to know that the index is
+always going to be numeric you could change the {...} to [...].
+over such an array.
+assuming its equivalent, $#, to have the value %.20g.  You'll want to
+Near the top of the line loop will be the split operation that is
+implicit in the awk script.  There are times when you can move this
+down past some conditionals that test the entire record so that the
+split is not done as often.
+For aesthetic reasons you may wish to change index variables from being
+operations the variable is involved in to match.
+are passed through unmodified.
+Awk scripts are often embedded in a shell script that pipes stuff into
+and out of awk.  Often the shell script wrapper can be incorporated
+into the perl script, since perl can start up pipes into and out of
+itself, and can do other things that awk can't do by itself.
+often be simplified by referring to the variables $`, $& and $', as
+long as they are within the scope of the pattern match that sets them.
+The produced perl script may have subroutines defined to deal with
+awk's semantics regarding getline and print.  Since a2p usually picks
+correctness over efficiency.  it is almost always possible to rewrite
+such code to be more efficient by discarding the semantic sugar.
+For efficiency, you may wish to remove the keyword from any return
+statement that is the last statement executed in a subroutine.  A2p
+catches the most common case, but doesn't analyze embedded blocks for
+subtler cases.
+loop that tries to iterate over ARGV[0] won't find it.
+A2p uses no environment variables.
+It would be possible to emulate awk's behavior in selecting string
+versus numeric operations at run time by inspection of the operands,
+but it would be gross and inefficient.  Besides, a2p almost always
+guesses right.
+Storage for the awk syntax tree is currently static, and can run out.
+standard output.
+Options include:
+sets debugging flags.
+switch.
+specifies the names of the input fields if input does not have to be
+split into an array.  If you were translating an awk script that
+processes the password file, you might say:
+Any delimiter can be used to separate the field names.
+causes a2p to assume that input will always have that many fields.
+tells a2p to use old awk behavior.  The only current differences are:
+Old awk always has a line loop, even if there are no line
+actions, whereas new awk does not.
+In old awk, sprintf is extremely greedy about its arguments.
+For example, given the statement
+A2p cannot do as good a job translating as a human would, but it
+usually does pretty well.  There are some areas where you may want to
+examine the perl script produced and tweak it some.  Here are some of
+them, in no particular order.
+force numeric interpretation, even though the argument is always
+integer anyway.  This is generally unneeded in perl, but a2p can't
+tell if the argument is always going to be integer, so it leaves it
+in.  You may wish to remove it.
+Perl differentiates numeric comparison from string comparison.  Awk
+has one operator for both that decides at run time which comparison to
+do.  A2p does not try to do a complete job of awk emulation at this
+point.  Instead it guesses which one you want.  It's almost always
+right, but it can be spoofed.  All such guesses are marked with the
+warn you if you use == where you should have used eq.
+Perl does not attempt to emulate the behavior of awk in which
+nonexistent array elements spring into existence simply by being
+referenced.  If somehow you are relying on this mechanism to create
+null entries for a subsequent for...in, they won't be there in perl.
+If a2p makes a split line that assigns to a list of variables that
+looks like (Fld1, Fld2, Fld3...) you may want to rerun a2p using the
+throughout the script.  If it splits to an array instead, the script
+is probably referring to the number of fields somewhere.
+block to bypass the block under such circumstances can be simplified
+from the perl script.
+Perl has two kinds of array, numerically-indexed and associative.
+translated to hashes, but if you happen to know that the index is
+always going to be numeric you could change the {...} to [...].
+over such an array.
+assuming its equivalent, $#, to have the value %.20g.  You'll want to
+Near the top of the line loop will be the split operation that is
+implicit in the awk script.  There are times when you can move this
+down past some conditionals that test the entire record so that the
+split is not done as often.
+For aesthetic reasons you may wish to change index variables from being
+operations the variable is involved in to match.
+are passed through unmodified.
+Awk scripts are often embedded in a shell script that pipes stuff into
+and out of awk.  Often the shell script wrapper can be incorporated
+into the perl script, since perl can start up pipes into and out of
+itself, and can do other things that awk can't do by itself.
+often be simplified by referring to the variables $`, $& and $', as
+long as they are within the scope of the pattern match that sets them.
+The produced perl script may have subroutines defined to deal with
+awk's semantics regarding getline and print.  Since a2p usually picks
+correctness over efficiency.  it is almost always possible to rewrite
+such code to be more efficient by discarding the semantic sugar.
+For efficiency, you may wish to remove the keyword from any return
+statement that is the last statement executed in a subroutine.  A2p
+catches the most common case, but doesn't analyze embedded blocks for
+subtler cases.
+loop that tries to iterate over ARGV[0] won't find it.
+A2p uses no environment variables.
+It would be possible to emulate awk's behavior in selecting string
+versus numeric operations at run time by inspection of the operands,
+but it would be gross and inefficient.  Besides, a2p almost always
+guesses right.
+Storage for the awk syntax tree is currently static, and can run out.
+standard output.
+Options include:
+sets debugging flags.
+switch.
+specifies the names of the input fields if input does not have to be
+split into an array.  If you were translating an awk script that
+processes the password file, you might say:
+Any delimiter can be used to separate the field names.
+causes a2p to assume that input will always have that many fields.
+tells a2p to use old awk behavior.  The only current differences are:
+Old awk always has a line loop, even if there are no line
+actions, whereas new awk does not.
+In old awk, sprintf is extremely greedy about its arguments.
+For example, given the statement
+A2p cannot do as good a job translating as a human would, but it
+usually does pretty well.  There are some areas where you may want to
+examine the perl script produced and tweak it some.  Here are some of
+them, in no particular order.
+force numeric interpretation, even though the argument is always
+integer anyway.  This is generally unneeded in perl, but a2p can't
+tell if the argument is always going to be integer, so it leaves it
+in.  You may wish to remove it.
+Perl differentiates numeric comparison from string comparison.  Awk
+has one operator for both that decides at run time which comparison to
+do.  A2p does not try to do a complete job of awk emulation at this
+point.  Instead it guesses which one you want.  It's almost always
+right, but it can be spoofed.  All such guesses are marked with the
+warn you if you use == where you should have used eq.
+Perl does not attempt to emulate the behavior of awk in which
+nonexistent array elements spring into existence simply by being
+referenced.  If somehow you are relying on this mechanism to create
+null entries for a subsequent for...in, they won't be there in perl.
+If a2p makes a split line that assigns to a list of variables that
+looks like (Fld1, Fld2, Fld3...) you may want to rerun a2p using the
+throughout the script.  If it splits to an array instead, the script
+is probably referring to the number of fields somewhere.
+block to bypass the block under such circumstances can be simplified
+from the perl script.
+Perl has two kinds of array, numerically-indexed and associative.
+translated to hashes, but if you happen to know that the index is
+always going to be numeric you could change the {...} to [...].
+over such an array.
+assuming its equivalent, $#, to have the value %.20g.  You'll want to
+Near the top of the line loop will be the split operation that is
+implicit in the awk script.  There are times when you can move this
+down past some conditionals that test the entire record so that the
+split is not done as often.
+For aesthetic reasons you may wish to change index variables from being
+operations the variable is involved in to match.
+are passed through unmodified.
+Awk scripts are often embedded in a shell script that pipes stuff into
+and out of awk.  Often the shell script wrapper can be incorporated
+into the perl script, since perl can start up pipes into and out of
+itself, and can do other things that awk can't do by itself.
+often be simplified by referring to the variables $`, $& and $', as
+long as they are within the scope of the pattern match that sets them.
+The produced perl script may have subroutines defined to deal with
+awk's semantics regarding getline and print.  Since a2p usually picks
+correctness over efficiency.  it is almost always possible to rewrite
+such code to be more efficient by discarding the semantic sugar.
+For efficiency, you may wish to remove the keyword from any return
+statement that is the last statement executed in a subroutine.  A2p
+catches the most common case, but doesn't analyze embedded blocks for
+subtler cases.
+loop that tries to iterate over ARGV[0] won't find it.
+A2p uses no environment variables.
+It would be possible to emulate awk's behavior in selecting string
+versus numeric operations at run time by inspection of the operands,
+but it would be gross and inefficient.  Besides, a2p almost always
+guesses right.
+Storage for the awk syntax tree is currently static, and can run out.
+
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+-d
+-h
+-i
+-k
+-l
+-q
+-r
+-S
+-V
+-w
+ 
+ 
+The following list describes the values returned by ab:
+ 
+ 
+Server Software
+Server Hostname
+The DNS or IP address given on the command line  
+Server Port
+Document Path
+Document Length
+Concurrency Level
+The number of concurrent clients used during the test  
+Time taken for tests
+This is the time taken from the moment the first socket connection is created to the moment the last response is received  
+Complete requests
+The number of successful responses received  
+Failed requests
+Write errors
+Non-2xx responses
+Keep-Alive requests
+The number of connections that resulted in Keep-Alive requests  
+Total body sent
+Total transferred
+HTML transferred
+Requests per second
+Time per request
+Transfer rate
+ 
+ 
+ 
+ 
+CLI interface to the accessibility API.
+There are no configuration options.
+Copyright (C) 1989-2000, 2001 Free Software Foundation, Inc.
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be included in
+translations approved by the Free Software Foundation instead of in
+the original English.
+[
+]
+[
+]
+reads a troff font file
+and adds some additional font-metric information
+that is used by the groff system.
+The font file with the information added is written on the
+standard output.
+The information added is guessed using 
+some parametric information about the font
+and assumptions
+about the traditional troff names for characters.
+The main information added is the heights and depths of characters.
+The
+and
+arguments should be the same as the corresponding parameters
+in the DESC file;
+is the name of the file describing the font;
+if
+ends with
+the font will be assumed to be italic.
+prints the version number.
+All other options changes one of the parameters that is used
+to derive the heights and depths.
+Like the existing quantities in the font
+file, each
+is in
+for a font whose point size is
+must be one of:
+The height of lowercase letters without ascenders such as x.
+The height of figures (digits).
+The height of characters with ascenders, such as b, d or l.
+The height of characters such as parentheses.
+The height of uppercase letters such as A.
+The depth of a comma.
+The depth of characters with descenders, such as p,q, or y.
+The depth of characters such as parentheses.
+makes no attempt to use the specified parameters to guess
+the unspecified parameters.
+If a parameter is not specified the default will be used.
+The defaults are chosen to have the reasonable values for
+a Times font.
+Audio File Convert will convert a source audio file to a new audio file with the specified file and data types
+print help text
+Audio File Hash writes an SHA-1 hash to an audio file or prints (to stdout) the hash contained in an audio file
+print help text
+write hash code to audio file
+print hash code from audio file (if present)
+compare hash codes from two audio files
+afida compares a reference audio file with a distorted version and estimates the perceivable spatial image distortions in terms of image shift and width.
+print help text
+Audio File Info prints out information about an audio file to stdout
+Copyright (C) 1989-2000, 2001, 2002, 2003, 2005 Free Software Foundation, Inc.
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be included in
+translations approved by the Free Software Foundation instead of in
+the original English.
+The whitespace between an command line option and its argument is optional.
+creates a font file for use with groff and
+is written in perl;
+you must have perl version 5.004 or newer installed in order to run
+is the AFM (Adobe Font Metric) file for the font.
+is a file that says which groff character names map onto
+each PostScript character name;
+this file should contain a sequence of lines of the form
+ps_char groff_char
+where
+is the PostScript name of the character
+and
+is the groff name of the character (as used in the groff font file).
+The same
+can occur multiple times in the file;
+each
+must occur at most once.
+Lines starting with
+and blank lines are ignored.
+If the file isn't found in the current directory, it is searched in
+If a PostScript character is not named as
+are four uppercase hexadecimal digits), and is not mentioned in
+and a generic groff glyph name can't be deduced using the
+Adobe Glyph List (AGL, built into
+then
+puts the PostScript character into the groff font file as an unnamed
+character which can only be accessed by the
+escape sequence in
+If option
+is not specified, the encoding defined in the AFM file (i.e., entries
+with non-negative character codes) is used.
+Please refer to section `Using Symbols' in the groff info file which
+describes how groff glyph names are constructed.
+the character code) are still available in groff; they get glyph index
+values greater than 255 (or greater than the biggest character code used
+in the AFM file in the unlikely case that it is greater than 255) in the
+groff font file.
+Glyph indices of unencoded characters don't have a specific order; it
+is best to access them with glyph names only.
+The groff font file will be output to a file called
+If there is a downloadable font file for the font, it may be listed in
+the file
+see
+If the
+option is used,
+will automatically generate an italic correction,
+a left italic correction and a subscript correction
+for each character
+(the significance of these parameters is explained in
+these parameters may be specified for individual characters by
+adding to the
+lines of the form:
+where
+is the PostScript name of the character,
+and
+is the desired value of the corresponding parameter in thousandths of an em.
+These parameters are normally needed only for italic (or oblique) fonts.
+Use
+as the slant parameter in the font file;
+this is used by groff in the positioning of accents.
+By default
+uses the negative of the ItalicAngle specified in the afm file;
+with true italic fonts it is sometimes desirable to use
+a slant that is less than this.
+If you find that characters from an italic font have accents
+placed too far to the right over them,
+then use the
+option to give the font a smaller slant.
+The device description file is
+rather than the default
+If not found in the current directory, the `devps' subdirectory of the
+default font directory is searched (this is true for both the default
+device description file and a file given with option
+The PostScript font should be reencoded to use the encoding described
+in enc_file.
+The format of
+is described in
+If not found in the current directory, the `devps' subdirectory of the
+default font directory is searched.
+Generate an italic correction for each character so that 
+the character's width plus the character's italic correction
+is equal to
+thousandths of an em
+plus the amount by which the right edge of the character's bounding box
+is to the right of the character's origin.
+If this would result in a negative italic correction, use a zero
+italic correction instead.
+Also generate a subscript correction equal to the 
+product of the tangent of the slant of the font and
+four fifths of the x-height of the font.
+If this would result in a subscript correction greater than the italic
+correction, use a subscript correction equal to the italic correction
+instead.
+Also generate a left italic correction for each character
+equal to
+thousandths of an em
+plus the amount by which the left edge of the character's bounding box
+is to the left of the character's origin.
+The left italic correction may be negative unless option
+is given.
+This option is normally needed only with italic (or oblique) fonts.
+The font files distributed with groff were created using an option of
+for italic fonts.
+Prevent negative left italic correction values.
+Roman font files distributed with groff were created with
+to improve spacing with
+Don't output a
+command for this font.
+Use this with constant-width fonts.
+The font is special.
+The effect of this option is to add the
+command to the font file.
+Print version.
+Don't use the built-in Adobe Glyph List.
+Device description file.
+Font description file for font
+List of downloadable fonts.
+Encoding used for text fonts.
+Standard mapping.
+The groff info file, section `Using Symbols'.
+Audio File Play plays an audio file to the default audio output
+print help text
+path
+The
+command is used to decompress files compressed with HFS+ compression.
+Paths specified are recursively traversed (while remaining on the starting filesystem) and all encountered files are decompressed. If the
+option is specified, the encountered files will not be decompressed, but their contents will be printed to standard output.
+first appeared in Mac OS X 10.6..TH AGENTXTRAP 1 "20 Dec 2009" V5.6 "Net-SNMP"
+agentxtrap - send an AgentX NotifyPDU to an AgentX master agent
+issues an AgentX NotifyPDU to a master agent. One or more object
+identifiers (OIDs) can be given as arguments on the command line.
+A type and a value must accompany each object identifier.
+Each variable name is given in the format specified in
+if the
+option is present then the notification is sent in the nondefault name context.
+if the
+option is present then that value, parsed as centiseconds, is taken to be the
+sysUpTime field of the application.
+if the
+option is present then contact the AgentX master at ADDRESS and not the default
+one.
+Additionally all the options described in
+under the
+headers as well as the
+options are supported.
+In
+the parsing of the
+field is controlled by the
+field. The possible values for the
+field is one of the following characters:
+Let
+decide how
+should be interpreted
+INTEGER
+Unsigned
+Counter32
+OCTET STRING of chaacters
+OCTET STRING, entered as a sequence of optionally space separated hexadecimal
+digit pairs
+OCTET STRING, entered as a sequence of space separated decimal digits in the
+range 0 - 255
+NULL
+OBJECT IDENTIFIER
+TimeTicks
+IpAddress
+BITS
+which are handled in the same way as the
+command.
+To send a generic linkUp trap to the manager for interface 1 the following
+command can be used:
+agentxtrap netSnmp.0.3 ifindex.1 i 1
+snmpcmd(1), snmpset(1), variables(5), RFC 2741
+probe
+encode
+encode
+encode
+are implemented as a single tool with multiple names.  All invocations
+support the three verbs
+and
+If multiple files are passed to
+the exit status will be non-zero only if
+files contain data in the specified encoding.
+perform the operation even if the output file already exists
+display version and usage, then quit
+be verbose
+display version, then quit
+For
+read encoded data from the standand input.  For
+write encoded data to the standard output.  Currently, "plain" data must
+be written to and from specified filenames (see also
+create output files in
+Use
+for output, overriding any stored or default name.  For
+the appropriate suffix will be added to
+implies only one file to be encoded or decoded.
+override the default suffix for the given encoding
+don't use BinHex runlength compression when encoding
+Specify MacBinary encoding type.  Type 1 is undesirable because it has
+neither a checksum nor a signature and is thus difficult to recognize.
+In general, the tool returns a non-zero exit status if it fails.
+The
+command connects to the documents or
+resources designated by
+and displays each applet
+referenced by that document in its own window. 
+Note: if the documents referred to by
+do not reference any
+applets with the
+tag,
+does nothing.
+For details on the HTML tags that appletviewer supports,
+The following options are supported:
+Starts the applet viewer in the Java debugger,
+thus allowing you to debug applets in the document.
+(See
+Specifies the input
+file encoding name.
+Passes the string
+through as a single argument to 
+the Java interpreter
+which runs
+the appletviewer.
+The argument should not contain spaces.
+Multiple argument words must all begin with the prefix
+which is stripped.
+This is useful for adjusting the compiler's execution
+environment or compiler memory usage.
+The
+utility runs the named
+on each
+argument
+in turn.
+Character sequences of the form
+in
+where
+is a digit from 1 to 9, are replaced by the
+following unused
+In this case, the largest digit number of arguments are discarded for
+each execution of
+The options are as follows:
+Normally arguments are taken singly; the optional number
+specifies the number of arguments to be passed to
+If the number is zero,
+is run, without arguments, once for each
+If any sequences of
+occur in
+the
+option is ignored.
+The use of the character
+as a magic character may be changed with the
+option.
+Display the commands that would have been executed, but do not actually
+execute them.
+The following environment variable affects the execution of
+Pathname of shell to use.
+If this variable is not defined, the Bourne shell is used.
+is similar to
+compares the `a' files to the `b' files;
+runs
+5 times; and
+links all files in the current directory to the directory
+default shell
+Shell metacharacters in
+may have bizarre effects; it is best to enclose complicated
+commands in single quotes
+The
+command appeared in
+keyword ...
+apropos searches a set of database files containing short descriptions
+of system commands for keywords and displays the result on the
+standard output.
+John W. Eaton was the original author of 
+Zeyd M. Ben-Halim released man 1.2, and Andries Brouwer followed up with versions 1.3 thru 1.5p. 
+Federico Lucifredi <flucifredi@acm.org> is the current maintainer.
+whatis(1), man(1).
+[
+]
+[
+]
+[
+]
+[
+]
+[
+]
+[
+]
+[
+]
+[
+]
+[
+[
+[
+]
+]
+]
+[
+]
+[
+]
+The tool apt, annotation processing tool, includes a set of 
+new reflective APIs and supporting infrastructure to
+process program annotations. The apt reflective APIs 
+provide a build-time, source-based, read-only view of
+program structure. These reflective APIs are designed 
+to cleanly model the JavaTM programming language's
+type system after the addition of generics. First, 
+apt runs annotation processors that can produce new source
+code and other files. Next, apt can cause compilation of 
+both original and generated source files, easing
+development. The reflective APIs and other APIs used 
+to interact with the tool are subpackages of com.sun.mirror. 
+A fuller discussion of how the tool operates as well as  
+instructions for developing with apt are in Getting
+Started with apt at 
+Options may be in any order. For a discussion of parameters 
+which apply to a specific option, see OPTIONS below.
+Zero or more source files to be processed.
+One or more files that list source files or other options.
+Specify the directory root under which processor-generated 
+source files will be placed; files are placed
+in subdirectories based on package namespace. 
+Do not compile sources files to class files.
+Print out textual representation of specified types; 
+perform no annotation processing or compilation. 
+Options to pass to annotation processors -- these are 
+not interpreted by apt directly, but are made
+available for use by individual processors 
+Specify where to find annotation processor factories; if 
+this option is used, the classpath is not searched
+for factories. 
+Name of annotation processor factory to use; 
+bypasses default discovery process 
+Specify where to place processor and javac generated class files 
+or
+Specify where to find user class files and annotation processor 
+factories. If
+is given, the
+classpath is not searched for factories. 
+Consult the 
+man page for information on 
+options. 
+The apt tool and its associated APIs may be changed or 
+superseded in future j2se releases. 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+      $ httpd -l
+    
+ 
+ 
+
+      $ apachectl restart
+      $ _
+    
+ 
+ 
+ 
+
+ 
+ 
+ 
+  
+ 
+ 
+-q
+  
+ 
+ 
+  
+ 
+ 
+-g
+  
+ 
+ 
+-c
+-p
+  
+  
+ 
+-i
+-a
+-A
+-e
+  
+ 
+ 
+
+      $ _
+    
+ 
+ 
+
+      $ _
+    
+ 
+This way a line named
+ 
+
+    
+ 
+ 
+
+    
+ 
+For a quick test of the apxs mechanism you can create a sample Apache module template plus a corresponding Makefile via:
+ 
+
+      $ apxs -g -n foo
+      Creating [DIR]  foo
+      $ _
+    
+ 
+Then you can immediately compile this sample module into a shared object and load it into the Apache server:
+ 
+
+      $ cd foo
+      $ make all reload
+      apachectl restart
+      $ _
+    
+ 
+
+The
+command with no arguments, displays the machine's architecture type.
+The other use of the
+command it to run a selected architecture of a universal binary.
+A universal binary contains code that can run on different architectures.
+By default, the operating system will select the architecture that most closely
+matches the processor type.
+This means that an intel architecture is selected on intel processors and a
+powerpc architecture is selected on powerpc processors.
+A 64-bit architecture is preferred over a 32-bit architecture on a 64-bit
+processor, while only 32-bit architectures can run on a 32-bit processor.
+When the most natural architecture is unavailable, the operating system will
+try to pick another architecture.
+On 64-bit processors, a 32-bit architecture is tried.
+If this is also unavailable, the operating system on an intel processor will
+try running a 32-bit powerpc architecture.
+Otherwise, no architecture is run, and an error results.
+The
+command can be used to alter the operating system's normal selection order.
+The most common use is to select the 32-bit architecture on a 64-bit processor,
+even if a 64-bit architecture is available.
+The
+argument must be one of the currently supported architectures:
+32-bit intel
+64-bit intel
+Either prefix the architecture with a hyphen, or (for compatibility with
+other commands), use
+followed by the architecture.
+If more than one architecture is specified, the operating system will try each
+one in order, skipping an architecture that is not supported on the current
+processor, or is unavailable in the universal binary.
+The other options are:
+Add the native 32-bit architecture to the list of architectures.
+Add the native 64-bit architecture to the list of architectures.
+Clears the environment that will be passed to the command to be run.
+Deletes the named environment variable from the environment that will be passed
+to the command to be run.
+Assigns the given value to the named environment variable in the environment
+that will be passed to the command to be run.
+Any existing environment variable with the same name will be replaced.
+Prints a usage message and exits.
+The
+argument is the command to run, followed by any arguments to pass to the
+command.
+It can be a full or partial path, while a lone name will be looked up in the user's
+command search path.
+If no architectures are specified on the command line, the
+command takes the basename of the
+argument and searches for the first property list file with that basename and
+the
+suffix, in the
+sub-directory in each of the standard domains, in the following order:
+User settings
+Local settings
+Network settings
+System settings
+This property list contains the architecture order preferences, as well
+as the full path to the real executable.
+For examples of the property list format, look at the files in
+On an intel processor:
+1234
+shows the intel little endian byte order.
+When a link is made to
+command with a different name, that name is used to find
+the corresponding property list file.
+Thus, other commands can be wrapped so that they have custom architecture
+selection order.
+Because of some internal logic in the code, hard links to the
+command may not work quite right.
+It is best to avoid using hard links, and only use symbolic links to the
+command.
+The environment variable
+can be used to provide architecture order preferences.
+It is checked before looking for the corresponding property list file.
+The value of the environment variable
+is composed of one or more specifiers, separated by semicolons.
+A specifier is made up of one, two or three fields, separated by colons.
+Architectures specified in order, are separated by commas and make up the last
+(mandatory) field.
+The first field, if specified, is a name of a program, which selects this
+specifier if that name matches the program name in question.
+If the name field is empty or there is no name field, the specifier matches
+any program name.
+Thus, ordering of specifiers is important, and the one with no name should
+be last.
+When the
+command is called directly, the
+name provides the path information to the executable (possibly via the command
+search path).
+When a name is specified in a
+specifier, the path information can alternately be specified as a second
+field following the name.
+When the
+command is called indirectly via a link, this path information must be
+specified.
+If not specified as a second field in a specifier, the executable path will
+be looked up in the corresponding property list file.
+A specifier that matches any name.
+A specifier that matches the program named
+(the full executable path is in the
+file).
+A specifier with all fields specified.
+A specifier for
+and a second specifier that would match any other name.
+Running the
+command on an interpreter script may not work if the interpreter is a link
+to the arch command, especially if a 64-bit architecture is specified (since the
+command is 2-way universal, 32-bit only).
+is a facility for manipulating the filesystem container for an applications using App Sandbox.
+A container is a per-application filesytem hierarchy rooted in
+Prints a summary of commands and their behaviours.
+Determines with the given application is signed with App Sandbox entitlements.
+In addition, if the application is specified by pid using the --pid syntax,
+prints out whether the application is actually running with App Sandbox enabled,
+a traditional sandbox, or no sandbox at all.
+The following commands manage filesystem containers for sandboxed apps.
+Print the path to the application's container.
+Create and initialize the application's container.
+Containers are normally created automatically when sandboxed applications
+are run.
+This command creates the container for an application without running the
+application.
+Upgrade the application's container to the current container schema.
+Existing containers are normally automatically upgraded to the latest
+container schema when their associated applications are run.
+This command upgrades an existing container without running the associated
+application.
+Repair a container's structure by re-creating missing files and symlinks,
+repairing file permissions so that files are owned by and accessible to the current user, and
+rebuilding the application's sandbox information.
+This operation may require authorization by the user.
+Each container has an access control list comprised of code requirements.
+A sandboxed application must satify one or more of the code requirements on
+their container in order to run.
+The following commands manipulate the container's access control list:
+Update the access control list for the application's container to
+include the application's designated code requirement.
+Update the access control list for the application's container to
+include the specified code requirement.
+Update the access control list for the application's container such
+that it consists of only the application's designated code requirement.
+Any other code requirements will be removed from the ACL.
+Print list of code requirements in the access control list for the
+given application's container.
+Validate the application against each of the code requirements in its
+container's access control list.
+Each code requirement in the ACL is labeled with one of the following:
+application does not validate against code requirement.
+application validates against code requirement.
+application validates against code requirement and code requirement is
+the same as the application's designated code requirement.
+Synonym for acl validate.
+App Sandbox will follow any symlinks in the paths to users' home directories.
+In addition, it has a whitelist of other locations where it will acknowledge
+and honor symbolic links.
+Any symlinks not in this whitelist will not be followed and, as a result,
+App Sandboxed applications will not have access to the paths that the symlinks
+refer to.
+The following command displays the whitelist of paths where App Sandbox will
+acknowledge symlinks at:
+Display the list of paths that App Sandbox searches for symlinks and, for
+any paths that are symlinks, display where the symlinks currently resolve to. 
+Collect diagnostic information related to Application Sandboxing and containers.
+The information is collected into a single file that can be sent to Apple to aid in diagnosing 
+problems when an application runs inside of a sandbox.
+Should you choose to send the diagnostic information to Apple, then you must agree to this disclaimer:
+This diagnostic tool generates files that allow Apple to investigate issues with your computer 
+and help Apple to improve its products. The generated files may contain some of your personal 
+information, which may include, but not be limited to, the serial number or similar unique number
+for your device, your user name, your file names or your computer name. The information is used by Apple in
+By enabling this diagnostic tool and sending a copy of the generated files to Apple, you are
+consenting to Apple's use of the content of such files.
+Additional information concerning a specific application can be gathered via the app subcommand.
+This command must be run as 'root'.
+The following command collects diagnostic information:
+Collection diagnostic information. Outputs the path to the folder or file containing the information. 
+Optional arguments:
+Do not compress the folder containing the dianostic files into a Zip file.
+Do not show the disclaimer. Use of this option constitutes acceptance of the disclaimer.
+Do not reveal the resulting diagnostic file in Finder.
+Do not show verbose output while running the diagnostic.
+Optional subcommand:
+Specify an application for which additional information will be gathered.
+By default,
+displays paths relative to the user's home directory.
+This flag causes any paths in the output to be displayed as absolute paths
+instead.
+Write internal logging information to a temporary file.
+Many commands require an application specification as one of their arguments.
+Applications can be specified any of the following ways:
+The application name as it appears in the Applications folder, with or
+For example, "TextEdit".
+The path to the application binary or bundle.
+For example, 
+Explicitly indicate the following argument is to be interpreted as the path
+to the application binary or bundle.
+The --file flag removes ambiguity when an argument can be interpreted as either
+an application name or a valid path to an application.
+For example, 
+Interpret the following argument as the bunder identifier of the application.
+For example, 
+Interpret the following argument as the process identifier of a running
+application.
+For example, 
+Interpret the following argument as a path to an existing container and determine the application for that container .
+For example, 
+The user's containers folder.
+The
+command first appeared in Mac OS X Version 10.7.
+inspects or processes a .car file generated from an asset catalog, removing
+requested scale factors, device idioms, subtypes, graphics feature set classes and
+memory classes. 
+A list of flags and their descriptions:
+version information for 
+Produce a JSON description of the asset catalog object with the given name to
+--output directory if given or to stdout if no output path given. If no name is provided,
+report on the contents of the entire car file.
+Keep all assets that have idiom that is given on the command
+line.
+Keep all assets that have scale factor that is given on the command
+line, present scale factors will not be removed if there is no fallback available.
+Keep all assets that have memory class that is given on the command
+line, present memory class will not be removed if there is no fallback available.
+Keep all assets that have graphics class that is given on the command
+line. The present graphics class will not be removed if there is no fallback available.
+process the hosted idioms list, this is a list of the idioms that must
+always be preserved in the car file. This list cannot contain
+universal, and the different idioms should be given in a comma separated list.
+Subtype to keep integer
+Output file name, if no output file is given then input file is overwritten.
+The
+and
+utilities
+read commands from standard input or a specified file.
+The commands are executed at a later time, using
+executes commands at a specified time;
+lists the user's pending jobs, unless the user is the superuser; in that
+case, everybody's jobs are listed;
+deletes jobs;
+executes commands when system load levels permit; in other words, when the load average
+drops below _LOADAVG_MX (1.5), or the value specified in the invocation of
+The
+utility allows some moderately complex
+specifications.
+It accepts times of the form
+or
+to run a job at a specific time of day.
+(If that time is already past, the next day is assumed.)
+As an alternative, the following keywords may be specified:
+or
+(4pm)
+and time-of-day may be suffixed with
+or
+for running in the morning or the evening.
+The day on which the job is to be run may also be specified
+by giving a date in the form
+with an optional
+or giving a date of the forms
+The specification of a date must follow the specification of
+the time of day.
+Time can also be specified as:
+where the time-units can be
+or
+and
+may be told to run the job today by suffixing the time with
+and to run the job tomorrow by suffixing the time with
+The shortcut
+can be used instead of
+For example, to run a job at 4pm three days from now, use
+to run a job at 10:00am on July 31, use
+and to run a job at 1am tomorrow, use
+The
+utility also supports the
+time format (see
+option).
+For both
+and
+commands are read from standard input or the file specified
+with the
+option.
+The working directory, the environment (except for the variables
+and
+and the
+are retained from the time of invocation.
+An
+or
+command invoked from a
+shell will retain the current userid.
+The user will be mailed standard error and standard output from his
+commands, if any.
+Mail will be sent using the command
+If
+is executed from a
+shell, the owner of the login shell will receive the mail.
+The superuser may use these commands in any case.
+For other users, permission to use
+is determined by the files
+and
+If the file
+exists, only usernames mentioned in it are allowed to use
+In these two files,
+a user is considered to be listed
+only if the user name has no blank or other characters
+before it on its line and a newline character immediately after the name,
+even at the end of the file.
+Other lines are ignored and may be used for comments.
+If
+does not exist,
+is checked, every username not mentioned in it is then allowed
+to use
+If neither exists, only the superuser is allowed use of
+Note that
+is implemented through the
+daemon periodically invoking
+which is disabled by default.
+See 
+for information about enabling
+Is an alias for
+Cat the jobs listed on the command line to standard output.
+Is an alias for
+(this option is deprecated; use
+instead).
+Read the job from
+rather than standard input.
+With no arguments, list all jobs for the invoking user.
+If one or more
+job numbers are given, list only those jobs.
+Send mail to the user when the job has completed even if there was no
+output.
+Use the specified queue.
+A queue designation consists of a single letter; valid queue designations
+range from
+to
+and
+to
+The
+queue (a) is the default for
+and the
+queue (b) is the default for
+Queues with higher letters run with increased niceness.
+If a job is submitted to a queue designated with an uppercase letter, it
+is treated as if it had been submitted to batch at that time.
+If
+is given a specific queue, it will only show jobs pending in that queue.
+Remove the specified jobs.
+The argument should be in the form
+where each pair of letters represents the following:
+The first two digits of the year (the century).
+The second two digits of the year.
+The month of the year, from 1 to 12.
+the day of the month, from 1 to 31.
+The hour of the day, from 0 to 23.
+The minute of the hour, from 0 to 59.
+The second of the minute, from 0 to 61.
+If the
+and
+letter pairs are not specified, the values default to the current
+year.
+If the
+letter pair is not specified, the value defaults to 0.
+For
+shows completed but not yet deleted jobs in the queue; otherwise
+shows the time the job will be executed.
+directory containing job files
+job-creation lock file
+directory containing output spool files
+allow permission control
+deny permission control
+login records
+If the file
+is not available or corrupted,
+or if the user is not logged on at the time
+is invoked, the mail is sent to the userid found
+in the environment variable
+If that is undefined or empty, the current userid is assumed.
+The
+and
+utilities
+as presently implemented are not suitable when users are competing for
+resources.
+If this is the case, another batch system such as
+may be more suitable.
+Specifying a date past 2038 may not work on some systems.
+At was mostly written by
+The time parsing routines are by
+with minor enhancements by
+The
+command converts numeric addresses to their symbolic equivalents.  If full debug symbol information is available,
+for example in a .app.dSYM sitting beside a .app, then the output of atos will include file name and source line
+number information.
+The input addresses may be given in one of three ways:
+A list of addresses at the end of the argument list.
+Using the
+argument to specify the path of an input file containing whitespace-separated numeric addresses.
+If no addresses were directly specified, 
+enters an interactive mode, reading addresses from stdin.
+The symbols are found in either a binary image file or in a currently executing process, as specified by:
+The path to a binary image file in which to look up symbols.
+The process ID or the partial name of a currently executing process in which to look up symbols.
+Multiple process IDs or paths can be specified if necessary, and the two can be mixed in any order.
+When working with a Mach-O binary image file, 
+considers only addresses and symbols defined in that binary image file, at their default locations (unless the -l or -s option is given). 
+When working with a running process, 
+considers addresses and symbols defined in all binary images currently loaded by that process, at their loaded locations.
+The following additional options are available.
+The particular architecure of a binary image file in which to look up symbols.
+The load address of the binary image.  This value is always assumed to be in hex, even without a "0x" prefix.  The input addresses are assumed to be in a binary image with that load address.  Load addresses for binary
+images can be found in the Binary Images: section at the bottom of crash, sample, leaks, and malloc_history reports.
+The slide value of the binary image -- this is the difference between the load address of a binary image, and the address at which the binary image was built.  
+This slide value is subtracted from the input addresses.  
+It is usually easier to directly specify the load address with the
+argument than to manually calculate a slide value.
+If a process was specified, the first line of atos output should be a header of the form "Looking up symbols in process <pid> named:  <process-name>".
+This is primarily used when
+is invoked as part of a stackshot(1) run, for verification of the process ID and name.
+Full debug symbol information is available in Sketch.app.dSYM, which sits alongside Sketch.app.  When Sketch.app was run,
+the Sketch binary (which was built at 0x100000000) was loaded at 0x10acde000.  Running 'sample Sketch' showed 3 addresses that
+we want to get symbol information for -- 0x10acea1d3, 0x10ace4bea, and 0x10ace4b7a.
+First notice that the .dSYM is next to the .app:
+Sketch.app
+Sketch.app.dSYM
+Now, to symbolicate, we run atos with the
+flag specifying the path to the actual Sketch executable (not the .app wrapper), the
+flag, and the
+flag to specify the load address.
+-[SKTGraphicView drawRect:] (in Sketch) (SKTGraphicView.m:445)
+-[SKTGraphic drawHandlesInView:] (in Sketch) (NSGeometry.h:110)
+-[SKTGraphic drawHandleInView:atPoint:] (in Sketch) (SKTGraphic.m:490)
+It is possible to get symbols for addresses from a different machine architecture than the system on which
+is running.  For example, when running
+on an Intel-based system, one may wish to get the symbol for an address that came from a backtrace of a process running on an ARM device.  To do so, use the
+flag to specify the desired architecture (such as i386 or arm) and pass in a corresponding symbol-rich Mach-O binary image file with a binary image of the corresponding architecture (such as a Universal Binary).
+The
+utility selects records from the audit trail files based on the specified
+criteria.
+Matching audit records are printed to the standard output in
+their raw binary form.
+If no
+argument is specified, the standard input is used
+by default.
+Use the
+utility to print the selected audit records in human-readable form.
+The options are as follows:
+Select all records.
+Select records that occurred after or on the given datetime.
+Select records that occurred before the given datetime.
+Select records matching the given audit classes specified as a comma
+separated list of audit flags.
+See
+for a description of audit flags.
+Select records that occurred on a given date.
+This option cannot be used with
+or
+Select records with the given effective user ID or name.
+Select records with the given effective group ID or name.
+Select records with the given real group ID or name.
+Select records having a subject token with matching ID.
+Select records with the given event name or number. This option can
+be used more then once to select records of multiple event types.
+See
+for a description of audit event names and numbers.
+Select records containing path tokens, where the pathname matches
+one of the comma delimited extended regular expression contained in
+given specification.
+Regular expressions which are prefixed with a tilde
+are excluded
+from the search results.
+These extended regular expressions are processed from left to right,
+and a path will either be selected or deslected based on the first match.
+Since commas are used to delimit the regular expressions, a backslash
+character should be used to escape the comma if it is a part of the search
+pattern.
+Select records containing the given message queue ID.
+Select records containing the given process ID.
+Select records containing the given semaphore ID.
+Select records containing the given shared memory ID.
+Select records with the given real user ID or name.
+Select records with the given audit ID.
+Invert sense of matching, to select records that do not match.
+To select all records associated with effective user ID root from the audit
+log
+To select all
+events from that log:
+Output from the above command lines will typically be piped to a new trail
+file, or via standard output to the
+command.
+Select all records containing a path token where the pathname contains
+Select all records containing path tokens, where the pathname is a TTY
+device:
+Select all records containing path tokens, where the pathname is a TTY
+except for
+The OpenBSM implementation was created by McAfee Research, the security
+It was subsequently adopted by the TrustedBSD Project as the foundation for
+the OpenBSM distribution.
+This software was created by McAfee Research, the security research division
+of McAfee, Inc., under contract to Apple Computer Inc.
+Additional authors include
+and SPARTA Inc.
+The Basic Security Module (BSM) interface to audit records and audit event
+stream format were defined by Sun Microsystems.
+provides authorization-based file opening services.  In its simplest form,
+verifies that it is allowed to open
+(using an appropriate
+authorization right) and then writes the file to stdout.  If
+is specified,
+will read from
+and write to the file.
+is designed to be used both from the command line and programmatically.
+The
+flag allows a parent process to receive an open file descriptor pointing to
+the file in question.
+Before opening
+will make an authorization request for a right of the form:
+rights only allow for read-only file descriptors.
+The
+option can be used to provide an AuthorizationRef constructed by
+the client.  This generally prevents
+from presenting an authorization dialog containing its own name.
+specifies that STDOUT_FILENO has been dup2()'d onto a pipe to a
+parent process and that an open file descriptor to
+should be sent back across it using the SCM_RIGHTS extension to
+rather than
+having the file itself written to or read from
+specifies that
+should read one AuthorizationExternalForm structure from
+convert it to an AuthorizationRef, and attempt to use it to authorize
+the
+operation.  The authorization should refer to the 
+right corresponding to the requested operation.  The authorization
+data will be read before any additional data supplied on
+and will not be included in data written with 
+instructs
+to open
+has not been specified,
+will then copy
+to
+until
+is closed.
+append to
+rather than truncating it (truncating is the default).
+create the file if it doesn't exist.
+requires
+specify the mode bits if a file is created.
+numerically specify the flags that should be passed to
+require that the file being created not exist.
+or better can be obtained):
+will fail if an appropriate
+or
+right cannot be obtained or if the named path does not exist.
+should support prefix path authentication such that the right
+should use
+appeared in Mac OS X 10.1 to assist with the manipulation of disk devices.
+runs the specified workflow.  To create or edit a workflow, use the Automator application.
+The following options are available:
+Set variable
+to
+for this run of 
+Set 
+as the input to 
+If 
+Run in verbose mode.
+AUValidation tests a specified AudioUnit for API and behavioural conformance.
+returns: OK: 0, malformed execution: 1, unit not conformant: -1
+must be specified first. can specify either: -ppc to run using Rosetta on Intel machine, or -32 to run as 32 bit. If neither specified runs as 64 bit native architecture
+print help text
+lists all available AudioUnits of any type
+lists all available AudioUnits of type 'TYPE'
+opens the AudioUnit specified by the TYPE SUBT MANU component ID's and tests that unit.
+iterates through all of the AU's of specified TYPE and MANU
+execution is terminated when first error is encountered
+execution is terminated when first warning is encountered
+continue validating when an error occurs in batch mode. 
+quiet - does no printing except for errors or warnings
+doesn't print parameter or Factory Presets information
+only runs a basic open and initialize test. good for debugging basic functionality
+wait after finished - good for profiling memory usage see 'man leaks'
+The version is printed to stdout.
+The version is printed to stdout in hexadecimal.
+Each line in the file should contain one complete command.
+AUValidation tests a specified AudioUnit for API and behavioural conformance.
+returns: OK: 0, malformed execution: 1, unit not conformant: -1
+print help text
+lists all available AudioUnits of any type
+lists all available AudioUnits of type 'TYPE'
+opens the AudioUnit specified by the TYPE SUBT MANU component ID's and tests that unit.
+iterates through all of the AU's of specified TYPE and MANU
+execution is terminated when first error is encountered
+execution is terminated when first warning is encountered
+continue validating when an error occurs in batch mode. 
+quiet - does no printing except for errors or warnings
+doesn't print parameter or Factory Presets information
+only runs a basic open and initialize test. good for debugging basic functionality
+wait after finished - good for profiling memory usage see 'man leaks'
+The version is printed to stdout.
+The version is printed to stdout in hexadecimal.
+Each line in the file should contain one complete command.
+The
+executable is used for the managment of persistent AVB entities which are advertised by the Mac.
+is launched automatically by launched as needed on demand and should not be launched manually.
+configured Entities
+allocated Entity IDs
+The 
+tool is used to capture a snapshot of the current AVB system state and help diagnose 
+common issues with AVB.
+looks for the system to determine that it actually has AVB capable interfaces and that at 
+least one of these has been enabled.
+will produce a number of warnings which may not be errors depending on the setup of the system.
+Things such as missing local or remote attributes for MSRP will be flagged as a warning but is
+not an error if the Mac is not sourcing or sinking streams as appropriate for the warning.
+report may be the result of a network device. Please use your best judgement before filing the bug report.
+The following options are available:
+Disable the reading of the AVDECC AEM from the device and archiving it in the result.
+Disable dumping of the state of the AVB audio driver device tree.
+Enabled reading of and dumping the ACMP state of the entities.
+Enable sending of the AVDECC AECP AEM GET_STREAM_INFO command to each of the possible stream sources and sinks and including in the info dump.
+Enable sending of the AVDECC AECP AEM GET_COUNTER command to each of the possible stream sources and sinks and including in the info dump.
+output The information gathered by
+including the command line output, an ioreg dump and the current system.log and kernel.log files.
+The
+executable is used for the managment AVB features and settings.
+The following options are available:
+Enable or disable the virtual audio entity on the specified interface, or list the set of interfaces with a virtual audio entity enabled.
+An interface must be present and enabled for AVB use to enable the virtual audio entity on that interface. A virtual audio entity can always be removed from an interface regardless of if the interface is present or not.
+can be used to compress video media to different types for sharing on the web or loading onto devices.
+prints usage information and available presets
+sets the console output to verbose
+sets the console output to quiet
+shows progress during the export (default with -v)
+converts the source media to an output file using the specified preset. Use --listPresets to get the full list. Common presets are:
+is the source media file
+is the output movie file
+lists all of the presets avconvert supports
+Optional flags to configure the audio export settings
+a limit value for the data rate for the audio track in bits per second
+sets the format of the audio output using a fourCC eg. aac
+configures the sample rate of the output in Hertz. eg. 44100
+is the channel count of the output eg. 1 (for mono) 2 (stereo) 4 (quad)
+Optional flags to configure the video export settings
+a limit value for the video data rate in bits per second
+sets the height of the output video in pixels
+sets the width of the output video in pixels
+sets the format of the video output using a fourCC eg. avc1
+sets the frame rate of the output video in frames per second
+specifies how often keyframes appear in the output video
+sets whether or not to enable frame reordering (b-frames)
+Optional flags configuring track and metadata output
+omits the listed track type from the exported movie Allowable track types are:
+sets the file from which the metadata for the export is found if that is different from the source movie
+	avconvert --listPresets
+Lists the available presets that can be used for export
+	avconvert --preset AppleM4ViPod --source sample_movie.mov --output ipod_movie.m4v
+Exports the source movie "sample_movie.mov" to "ipod_movie.m4v" using the iPod encoding preset
+	avconvert --preset AppleM4VAppleTV --source sample_movie.mov --output appletv_movie.m4v -adr 128000 -sr 441000
+Overrides the AppleTV defaults for audio data rate and sample rate in the output movie
+	avconvert --preset AppleM4VAppleTV --source sample_movie.mov --output appletv_movie.m4v -ot audioTrack
+Omits the audio track from the output file "appletv_movie.m4v"
+command first appeared in Mac OS X 10.7..de EX
+awk
+[
+]
+[
+]
+[
+|
+]
+[
+]
+scans each input
+for lines that match any of a set of patterns specified literally in
+or in one or more files
+specified as
+With each pattern
+there can be an associated action that will be performed
+when a line of a
+matches the pattern.
+Each line is matched against the
+pattern portion of every pattern-action statement;
+the associated action is performed for each matched pattern.
+The file name 
+means the standard input.
+Any
+of the form
+is treated as an assignment, not a filename,
+and is executed at the time it would have been opened if it were a filename.
+The option
+followed by
+is an assignment to be done before
+is executed;
+any number of
+options may be present.
+The
+option defines the input field separator to be the regular expression
+An input line is normally made up of fields separated by white space,
+or by regular expression
+The fields are denoted
+refers to the entire line.
+If
+is null, the input line is split into one field per character.
+A pattern-action statement has the form
+A missing 
+means print the line;
+a missing pattern always matches.
+Pattern-action statements are separated by newlines or semicolons.
+An action is a sequence of statements.
+A statement can be one of the following:
+break
+continue
+Statements are terminated by
+semicolons, newlines or right braces.
+An empty
+stands for
+with the usual C escapes recognized within.
+Expressions take on string or numeric values as appropriate,
+and are built using the operators
+(exponentiation), and concatenation (indicated by white space).
+The operators
+are also available in expressions.
+Variables may be scalars, array elements
+(denoted
+or fields.
+Variables are initialized to the null string.
+Array subscripts may be any string,
+not necessarily numeric;
+this allows for a form of associative memory.
+Multiple subscripts such as
+are permitted; the constituents are concatenated,
+separated by the value of
+The
+statement prints its arguments on the standard output
+(or on a file if
+or
+is present or on a pipe if
+is present), separated by the current output field separator,
+and terminated by the output record separator.
+and
+may be literal names or parenthesized expressions;
+identical string values in different statements denote
+the same open file.
+The
+statement formats its expression list according to the format
+(see
+The built-in function
+closes the file or pipe
+The built-in function
+flushes any buffered output for the file or pipe
+The mathematical functions
+and
+are built in.
+Other built-in functions:
+the length of its argument
+taken as a string,
+or of
+if no argument.
+random number on (0,1)
+sets seed for
+and returns the previous seed.
+truncates to an integer value
+the
+substring of
+that begins at position
+counted from 1.
+the position in
+where the string
+occurs, or 0 if it does not.
+the position in
+where the regular expression
+occurs, or 0 if it does not.
+The variables
+and
+are set to the position and length of the matched string.
+splits the string
+into array elements
+and returns
+The separation is done with the regular expression
+or with the field separator
+if
+is not given.
+An empty string as field separator splits the string
+into one array element per character.
+substitutes
+for the first occurrence of the regular expression
+in the string
+If
+is not given,
+is used.
+same as
+except that all occurrences of the regular expression
+are replaced;
+and
+return the number of replacements.
+the string resulting from formatting
+according to the
+format
+executes
+and returns its exit status
+returns a copy of
+with all upper-case characters translated to their
+corresponding lower-case equivalents.
+returns a copy of
+with all lower-case characters translated to their
+corresponding upper-case equivalents.
+The ``function''
+sets
+to the next input record from the current input file;
+sets
+to the next record from
+sets variable
+instead.
+Finally,
+pipes the output of
+into
+each call of
+returns the next line of output from
+In all cases,
+returns 1 for a successful input,
+Patterns are arbitrary Boolean combinations
+(with
+of regular expressions and
+relational expressions.
+Regular expressions are as defined in
+Isolated regular expressions
+in a pattern apply to the entire line.
+Regular expressions may also occur in
+relational expressions, using the operators
+and
+is a constant regular expression;
+any string (constant or variable) may be used
+as a regular expression, except in the position of an isolated regular expression
+in a pattern.
+A pattern may consist of two patterns separated by a comma;
+in this case, the action is performed for all lines
+from an occurrence of the first pattern
+though an occurrence of the second.
+A relational expression is one of the following:
+where a relop is any of the six relational operators in C,
+and a matchop is either
+(matches)
+or
+(does not match).
+A conditional is an arithmetic expression,
+a relational expression,
+or a Boolean combination
+of these.
+The special patterns
+and
+may be used to capture control before the first input line is read
+and after the last.
+and
+do not combine with other patterns.
+Variable names with special meanings:
+conversion format used when converting numbers
+(default
+regular expression used to separate fields; also settable
+by option
+number of fields in the current record
+ordinal number of the current record
+ordinal number of the current record in the current file
+the name of the current input file
+input record separator (default newline)
+output field separator (default blank)
+output record separator (default newline)
+output format for numbers (default
+separates multiple subscripts (default 034)
+argument count, assignable
+argument array, assignable;
+non-null members are taken as filenames
+array of environment variables; subscripts are names.
+Functions may be defined (at the position of a pattern-action statement) thus:
+function foo(a, b, c) { ...; return x }
+Parameters are passed by value if scalar and by reference if array name;
+functions may be called recursively.
+Parameters are local to the function; all other variables are global.
+Thus local variables may be created by providing excess parameters in
+the function definition.
+length($0) > 72
+Print lines longer than 72 characters.
+{ print $2, $1 }
+Print first two fields in opposite order.
+      { print $2, $1 }
+	{ s += $1 }
+Add up first column, print sum and average.
+BEGIN	{	# Simulate echo(1)
+	for (i = 1; i < ARGC; i++) printf "%s ", ARGV[i]
+	exit }
+A. V. Aho, B. W. Kernighan, P. J. Weinberger,
+The AWK Programming Language,
+Addison-Wesley, 1988.  ISBN 0-201-07981-X
+There are no explicit conversions between numbers and strings.
+To force an expression to be treated as a number add 0 to it;
+to force it to be treated as a string concatenate
+The scope rules for variables in functions are a botch;
+the syntax is worse.
+encodes and decodes Base64 data, as specified in RFC 4648. With no options,
+reads raw data from stdin and writes encoded data as a continuous block to
+stdout.
+The following options are available:
+Insert line breaks every
+characters. Default is 0, which generates an unbroken stream.
+Decode incoming Base64 stream into binary data.
+Print usage summary and exit.
+Read input from
+Default is stdin; passing
+also represents stdin.
+Write output to
+Default is stdout; passing
+also represents stdout.
+The
+utility deletes any prefix ending with the last slash
+character present in
+(after first stripping trailing slashes),
+and a
+if given.
+The
+is not stripped if it is identical to the remaining characters in
+The resulting filename is written to the standard output.
+A non-existent suffix is ignored.
+If
+is specified, then every argument is treated as a
+as if
+were invoked with just one argument.
+If
+is specified, then the
+is taken as its argument, and all other arguments are treated as a
+The
+utility deletes the filename portion, beginning
+with the last slash
+character to the end of
+(after first stripping trailing slashes),
+and writes the result to the standard output.
+The following line sets the shell variable
+to
+The
+and
+utilities are expected to be
+compatible.
+[options]
+[file]
+executes commands read from the standard input or from a file.
+is intended to be a conformant implementation of the
+Shell and Utilities portion of the IEEE POSIX specification
+(IEEE Standard 1003.1).
+can be configured to be POSIX-conformant by default.
+In addition to the single-character shell options documented in the
+interprets the following options when it is invoked:
+If the
+option is present, then commands are read from
+If there are arguments after the
+they are assigned to the positional parameters, starting with
+If the
+option is present, the shell is
+Make
+act as if it had been invoked as a login shell (see
+below).
+If the
+option is present, the shell becomes
+(see
+below).
+If the
+option is present, or if no arguments remain after option
+processing, then commands are read from the standard input.
+This option allows the positional parameters to be set
+when invoking an interactive shell.
+is printed on the standard output.
+These are the strings that
+are subject to language translation when the current locale
+below).
+that may be reused as input.
+A
+signals the end of options and disables further option processing.
+Any arguments after the
+are treated as filenames and arguments.  An argument of
+also interprets a number of multi-character options.
+These options must appear on the command line before the
+single-character options to be recognized.
+Arrange for the debugger profile to be executed before the shell
+starts.
+Turns on extended debugging mode (see the description of the
+option to the
+builtin below)
+and shell function tracing (see the description of the
+builtin below).
+Display a usage message on standard output and exit successfully.
+Execute commands from
+instead of the standard personal initialization file
+if the shell is interactive (see
+below).
+Do not use the GNU
+library to read command lines when the shell is interactive.
+Do not read either the system-wide startup file
+or any of the personal initialization files
+or
+By default,
+reads these files when it is invoked as a login shell (see
+below).
+Do not read and execute the personal initialization file
+if the shell is interactive.
+This option is on by default if the shell is invoked as
+The shell becomes restricted (see
+below).
+Show version information for this instance of
+on the standard output and exit successfully.
+If arguments remain after option processing, and neither the
+nor the
+option has been supplied, the first argument is assumed to
+be the name of a file containing shell commands.
+If
+is invoked in this fashion, 
+is set to the name of the file, and the positional parameters
+are set to the remaining arguments.
+reads and executes commands from this file, then exits.
+executed in the script.
+If no commands are executed, the exit status is 0.
+An attempt is first made to open the file in the current directory, and,
+if no file is found, then the shell searches the directories in
+for the script.
+or one started with the 
+option.
+and without the
+option
+whose standard input and error are
+both connected to terminals (as determined by
+or one started with the
+option.
+is set and
+includes
+if
+is interactive,
+allowing a shell script or a startup file to test this state.
+The following paragraphs describe how
+executes its startup files.
+If any of the files exist but cannot be read,
+reports an error.
+Tildes are expanded in file names as described below under
+in the
+section.
+When
+is invoked as an interactive login shell, or as a non-interactive shell
+file exists.
+and executes commands from the first one that exists and is readable.
+The
+option may be used when the shell is started to inhibit this behavior.
+When a login shell exits,
+exists.
+When an interactive shell that is not a login shell is started,
+This may be inhibited by using the
+option.
+When
+is started non-interactively, to run a shell script, for example, it
+looks for the variable
+in the environment, expands its value if it appears there, and uses the
+expanded value as the name of a file to read and execute.
+behaves as if the following command were executed:
+but the value of the
+variable is not used to search for the file name.
+If
+is invoked with the name
+it tries to mimic the startup behavior of historical versions of
+as closely as possible,
+while conforming to the POSIX standard as well.
+When invoked as an interactive login shell, or a non-interactive
+read and execute commands from
+and
+in that order.
+The
+option may be used to inhibit this behavior.
+When invoked as an interactive shell with the name
+looks for the variable
+expands its value if it is defined, and uses the
+expanded value as the name of a file to read and execute.
+Since a shell invoked as
+does not attempt to read and execute commands from any other startup
+files, the
+option has no effect.
+A non-interactive shell invoked with the name
+does not attempt to read any other startup files. 
+When invoked as
+enters
+mode after the startup files are read.
+When
+is started in
+mode, as with the
+command line option, it follows the POSIX standard for startup files.
+In this mode, interactive shells expand the
+variable and commands are read and executed from the file
+whose name is the expanded value.
+No other startup files are read.
+attempts to determine when it is being run by the remote shell
+If
+The
+option may be used to inhibit this behavior, and the
+option may be used to force another file to be read, but
+or allow them to be specified.
+If the shell is started with the effective user (group) id not equal to the
+files are read, shell functions are not inherited from the environment, the
+variable, if it appears in the environment, is ignored,
+and the effective user id is set to the real user id.
+the same, but the effective user id is not reset.
+The following definitions are used throughout the rest of this
+document.
+A space or tab.
+A sequence of characters considered as a single unit by the shell.
+Also known as a
+A 
+consisting only of alphanumeric characters and underscores, and
+beginning with an alphabetic character or an underscore.  Also
+referred to as an
+A character that, when unquoted, separates words.  One of the following:
+symbols:
+The following words are recognized as reserved when unquoted and either
+the first word of a simple command (see
+below) or the third word of a 
+or
+command:
+specifies the command to be executed, and is passed as argument zero.
+The remaining words are passed as arguments to the invoked command.
+the character
+The format for a pipeline is:
+The standard output of
+is connected via a pipe to the standard input of
+This connection is performed before any redirections specified by the
+command (see
+below).
+The return status of a pipeline is the exit status of the last
+value of the last (rightmost) command to exit with a non-zero status,
+or zero if all commands exit successfully.
+If the reserved word
+precedes a pipeline, the exit status of that pipeline is the logical
+negation of the exit status as described above.
+The shell waits for all commands in the pipeline to
+terminate before returning a value.
+If the
+reserved word precedes a pipeline, the elapsed as well as user and
+system time consumed by its execution are reported when the pipeline
+terminates.
+The
+variable may be set to a format string that specifies how the timing
+information should be displayed; see the description of
+under
+below.
+Each command in a pipeline is executed as a separate process (i.e., in a
+subshell).
+of the operators
+or
+and optionally terminated by one of
+or
+Of these list operators,
+and
+have equal precedence, followed by
+and
+which have equal precedence.
+of a semicolon to delimit commands.
+If a command is terminated by the control operator
+in a subshell.  The shell does not wait for the command to
+finish, and the return status is 0.  Commands separated by a
+are executed sequentially; the shell waits for each
+command to terminate in turn.  The return status is the
+exit status of the last command executed.
+The control operators
+and
+denote AND lists and OR lists, respectively.
+An AND list has the form
+is executed if, and only if,
+returns an exit status of zero.
+An OR list has the form
+is executed if and only if
+returns a non-zero exit status.  The return status of
+AND and OR lists is the exit status of the last command
+executed in the list.
+below).
+Variable assignments and builtin
+commands that affect the shell's environment do not remain in effect
+after the command completes.  The return status is the exit status of
+The return status is the exit status of
+word is permitted to be recognized.  Since they do not cause a word
+below under
+If the value of the expression is non-zero, the return status is 0;
+otherwise the return status is 1.  This is exactly equivalent to
+Return a status of 0 or 1 depending on the evaluation of
+Expressions are composed of the primaries described below under
+Word splitting and pathname expansion are not performed on the words
+variable expansion, arithmetic expansion, command substitution, process
+substitution, and quote removal are performed.
+as primaries.
+right of the operator is considered a pattern and matched according
+If the shell option
+is enabled, the match is performed without regard to the case
+of alphabetic characters.
+Any part of the pattern may be quoted to force it to be matched as a
+string.
+When it is used, the string to the right of the operator is considered
+The return value is 0 if the string matches
+the pattern, and 1 otherwise.
+If the regular expression is syntactically incorrect, the conditional
+expression's return value is 2.
+If the shell option
+is enabled, the match is performed without regard to the case
+of alphabetic characters.
+Substrings matched by parenthesized subexpressions within the regular
+matching the entire regular expression.
+Expressions may be combined using the following operators, listed
+in decreasing order of precedence:
+This may be used to override the normal precedence of operators.
+True if
+is false.
+True if both
+and
+are true.
+True if either
+or
+is true.
+the entire conditional expression.
+of items.
+below).
+The return status is the exit status of the last command that executes.
+list, no commands are executed, and the return status is 0.
+to the rules described below under
+until it evaluates to zero.
+If any expression is omitted, it behaves as if it evaluates to 1.
+that is executed, or false if any of the expressions is invalid.
+of items.  The set of expanded words is printed on the standard
+below).  The
+prompt is then displayed and a line read from the standard input.
+If the line consists of a number corresponding to one of
+the displayed words, then the value of
+is set to that word.  If the line is empty, the words and prompt
+are displayed again.  If EOF is read, the command completes.  Any
+other value read causes
+to be set to null.  The line read is saved in the variable
+The
+is executed after each selection until a
+command is executed.
+The exit status of
+is the exit status of the last command executed in
+or zero if no commands were executed.
+as for pathname expansion (see
+below).
+expansion, parameter and variable expansion, arithmetic substitution,
+command substitution, process substitution and quote removal.
+expansion, parameter and variable expansion, arithmetic substitution,
+command substitution, and process substitution.
+If the shell option
+is enabled, the match is performed without regard to the case
+of alphabetic characters.
+When a match is found, the
+subsequent matches are attempted.  The exit status is zero if no
+pattern matches.  Otherwise, it is the exit status of the
+The
+is executed.  If its exit status is zero, the
+executed, if present.  The exit status is the exit status of the
+last command executed, or zero if no condition tested true.
+the
+is executed as long as the last command in
+returns a non-zero exit status.
+is the exit status
+none was executed.
+A shell function is an object that is called like a simple command and
+executes a compound command with a new set of positional parameters.
+Shell functions are declared as follows:
+name of a simple command.
+Any redirections (see
+below) specified when a function is defined are performed
+when the function is executed.
+The exit status of a function definition is zero unless a syntax error
+occurs or a readonly function with the same name already exists.
+When executed, the exit status of a function is the exit status of the
+last command executed in the body.  (See
+below.)
+In a non-interactive shell, or an interactive shell in which the
+option to the
+builtin is enabled (see
+below), a word beginning with
+causes that word and all remaining characters on that line to
+be ignored.  An interactive shell without the
+option enabled does not allow comments.  The
+option is on by default in interactive shells.
+characters or words to the shell.  Quoting can be used to 
+disable special treatment for special characters, to prevent
+reserved words from being recognized as such, and to prevent
+parameter expansion.
+has special meaning to the shell and must be quoted if it is to
+represent itself.
+When the command history expansion facilities are being used
+(see
+below), the
+to prevent history expansion.
+There are three quoting mechanisms: the
+single quotes, and double quotes.
+It preserves the literal value of the next character that follows,
+is treated as a line continuation (that is, it is removed from the
+input stream and effectively ignored).
+Enclosing characters in single quotes preserves the literal value
+of each character within the quotes.  A single quote may not occur
+between single quotes, even when preceded by a backslash.
+Enclosing characters in double quotes preserves the literal value
+of all characters within the quotes, with the exception of
+and, when history expansion is enabled,
+The characters
+and
+retain their special meaning within double quotes.  The backslash
+retains its special meaning only when followed by one of the following
+characters:
+or
+A double quote may be quoted within double quotes by preceding it with
+a backslash.
+If enabled, history expansion will be performed unless an
+appearing in double quotes is escaped using a backslash.
+The backslash preceding the
+is not removed.
+The special parameters
+and
+have special meaning when in double
+quotes (see
+below).
+as specified by the ANSI C standard.  Backslash escape sequences, if
+present, are decoded as follows:
+alert (bell)
+backspace
+an escape character
+form feed
+new line
+carriage return
+horizontal tab
+vertical tab
+backslash
+single quote
+(one to three digits)
+(one or two hex digits)
+The expanded result is single-quoted, as if the dollar sign had
+not been present.
+the string to be translated according to the current locale.
+is ignored.
+If the string is translated and replaced, the replacement is
+double-quoted.
+A
+is an entity that stores values.
+It can be a
+a number, or one of the special characters listed below under
+A
+is a parameter denoted by a
+Attributes are assigned using the
+builtin command (see
+below in
+A parameter is set if it has been assigned a value.  The null string is
+a valid value.  Once a variable is set, it may be unset only by using
+the
+builtin command (see
+below).
+A
+may be assigned to by a statement of the form
+If
+is not given, the variable is assigned the null string.  All
+undergo tilde expansion, parameter and variable expansion,
+command substitution, arithmetic expansion, and quote
+removal (see
+below).  If the variable has its
+attribute set, then
+is evaluated as an arithmetic expression even if the $((...)) expansion is
+not used (see
+below).
+Word splitting is not performed, with the exception
+Pathname expansion is not performed.
+Assignment statements may also appear as arguments to the
+and
+builtin commands.
+In the context where an assignment statement is assigning a value
+to a shell variable or array index, the += operator can be used to
+append to or add to the variable's previous value.
+When += is applied to a variable for which the integer attribute has been
+variable's current value, which is also evaluated.
+When += is applied to an array variable using compound assignment (see
+below), the
+variable's value is not unset (as it is when using =), and new values are
+appended to the array beginning at one greater than the array's maximum index.
+appended to the variable's value.
+A
+is a parameter denoted by one or more
+digits, other than the single digit 0.  Positional parameters are
+assigned from the shell's arguments when it is invoked,
+and may be reassigned using the
+builtin command.  Positional parameters may not be assigned to
+with assignment statements.  The positional parameters are
+temporarily replaced when a shell function is executed (see
+below).
+When a positional parameter consisting of more than a single
+digit is expanded, it must be enclosed in braces (see
+below).
+The shell treats several parameters specially.  These parameters may
+only be referenced; assignment to them is not allowed.
+Expands to the positional parameters, starting from one.  When the
+expansion occurs within double quotes, it expands to a single word
+with the value of each parameter separated by the first character
+of the 
+is the first character of the value of the
+variable.  If
+is unset, the parameters are separated by spaces.
+If
+is null, the parameters are joined without intervening separators.
+Expands to the positional parameters, starting from one.  When the
+expansion occurs within double quotes, each parameter expands to a
+If the double-quoted expansion occurs within a word, the expansion of
+the first parameter is joined with the beginning part of the original
+word, and the expansion of the last parameter is joined with the last
+part of the original word.
+expand to nothing (i.e., they are removed).
+Expands to the number of positional parameters in decimal.
+Expands to the status of the most recently executed foreground
+pipeline.
+Expands to the current option flags as specified upon invocation, 
+by the
+builtin command, or those set by the shell itself
+(such as the
+option).
+Expands to the process ID of the shell.  In a () subshell, it
+expands to the process ID of the current shell, not the
+subshell.
+Expands to the process ID of the most recently executed background
+(asynchronous) command.
+Expands to the name of the shell or shell script.  This is set at
+shell initialization.  If
+is invoked with a file of commands,
+is set to the name of that file.  If
+is started with the
+option, then
+is set to the first argument after the string to be
+executed, if one is present.  Otherwise, it is set
+to the file name used to invoke
+as given by argument zero.
+At shell startup, set to the absolute pathname used to invoke the
+shell or shell script being executed as passed in the environment
+or argument list.
+Subsequently, expands to the last argument to the previous command,
+after expansion.
+Also set to the full pathname used to invoke each command executed
+and placed in the environment exported to that command.
+When checking mail, this parameter holds the name of the mail file
+currently being checked.
+The following variables are set by the shell:
+Expands to the full file name used to invoke this instance of
+An array variable whose values are the number of parameters in each
+frame of the current bash execution call stack.
+The number of
+parameters to the current subroutine (shell function or script executed
+When a subroutine is executed, the number of parameters passed is pushed onto
+(see the description of the
+option to the
+builtin below)
+An array variable containing all of the parameters in the current bash
+execution call stack.  The final parameter of the last subroutine call
+is at the top of the stack; the first parameter of the initial call is
+at the bottom.  When a subroutine is executed, the parameters supplied
+(see the description of the
+option to the
+builtin below)
+The command currently being executed or about to be executed, unless the
+shell is executing a command as the result of a trap,
+in which case it is the command executing at the time of the trap.
+An array variable whose members are the line numbers in source files
+The element with index 0 is the portion of the string
+matching the entire regular expression.
+This variable is read-only.
+An array variable whose members are the source filenames corresponding
+Incremented by one each time a subshell or subshell environment is spawned.
+The initial value is 0.
+A readonly array variable whose members hold version information for
+this instance of
+The values assigned to the array members are as follows:
+The patch level.
+The build version.
+Expands to a string describing the version of this instance of
+cursor position.
+This variable is available only in shell functions invoked by the
+below).
+The current command line.
+This variable is available only in shell functions and external
+commands invoked by the
+below).
+The index of the current cursor position relative to the beginning of
+the current command.
+If the current cursor position is at the end of the current command,
+This variable is available only in shell functions and external
+commands invoked by the
+below).
+The set of characters that the Readline library treats as word
+separators when performing word completion.
+If
+is unset, it loses its special properties, even if it is
+subsequently reset.
+words in the current command line.
+The words are split on shell metacharacters as the shell parser would
+separate them.
+This variable is available only in shell functions invoked by the
+below).
+An array variable (see
+below) containing the current contents of the directory stack.
+Directories appear in the stack in the order they are displayed by the
+builtin.
+Assigning to members of this array variable may be used to modify
+directories already in the stack, but the
+and
+builtins must be used to add and remove directories.
+Assignment to this variable will not change the current directory.
+If
+is unset, it loses its special properties, even if it is
+subsequently reset.
+Expands to the effective user ID of the current user, initialized at
+shell startup.  This variable is readonly.
+An array variable containing the names of all shell functions
+currently in the execution call stack.
+The element with index 0 is the name of any currently-executing
