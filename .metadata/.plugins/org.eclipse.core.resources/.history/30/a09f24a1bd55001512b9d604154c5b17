@@ -1,0 +1,38 @@
+/**
+ * this program takes input an integer number n from
+ * command line and finds all prime numbers p_i; 1 ≤ i ≤ k; so such n = p1 * p2 * p3 â¦ * pk.
+ * 
+ * @author Sharma, Deepak DS5930
+ * @author Kurra, Sree Lakshmi SK9040
+ * 
+ */
+
+public class Primefactor {
+
+	public static void main(String[] args)
+	{
+		int number=Integer.parseInt(args[0]);
+		int dummy=3;
+		String output= "";
+		System.out.print(number+"=");
+		while(number%2==0)
+		{   output=output+"2*";    //.print(2 + "*");
+			number=number/2;
+		}
+        
+        for(dummy=3;dummy<=Math.sqrt(number)+1;dummy=dummy+2)
+        {
+          while(number%dummy==0)
+          {   output=output+dummy+"*";
+        	  number=number/dummy;
+          }
+          
+        }
+        if(number>1)
+        {
+      	  output=output+number+"*";
+        }
+        System.out.println(output.substring(0,output.length()-1));
+		
+	}
+}

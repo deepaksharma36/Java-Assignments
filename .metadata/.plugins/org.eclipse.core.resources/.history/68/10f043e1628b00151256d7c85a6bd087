@@ -1,0 +1,20 @@
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
+
+public class UPDserver {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	byte[] buffer = new byte[65508];
+	InetAddress aInetAddress = new InetSocketAddress("127.0.0.1", 2020);
+
+	DatagramPacket packet = new DatagramPacket(
+	    buffer, buffer.length,, 9000);
+}

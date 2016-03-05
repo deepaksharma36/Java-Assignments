@@ -1,0 +1,64 @@
+
+public class Linklist {
+  
+	private node Start;
+	public Linklist()
+	{
+		Start=null;
+		//Start.next=null;
+	}
+	
+	public class<E,V> node
+	{
+		private E dataOne;
+		private V dataTwo;
+		private node<E,T> next;
+		
+		
+	}
+	
+	public void addNode(int newValue)
+	{  node i ;
+	   node newNode= new node();
+	   newNode.value=newValue;
+	   newNode.next=null;
+	   i=Start;
+	   if(Start!=null)
+	   {
+		while(i.next!=null)
+		{
+			i=i.next;
+		}
+		if(i.next==null)
+		{
+		i.next=newNode;
+		   System.out.println("new nodes added");
+		}
+	   }
+	   else
+	   {
+		   System.out.println("First node added");
+		   Start=newNode;
+	       //Start.next=null;
+	   }
+	}
+	public void printLinklist()
+	{
+		node i ;
+		   i=Start;
+			   //System.out.println(Start.value);
+			   //System.out.println(Start.next.value);
+			   //System.out.println(Start.next.next.value);
+			   while(i!=null)
+			   {
+				   System.out.println(i.value);
+				   i=i.next;
+			   }
+		
+	}
+	
+	
+	
+}
+
+

@@ -1,0 +1,320 @@
+public class Connect4Field implements Connect4FieldInterface {
+	private int[] sizeBoard={9,25};
+	private char[][] Connect4FieldBoard = new char[sizeBoard[0]][sizeBoard[1]];
+	private int[] lastMove = new int[2];
+	private PlayerInterface playerEA=null,playerEB=null;
+	private Player[] thePlayers= new Player[2]; 
+
+	public Connect4Field(String[] playerDetails) {
+		char [] playerSymbol={'*','+'};
+		if(playerDetails.length==2)
+		{
+		//String [] playerName={"A","B"};
+		for ( int index = 0; index < 2; index ++ )    
+	         this.thePlayers[index]=new Player(this,playerDetails[index],playerSymbol[index]);
+		init(playerEA, playerEB);
+		}
+		else if(playerDetails.length==1)
+		{
+			this.thePlayers[0]=new Player(this,playerDetails[0],playerSymbol[0]);
+		    this.thePlayers[1]=new Player(this,"CPU",playerSymbol[1]);		
+		}
+		initConnect4FieldBoard();
+
+	}
+
+	public boolean checkIfPiecedCanBeDroppedIn(int column) {
+		// TODO Auto-generated method stub
+		int row = 0;
+		while (row < 9) {
+			if (Connect4FieldBoard[row][column] == 'e') {
+				return true;
+			}
+			row++;
+		}
+		return false;
+	}
+
+	public void dropPieces(int column, char gamePiece) {
+		// TODO Auto-generated method stub
+		int row = 0;
+		if(Connect4FieldBoard[sizeBoard[0]-1][column]!='x')
+		{
+		while (row < sizeBoard[0]) {
+			if (Connect4FieldBoard[row][column] == 'e') {
+				Connect4FieldBoard[row][column] = gamePiece;
+				lastMove[0] = row;
+				lastMove[1] = column;
+				break;
+			}
+			row++;
+		}
+		}
+	}
+
+	public boolean didLastMoveWin() {
+		// TODO Auto-generated method stub
+		int row=lastMove[0];
+		int column=lastMove[1];
+		if (row-3>=0 && Connect4FieldBoard[row-3][column]!='x')
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row-3,row,column,column))
+				return true;
+		}
+		//[-xxx] //working 
+		 if (column+3<sizeBoard[1] && Connect4FieldBoard[row][column+3]!='x')
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column+3))
+				return true;
+		}
+		//[xxx-] //working
+		 if (column-3 >=0 )
+		{   System.out.println(column);
+		    System.out.println(row);
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column-3,column))
+				return true;
+		}
+		//[xx-x] //working
+		if ((column-2 >=0 && column+1<sizeBoard[1])   && Connect4FieldBoard[row][column-2]!='x' && Connect4FieldBoard[row][column+1]!='x')
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column-2,column+1))
+				return true;
+		}
+		//[x-xx] //working
+		 if ((column-1 >=0 && column+2<sizeBoard[1]) && Connect4FieldBoard[row][column-1]!='x' && Connect4FieldBoard[row][column+2]!='x')
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column-1,column+2))
+				return true;
+		}
+		/**
+		 *   -
+		 *    x
+		 *     x
+		 *      x
+		 */
+		
+		 if ((row-3>=0 && column+3<sizeBoard[1] ) && Connect4FieldBoard[row-3][column+3]!='x' && Connect4FieldBoard[row][column]!='x' )
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column+1,column+1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-2,row-2,column+2,column+2) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-3,row-3,column+3,column+3))
+				return true;
+		}
+		/**
+		 *       -
+		 *      x
+		 *     x
+		 *    x
+		 */
+		 if ((row-3>=0 && column-3>=0) && Connect4FieldBoard[row-3][column-3]!='x' )
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-2,row-2,column-2,column-2) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-3,row-3,column-3,column-3))
+				return true;
+		}
+		
+		/**
+		 *   x
+		 *    x
+		 *     x
+		 *      -  working
+		 */
+		
+		 if ((row+3<sizeBoard[0] && column-3>=0 ))
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+2,row+2,column-2,column-2) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+3,row+3,column-3,column-3))
+				return true;
+		}
+		
+		/**
+		 *       x
+		 *      x
+		 *     x
+		 *    -
+		 */
+		 if ((row+3<sizeBoard[0] && column+3<sizeBoard[1]))
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column+1,column+1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+2,row+2,column+2,column+2) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+3,row+3,column+3,column+3))
+				return true;
+		}
+		
+		/**
+		 *   x
+		 *    -
+		 *     x
+		 *      x
+		 */
+		 if (row-2>=0 && column+2<sizeBoard[1] && row+1<sizeBoard[0] && column-1>=0  )
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column+1,column+1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-2,row-2,column+2,column+2))
+				return true;
+		}
+		
+		/**
+		 *   x
+		 *    x
+		 *     -
+		 *      x
+		 */
+		 if ((row-1>=0 && column+1<sizeBoard[1] && row+2<sizeBoard[0] && column-2>=0 )  )
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column+1,column+1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+2,row+2,column-2,column-2))
+				return true;
+		}
+		
+		
+		
+		/**
+		 *       x
+		 *      -
+		 *     x
+		 *    x
+		 */
+		 if ( column+1<sizeBoard[1] && row+1<sizeBoard[0] && row-2>=0 && column-2>=0)
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column+1,column+1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row-2,row-2,column-2,column-2))
+				return true;
+		}
+		/**    
+		 *    x
+		 *   x
+		 *  -
+		 * x
+		 */
+		 if (row-1>=0 && column-1>=0 && row+2<sizeBoard[0]  && column+2<sizeBoard[1])
+		{
+			if( doesItConnect(Connect4FieldBoard[row][column],row,row,column,column) && 
+			    doesItConnect(Connect4FieldBoard[row][column],row-1,row-1,column-1,column-1) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+2,row+2,column+2,column+2) &&
+			    doesItConnect(Connect4FieldBoard[row][column],row+1,row+1,column+1,column+1))
+				return true;
+		}
+		
+	      return false;
+	}
+
+	public boolean isItaDraw() {
+		for(int dummyCounterY=0;dummyCounterY<sizeBoard[0];dummyCounterY++)
+		{
+			for(int dummyCounterX=0;dummyCounterX<sizeBoard[1];dummyCounterX++)
+			{
+				if(Connect4FieldBoard[dummyCounterY][dummyCounterX]=='e')
+					return false;
+			}
+		}
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public String toString()
+	{
+		printConnect4FieldBoard();
+		return "";
+	}
+    
+	public void init(PlayerInterface playerEA, PlayerInterface playerEB) {
+		//System.out.println("Hey its done");
+		
+	}
+
+     public  void playTheGame()      {
+                int column;
+                System.out.println(this);
+                boolean gameIsOver = false;
+                do {
+                        for ( int index = 0; index < 2; index ++ )      {
+                                System.out.println(this);
+                                if ( isItaDraw() )      {
+                                        System.out.println("Draw");
+                                        gameIsOver = true;
+                                } else {
+                                        column = thePlayers[index].nextMove();
+                                        dropPieces(column, thePlayers[index].getGamePiece() );
+                                        if ( didLastMoveWin() ) {
+                                                gameIsOver = true;
+                                                System.out.println("The winner is: " + thePlayers[index].getName());
+                                        }
+                                }
+                        }
+ 
+                }  while ( ! gameIsOver  );
+        }
+
+	public int[] getLastMove() {
+		return lastMove;
+	}
+
+	public boolean doesItConnect(char value,int r1,int r2, int c1, int c2)
+	{
+	    for (int Y=r1; Y<=r2;Y++)
+	    {
+	    	for(int X=c1; X<=c2; X++)
+	    	{
+	    		if(value!= Connect4FieldBoard[Y][X])
+	    		{
+	    		return false;	
+	    		}
+	    		  	}
+	    }
+	   return true;
+	}
+    
+	public void initConnect4FieldBoard()
+	{
+		int N=8,M=9;
+		for(int dummyCounterY=0;dummyCounterY<sizeBoard[0];dummyCounterY++)
+		{
+			for(int dummyCounterX=0;dummyCounterX<N;dummyCounterX++)
+			{
+			    Connect4FieldBoard[dummyCounterY][dummyCounterX]='x';
+				 
+			}
+			for(int dummyCounterX=N;dummyCounterX<N+M;dummyCounterX++)
+			{
+				Connect4FieldBoard[dummyCounterY][dummyCounterX]='e';
+				 
+			}
+			for(int dummyCounterX=M+N;dummyCounterX<M+2*N;dummyCounterX++)
+			{
+				Connect4FieldBoard[dummyCounterY][dummyCounterX]='x';
+				 
+			}
+			
+			N=N-1;
+			M=M+2;
+			
+		}
+		
+	}
+
+	public void printConnect4FieldBoard()
+	{  
+		for(int dummyCounterY=sizeBoard[0]-1;dummyCounterY>=0;dummyCounterY--)
+		{   
+			for(int dummyCounterX=0;dummyCounterX<sizeBoard[1];dummyCounterX++)
+			{
+			   System.out.print( Connect4FieldBoard[dummyCounterY][dummyCounterX]);
+			}
+			System.out.println("");
+		}
+	}
+	
+}

@@ -1,0 +1,32 @@
+ class OnceOrMany {
+ 
+         public static boolean singelton(String literal, String aNewString)    {
+               System.out.println("literal: "+ literal + "     aNewString: "+aNewString);
+        	   return ( literal == aNewString );
+         }
+         public static void main( String args[] ) {
+        	   String test1="Deepak";
+        	   String test2=new String("Deepak");
+        	   String test3=new String("Deepak");
+        	   String test4="Deepak";
+        	   if(test2==test1)
+        	       System.out.println("test1==test4");
+        	   else
+        		   System.out.println("test1!=test4");	   
+               String aString = "xyz";
+               System.out.println("1.  xyz == aString: " +     "xyz" == aString   );
+               System.out.println("2.  xyz == aString: " +   ( "xyz" == aString ) );
+
+              String newString = new String("xyz");
+              System.out.println("xyz == new String(xyz)\n    " + ("xyz" == newString) );
+
+              System.out.println("1: " + singelton("xyz", "xyz"));
+              System.out.println("2: " + singelton("xyz", new String("xyz") ));
+              System.out.println("3: " + singelton("xyz", "xy" + "z"));
+              System.out.println("4: " + singelton("x" + "y" + "z", "xyz"));
+              System.out.println("5: " + singelton("x" + "y" + new String("z"), "xyz"));
+              System.out.println("6: " + singelton("x" + ( "y" + "z"), "xyz"));
+              System.out.println("7: " + singelton("x" + ( "" + "z"), "xyz"));
+        }
+      }
+

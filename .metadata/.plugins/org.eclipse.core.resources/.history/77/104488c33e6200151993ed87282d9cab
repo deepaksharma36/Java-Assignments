@@ -1,0 +1,25 @@
+import java.util.Scanner;
+import java.util.regex.MatchResult;
+
+public class Test {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+	Scanner sc = new Scanner("1fish2fishredfishbluefish")//.useDelimiter("deepak");
+	sc.findInLine("(\\d+) fish (\\d+) fish (\\w+) fish (\\w+)");
+	MatchResult result = sc.match();
+	for (int i=1; i<=result.groupCount(); i++) {
+       System.out.println(i + ": " + result.group(i));
+           }
+	while(sc.hasNext())
+	{
+		System.out.printf("%s %n",sc.next());
+	}
+		// TODO Auto-generated method stub
+
+	}
+
+}

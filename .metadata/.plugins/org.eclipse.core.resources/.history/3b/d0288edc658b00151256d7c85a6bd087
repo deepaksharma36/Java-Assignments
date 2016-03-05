@@ -1,0 +1,31 @@
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
+
+public class Client {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+		DatagramSocket datagramSocket;
+		
+			datagramSocket = new DatagramSocket(9000);
+		
+
+		byte[] buffer = new byte[10];
+		while(true){
+		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+		datagramSocket.receive(packet);
+			
+		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,157 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeSet;
+
+class Edge implements Comparable<Edge>{
+	private String startVertex, endVertex;
+	private int weight;
+	Edge(String startVertex, String endVertex, int weight){
+		this.startVertex=startVertex;
+		this.endVertex=endVertex;
+		this.weight=weight;
+	}
+	public String getStartVertex() {
+		return startVertex;
+	}
+	public void setStartVertex(String startVertex) {
+		this.startVertex = startVertex;
+	}
+	public String getEndVertex() {
+		return endVertex;
+	}
+	public void setEndVertex(String endVertex) {
+		this.endVertex = endVertex;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	@Override
+	public int compareTo(Edge edge2) {
+		if (this.weight>edge2.getWeight())
+		return 1;
+		else if(this.weight<edge2.getWeight())
+			return -1;
+		else
+			return 0;
+	}
+}
+class Graph{
+    private HashMap<String, ArrayList<Edge>> graph;// = new HashMap<String, ArrayList<Edge>>;
+    Graph()
+    {
+    	graph = new HashMap<String, ArrayList<Edge>>();
+    }
+	public boolean addEdge(String startVertext,String endVertex, int weight)
+	{
+		if (graph.containsKey(startVertext)){
+		
+		graph.get(startVertext).add(new Edge(startVertext, endVertex, weight));
+		return true;
+		}
+		else{
+			graph.put(startVertext,new ArrayList<Edge>());
+			graph.get(startVertext).add(new Edge(startVertext, endVertex, weight));
+		return true;
+		}
+	}
+	
+	public ArrayList<Edge> getEdges(String vertex){
+		if (graph.containsKey(vertex))
+			return graph.get(vertex);
+		else
+			return null;
+	}
+	
+}
+
+class Path {
+	String via;
+	int distance;
+	Path(String via,int distance)
+	{
+		this.distance=distance;
+		this.via=via;
+	}
+
+	public int compareTo(int o) {
+		if (this.distance>o)
+			return 1;
+		else if (this.distance<o)
+			return -1;
+		else 
+			return 0;
+	}
+	
+	public String toString(){
+		return via + " " +distance;
+	}
+	
+	
+}
+
+public class Dijkstra {
+	Queue<Edge> dijkstraQueue=new PriorityQueue<Edge>();
+	
+	HashMap<String,Path> path = new HashMap<String,Path>();
+	private ArrayList<Path> getPath(HashMap<String,Path> path,String endVertex)
+	{
+		ArrayList<Path> sortestPath = new ArrayList<Path>();
+		do
+		{
+			sortestPath.add(path.get(endVertex));
+			if (path.containsKey(endVertex))
+				endVertex=path.get(endVertex).via;
+			else
+				break;
+				//System.out.println("Breaking");
+		}while(endVertex!=null);
+		return sortestPath;
+	}
+	public ArrayList<Path> FindPath(String startVertex,String endVertex, Graph graph){
+		Set<String> visited = new TreeSet<String>();
+		Edge current;
+		visited.add(startVertex);
+		for(Edge edge: graph.getEdges(startVertex)) 
+				dijkstraQueue.add(edge);
+		path.put(startVertex, new Path(null,0));
+		while(!dijkstraQueue.isEmpty()){
+			current = dijkstraQueue.poll();
+			
+			if (!path.containsKey(current.getEndVertex()))
+				path.put(current.getEndVertex(), 
+						new Path(current.getStartVertex(),path.get(current.getStartVertex()).distance+current.getWeight()));
+			else if(path.get(current.getEndVertex()).compareTo(path.get(current.getStartVertex()).distance+current.getWeight())==1)
+				path.put(current.getEndVertex(), new Path(current.getStartVertex(),path.get(current.getStartVertex()).distance+current.getWeight()));
+			// if end vertex of newly found edge is not visited the visit it and store all the edges from this endvertex in que
+			if (!visited.contains(current.getEndVertex())){
+				visited.add(current.getEndVertex());
+			if(graph.getEdges(current.getEndVertex())!=null)
+			{for(Edge edge: graph.getEdges(current.getEndVertex()))
+				dijkstraQueue.add(edge);}
+			}
+		}
+		return getPath(path, endVertex);
+	}
+	public static void main(String[] args)
+	{
+	    Graph grapth = new Graph();
+	    Dijkstra aDijkstra = new Dijkstra();
+	    grapth.addEdge("a", "b", 10);
+	    grapth.addEdge("b", "c", 10);
+	    grapth.addEdge("c", "d", 10);
+	    grapth.addEdge("a", "d", 55);
+	    grapth.addEdge("b", "d", 5);
+	    ArrayList<Path> spath = aDijkstra.FindPath("a", "d",grapth );
+	    for (Path p:spath){
+	    	System.out.println(p);
+	    }
+	    
+	}
+}

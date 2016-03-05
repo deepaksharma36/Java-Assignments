@@ -1,0 +1,31 @@
+public class ZeroOne extends Thread	{
+	private String info;
+	static Object o = new Object();
+	static int oneIsRunning = 0;
+					     
+	public ZeroOne (String info) {
+		this.info    = info;
+	}
+	public void run () {
+		while ( true )	{
+			synchronized ( o ) {
+				try {
+				o.notifyAll();
+				if(Thread.currentThread().getId()!=oneIsRunning)
+					o.wait();
+				System.out.println(Thread.currentThread().getId());
+				//System.out.print(info);
+				
+					if ( oneIsRunning<99 )	{
+						( new ZeroOne(Integer.toString(oneIsRunning++)) ).start();
+					}
+					sleep(300);
+					o.wait();
+				} catch ( Exception e ) { }
+			}
+		}
+	}
+	public static void main (String args []) {
+		new ZeroOne("0").start();
+	}
+}

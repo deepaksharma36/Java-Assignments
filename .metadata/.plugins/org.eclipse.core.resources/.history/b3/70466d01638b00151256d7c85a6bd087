@@ -1,0 +1,28 @@
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
+
+public class UPDserver {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	byte[] buffer = new byte[65508];
+	try{
+	InetAddress address = InetAddress.getLocalHost();
+	
+	DatagramPacket packet = new DatagramPacket(
+	    buffer, buffer.length,address, 9000);
+	
+	
+	}
+	catch()
+	{
+		
+	}
+}

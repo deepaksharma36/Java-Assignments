@@ -1,0 +1,70 @@
+public class XXX {
+
+	/**
+	 * @param args
+	 */
+	class nonStatic {
+
+		void c() {
+			Static nObj = new Static();
+			nObj.c();
+			f(); // non static inner class can access private/public /protacted
+					// static/non static method of outer class
+					//
+			System.out.println("nonstatic class nonstatic method");
+			Static.b();
+		}
+		/**
+		 * static void n() { System.out.println("chutiyapa PAY heed"); }
+		 * 
+		 * static method can only be declared in a static or top level type
+		 */
+
+	}
+
+	static class Static {
+		static void b() {
+			nonStatic nObj = new XXX().new nonStatic();
+			nObj.c();
+			System.out.println("static class static method");
+		}
+
+		void c() {
+			nonStatic nObj = new XXX().new nonStatic();
+			nObj.c();
+			System.out.println("static class non static method");
+		}
+
+	}
+
+	static void f() {
+
+		System.out.println("main class  static method");
+	}
+
+	void g() {
+		x();// non static to non static possible
+		f();// non static to static possible
+
+		System.out.println("main class non static method");
+
+	}
+
+	void x() {
+		System.out.println("main class non static method");
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		f(); // static method can call static method
+		new XXX().g(); // non static method can be called only by creating
+						// object in a non static method
+		Static.b();
+		new Static().c();
+		new Static().b();// just warning method be is static can be accessed in
+							// static way
+
+	}
+
+}

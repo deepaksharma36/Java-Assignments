@@ -1,0 +1,19 @@
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+
+
+public class UPDserver {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	byte[] buffer = new byte[65508];
+	
+
+	DatagramPacket packet = new DatagramPacket(
+	    buffer, buffer.length, address, 9000);
+}

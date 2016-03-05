@@ -1,0 +1,96 @@
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ * view class implements the remote interface ViewInterface. the object of this
+ * class is used by the server for invoking show and take input ouput from
+ * various clients. view class takes inputs and shows the output on the
+ * interface/console as per the requirement of the game at various stages.
+ * 
+ * @author Sharma, Deepak DS5930
+ * 
+ */
+public class Client extends UnicastRemoteObject implements ClientInterface {
+	HashMap<Integer,InetAddress> serverMap = new HashMap<Integer,InetAddress>();
+	String myPath="/home/deepak/Dropbox/Java_Assignment/DistributedSystemRandomTree/Client/";
+	protected Client() throws RemoteException {
+		super();
+
+	}
+	/*public void insertFile(File s, ServerInterface destination)
+			throws RemoteException {
+		
+	}*/
+
+	public void getFile(byte[] data,String name) throws RemoteException {
+	    System.out.println("This method has been called");	
+		Path Currentpath = Paths.get(myPath+name);
+		try {
+			Files.write(Currentpath, data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+    public void findFile(String name){
+    	int[] requestCode={2,0};
+    	InetAddress server = serverMap.get(new String(name+requestCode[0]+requestCode[1]).hashCode()%NUMBEROFSERVER);
+		String registryURL = "rmi://" + "localhost" + ":" + PORTNUMBER + "/server";
+		try {
+			ServerInterface aServerInterface = (ServerInterface) Naming.lookup(registryURL);
+			aServerInterface.getFile(name, new Client(), requestCode);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    }
+	public static void main(String[] args){
+    	try {
+			Client aClient = new Client();
+			aClient.init();
+			aClient.findFile("2.txt");
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    
+	private void init()
+	{
+		try{
+			String my="129.21.91.213";
+		this.serverMap.put(0, InetAddress.getByName(my));
+		this.serverMap.put(1, InetAddress.getByName(my));
+		this.serverMap.put(2, InetAddress.getByName(my));
+		this.serverMap.put(3, InetAddress.getByName(my));
+		this.serverMap.put(4, InetAddress.getByName(my));
+		this.serverMap.put(5, InetAddress.getByName(my));
+		this.serverMap.put(6, InetAddress.getByName(my));}
+		catch(UnknownHostException host){
+			host.printStackTrace();
+		}
+	}
+	
+
+}

@@ -1,0 +1,23 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class tryingScanner {
+	public static void main(String[] args) {
+		Scanner sc;
+		try {
+			sc = new Scanner(new File("/home/deepak/words"));
+
+			System.out.printf("> ");
+			while (sc.hasNext()) {
+				String line = sc.nextLine();
+				System.out.printf("%s ", line);
+				System.out.println();
+				
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

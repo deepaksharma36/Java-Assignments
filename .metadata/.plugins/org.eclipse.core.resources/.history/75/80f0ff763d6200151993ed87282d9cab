@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+
+public class Test {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+	Scanner sc = new Scanner("3deepak1deepak2deepak3deepak").useDelimiter("deepak");
+	
+	
+	while(sc.hasNext())
+	{
+		System.out.printf("%s-%n",sc.next());
+	}
+		// TODO Auto-generated method stub
+
+	}
+
+}

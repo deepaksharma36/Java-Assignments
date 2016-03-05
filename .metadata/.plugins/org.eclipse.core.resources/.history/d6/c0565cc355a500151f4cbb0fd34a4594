@@ -1,0 +1,9 @@
+
+public class Test1 extends Thread {
+
+	
+	public static void main(String[] args) {
+
+	}
+
+}

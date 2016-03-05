@@ -1,0 +1,20 @@
+
+public class Test1 extends Thread {
+
+	public void run()
+	{  
+		while(true){
+			System.out.println("hey");
+		}
+	}
+	public static void main(String[] args) {
+	   Test1 aTest1 =	new Test1();
+	   //aTest1.setDaemon(true);
+	   aTest1.start();
+		
+		
+		
+		System.out.println("Bye");
+	}
+
+}

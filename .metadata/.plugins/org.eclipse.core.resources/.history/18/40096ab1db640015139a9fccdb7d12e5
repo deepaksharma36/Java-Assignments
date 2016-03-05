@@ -1,0 +1,19 @@
+public class Node <E,V>
+	{
+	private E dataOne;
+	private V dataTwo;
+	private Node <E,V> next;
+	
+	Node(E obj, V elm)
+	{
+		this.dataOne=obj;
+		this.dataTwo=elm;
+		this.next=null;
+	}
+		public Node<E,V> getNext()
+		{
+			return this.next;
+		}
+		
+		
+	}

@@ -1,0 +1,35 @@
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Brackets_1 {
+    public static void main(String[] args) {
+        Scanner s1 = new Scanner(System.in);
+        String input = s1.nextLine();
+
+        System.out.println(braces_1(input));
+
+    }
+    static String braces_1(String value){
+       
+    	if(value.length()%2!=0)
+            return "NO";
+        Stack<Character> myStack = new Stack<>();
+        HashMap<Character,Character> myHashmap1 = new HashMap<>();
+        myHashmap1.put('{','}');
+        myHashmap1.put('(',')');
+        myHashmap1.put('[',']');
+        int i=0;
+
+        while (i<value.length()){
+            if (myHashmap1.containsKey(value.charAt(i))){
+                myStack.push(value.charAt(i));
+            }
+            else if (myStack.empty() || (value.charAt(i) != myHashmap1.get(myStack.pop()))) {
+                return "NO";
+            }
+            i++;
+        }
+        return "YES";
+    }
+}

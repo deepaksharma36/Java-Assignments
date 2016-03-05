@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Mandelbrot.java&apos; to &apos;Assignment9/src/(default package)&apos;&#x0A;- Original project: &apos;Assignment8&apos;&#x0A;- Destination element: &apos;Assignment9/src/(default package)&apos;&#x0A;- Original element: &apos;Mandelbrot.java&apos;" description="Copy compilation unit" destination="=Assignment9/src&lt;" element1="/src&lt;{Mandelbrot.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1445711311310" units="1" version="1.0"/>
+</session>

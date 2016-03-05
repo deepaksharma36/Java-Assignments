@@ -1,0 +1,42 @@
+// this implementation implements the methods,
+// but the methods are null methods;
+public class StringStackOld implements StackInterfaceOld {
+    
+    public void push( Object item )	{	       }
+    public Object pop() 		{ return null; }
+    public Object peek() 		{ return "hi"; }
+    public boolean isEmpty() 		{ return true; }
+
+    public static void main(String args[])	{
+	StackInterfaceOld aStackInterfaceOld = new StringStackOld();
+	
+	/**
+	 * Input parameter for push method is Object class type, String class inheritance  
+	 * from the object class. An reference of Parent type can hold an element of child 
+	 * type.   
+	 */
+	
+	aStackInterfaceOld.push("hello");
+	/**
+	 * In below statement, Object of Object class is hold by reference of String class 
+	 * which is a derived class of Object class. Hence by doing  casting  
+	 *though fixed the compile time error by casting the object to String object
+	 *  but at run time it may show "run time error"
+	 * as  we can call method of derived class which is not present in base class.   
+	 * Complier here for same has given the warning.  
+	 */
+
+	String aString = (String)aStackInterfaceOld.pop();
+    }
+/*
+javac StringStackOld.java			// explain this error
+StringStackOld.java:11: incompatible types	// explain what a cast would do
+found   : java.lang.Object			// regarding possible compiler error detection
+required: java.lang.String
+	String aString = aStackInterfaceOld.pop();
+	                                       ^
+1 error
+
+*/
+
+}

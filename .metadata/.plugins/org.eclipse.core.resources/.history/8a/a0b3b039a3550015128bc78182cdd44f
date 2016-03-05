@@ -1,0 +1,50 @@
+ class OnceOrMany {
+ 
+         public static boolean singelton(String literal, String aNewString)    {
+               //System.out.println("literal: "+ literal + "     aNewString: "+aNewString);
+        	   return ( literal == aNewString );
+         }
+         public static void main( String args[] ) {
+        	   /*String test1="Deepak";
+        	   String test2=new String("Deepak");
+        	   String test3=new String("Deepak");
+        	   String test4="Deepak";
+        	   if(test3==test4)
+        	       System.out.println("test1==test4");
+        	   else
+        		   System.out.println("test1!=test4");
+        		*/	   
+               String aString = "xyz";
+               System.out.println("1.  xyz == aString: " +     "xyz" == aString   );
+               //In the above statement compiler is comparing two strings :
+               //"1.  xyz == aString: xyz" AND "xyz" as both string are not
+               //equal to each other so we got result False.  
+               //First string was synthesized because of the concatination between string 
+               //"1.  xyz == aString: " and "xyz". 
+               
+               System.out.println("2.  xyz == aString: " +   ( "xyz" == aString ) );
+               //output for above statement is: "2.  xyz == aString: true" 
+               //here before concatination String "xyz" was compared with aString and both  
+               //are equal which returned true. true was concatinated with rest of the String 
+               
+
+              String newString = new String("xyz");
+              System.out.println("xyz == new String(xyz)\n    " + ("xyz" == newString) );
+              //above statement gives output: "xyz == new String(xyz)\n   xyz False as we are 
+              //trying to compare a literal with object and this will result false which concates  
+              //with rest of the string in print statement.
+              
+              
+              System.out.println("1: " + singelton("xyz", "xyz"));
+              // above statement gives output true because we are comparing String literal and 
+              // java keeps only one copy on a particular location in heap(java 1.7 and above) 
+              //memory for all  the literal which we assign same value so boolean operation == returned True
+              System.out.println("2: " + singelton("xyz", new String("xyz") ));
+              System.out.println("3: " + singelton("xyz", "xy" + "z"));
+              System.out.println("4: " + singelton("x" + "y" + "z", "xyz"));
+              System.out.println("5: " + singelton("x" + "y" + new String("z"), "xyz"));
+              System.out.println("6: " + singelton("x" + ( "y" + "z"), "xyz"));
+              System.out.println("7: " + singelton("x" + ( "" + "z"), "xyz"));
+        }
+      }
+

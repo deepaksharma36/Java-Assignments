@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Assignment9/src/ZeroOne(1).java&apos; to &apos;ZeroOne.java&apos;" description="Rename resource &apos;ZeroOne(1).java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ZeroOne(1).java" name="ZeroOne.java" stamp="1445470302244" updateReferences="true"/>
+</session>

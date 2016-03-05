@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+
+public class Player implements PlayerInterface{
+private String name;
+private char GamePiece;
+private Connect4Field aConnect4Field; 
+public Player(Connect4Field aConnect4Field,String name, char GamePiece  )
+{
+	this.aConnect4Field=aConnect4Field;
+	this.GamePiece=GamePiece;
+	this.name=name;
+	
+
+}
+
+
+@Override
+public char getGamePiece() {
+	// TODO Auto-generated method stub
+	return GamePiece;
+}
+
+
+@Override
+public String getName() {
+	// TODO Auto-generated method stub
+	return name;
+}
+
+
+@Override
+public int nextMove() {
+	// TODO Auto-generated method stub
+	Scanner sc = new Scanner(System.in);
+	return 0;
+}
+	
+}

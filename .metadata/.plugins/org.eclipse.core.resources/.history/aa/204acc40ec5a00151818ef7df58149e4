@@ -1,0 +1,340 @@
+//Bimport java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Hangman {
+	public static void main(String[] args) {
+		String word = generateWord();
+		int numberOfPlayers = 0;
+		// String playerName = "";
+		// Scanner scan1;
+		// ArrayList<Player> playerArr = new ArrayList<Player>();
+		Player[] players;
+		// how many players are playing ?- input from user
+		// create obj's of the player class same as the n, where the name of the
+		// obj will be the name of the player
+		// in a for loop all players will play their game o e by one by calling
+		// their respective play game method
+		/*
+		 * System.out.println("provide the number of players playing hangman game"
+		 * ); try{ scan1= new Scanner(System.in); numberOfPlayers =
+		 * Integer.parseInt(scan1.nextLine()); // I have to create Validation
+		 * Function for My guess //scan1.close(); } catch (Exception e) {
+		 * System.out.print("I was never here"); // TODO Auto-generated catch
+		 * block e.printStackTrace(); }
+		 */
+		numberOfPlayers = (args.length) - 1;
+		players = new Player[numberOfPlayers];
+		// scan2.close();
+		for (int dummyCounter = 0; dummyCounter < numberOfPlayers; dummyCounter++) {
+			/*
+			 * System.out.println("provide the name of the player " +
+			 * dummyCounter + " who is playing hangman game"); try{ scan1 = new
+			 * Scanner(System.in); playerName = scan1.nextLine();
+			 * System.out.println(playerName);
+			 * 
+			 * 
+			 * } catch(Exception e) {
+			 * System.out.println("This is not working Exception"+e);
+			 * 
+			 * }
+			 */
+			players[dummyCounter] = new Player(args[dummyCounter + 1], word);
+
+		}
+		while (Player.noOfActivePlayer > 0) {
+			for (int dummyCounter = 0; dummyCounter < numberOfPlayers; dummyCounter++) {
+				//System.out.println((players[dummyCounter].isPlayerActive()));
+				while((players[dummyCounter].isPlayerActive())) {
+					players[dummyCounter].playGame();
+				}
+			}
+		}
+		leaderBoard(numberOfPlayers, players);
+	}
+
+	public static String generateWord() {
+		String word = "";
+		Random rand = new Random();
+		int counter = 0;
+		// dont hardcode here
+		int wordNumber = rand.nextInt(3900);
+		Scanner sc;
+		String line = "";
+		try {
+			sc = new Scanner(new File("/home/deepak/words"));
+
+			while (sc.hasNext() && counter < wordNumber) {
+				counter = counter + 1;
+				line = sc.nextLine();
+			}
+			System.out.printf("%s ", line);
+			word = line;
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return word;
+	}
+
+	public static void leaderBoard(int numberOfPlayers, Player[] players) {
+		int maxScore = 0;
+		String leader = "";
+		
+		int flag = 0;
+		int numberOfRecords=5;
+		if (numberOfPlayers<5)
+		{
+			numberOfRecords=numberOfPlayers;
+		}
+		int[] excludeCases = new int[numberOfRecords];
+		System.out.println("Position" +"  "+ "Player Name" +"  "+ "Score");
+		
+		for (int dummyCounter = 1; dummyCounter <= numberOfRecords; dummyCounter++) {
+			maxScore = 0;
+			for (int play = 1; play <= numberOfPlayers; play++) {
+				flag = 0;
+				if (players[play-1].getScore() > maxScore) {
+					for (int dummyCounter1 = 1; dummyCounter1 <= numberOfRecords; dummyCounter1++) {
+						if (excludeCases[dummyCounter1-1] == play) {
+							flag = 1;
+						}
+					}
+					if (flag == 0) {
+						maxScore = players[play-1].getScore();
+						leader =   players[play-1].getName();
+						excludeCases[dummyCounter-1] = play;
+					}
+				}
+			}
+			System.out.println(dummyCounter +"  "+ leader +"  "+ maxScore);
+			
+			
+		}
+	}
+}
+
+class Player {
+	// TODO : clues should be assigned at random
+	private String playerName;
+	private int score;
+	private Game myGame;
+	private int correctGusses = 0;
+	private boolean playerActive = true;
+
+	public static int noOfActivePlayer;
+
+	public Player(String name, String word) {
+		playerName = name;
+		score = 0;
+		noOfActivePlayer++;
+		myGame = new Game(word);
+		myGame.hangmanDrawing(0, 9, 0, 9, " ");
+
+	}
+
+	public void playGame() {
+		if (getPlayerActive()) {
+			System.out.println("Hi " + getPlayerName() + " ! It's your turn");
+			String guessCharacter = guessWord();
+			if (myGame.iswordPresent(guessCharacter) > -1) {
+				// replace below
+				updatePlayerAnswer(guessCharacter);
+				//myGame.getPlayerAnswer()[myGame.iswordPresent(guessCharacter)] = guessCharacter;
+				updateScore(10);
+				//correctGusses++;
+			} else {
+				myGame.IncreaseGuessesCount();
+				myGame.drawHangman(myGame.getGuessesCount());
+				myGame.showHangman();
+			}
+			showPlayerAnswer();
+			setPlayerActive(isPlayerActive());
+		}
+	}
+
+	public String guessWord() {
+		System.out.println("Guess any charactor of below "
+				+ myGame.getWord().length() + "  charactors word");
+		for (int dummyCounter = 0; dummyCounter < myGame.getWord().length(); dummyCounter++) {
+			System.out.print(this.myGame.getPlayerAnswer()[dummyCounter]);
+		}
+		System.out.println("");
+		Scanner scan = new Scanner(System.in);
+		String myGuess = scan.nextLine();
+		// I have to create Validation Function for My guess
+		// scan.close();
+		return myGuess;
+
+	}
+
+	public void showPlayerAnswer() {
+		System.out.println("");
+		for (int dummyCounter = 0; dummyCounter < myGame.getPlayerAnswer().length; dummyCounter++) {
+			System.out.print(myGame.getPlayerAnswer()[dummyCounter]);
+		}
+		System.out.println("");
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public boolean getPlayerActive() {
+		return playerActive;
+
+	}
+
+	public void setPlayerActive(boolean playerActive) {
+		this.playerActive = playerActive;
+	}
+
+	public boolean isPlayerActive() {
+		if (myGame.getGuessesCount() >= myGame.GameOverCount) {
+			noOfActivePlayer--;
+			setPlayerActive(false);
+			return false;
+		} else if (correctGusses == myGame.getWord().length()) {
+			setPlayerActive(false);
+			noOfActivePlayer--;
+			return false;
+			
+		} else
+			return true;
+	}
+
+	public int getScore() {
+		return score;
+	}
+	//Confederacy
+	public void updateScore(int score) {
+		this.score = this.score + score;
+	}
+	public String getName()
+
+	{
+		return playerName;
+	}
+	public void increaseCorrectGusses()
+	{
+		correctGusses++;
+	}
+	
+	public void updatePlayerAnswer( String c) {
+		
+		// Creating new Answer array for a player
+	
+	for (int dummyCounter = 0; dummyCounter < myGame.getWord().length(); dummyCounter++) {
+		if(c.toLowerCase().equals(Character.toString(myGame.getWord().toLowerCase().charAt(dummyCounter))))	
+		     {myGame.getPlayerAnswer()[dummyCounter] = c;
+		     increaseCorrectGusses();}      
+		     
+		}
+	
+}
+
+}
+
+class Game {
+	private String[] playerAnswer;
+	private String word;
+	private int guessesCount = 0;
+	public final int GameOverCount = 8;
+	private String[][] hangmanDrawing = new String[10][10];
+
+	public Game(String word) {
+		this.word = word;
+		playerAnswer = new String[getWord().length()];
+		// create setplayeranswer
+        
+		intialPlayerAnswer("?");
+	}
+
+	public String getWord() {
+
+		return word;
+	}
+
+	public void IncreaseGuessesCount() {
+		guessesCount = guessesCount + 1;
+	}
+
+	public int getGuessesCount() {
+		return guessesCount;
+	}
+
+	
+	public void intialPlayerAnswer( String str )
+	{
+		for (int dummyCounter = 0; dummyCounter < getWord().length(); dummyCounter++) 
+		   {     
+			     playerAnswer[dummyCounter] = str;
+			}
+	}
+
+	public int iswordPresent(String guess) {
+		for (int dummyCounter = 0; dummyCounter < getWord().length(); dummyCounter++) {
+			if (Character.toString(getWord().charAt(dummyCounter))
+					.toLowerCase().equals(guess.toLowerCase()))
+				return dummyCounter;
+
+		}
+		return -1;
+
+	}
+
+	public String[] getPlayerAnswer() {
+		return playerAnswer;
+	}
+
+	public void hangmanDrawing(int r1, int r2, int c1, int c2, String element) {
+		for (int dummyCounter1 = r1; dummyCounter1 <= r2; dummyCounter1++) {
+			for (int dummyCounter2 = c1; dummyCounter2 <= c2; dummyCounter2++) {
+
+				this.hangmanDrawing[dummyCounter1][dummyCounter2] = element;
+			}
+		}
+	}
+
+	public void drawHangman(int incorrectGusses) {
+		switch (incorrectGusses) {
+		case 8:
+			hangmanDrawing(6, 6, 7, 7, "\\");
+			hangmanDrawing(7, 7, 8, 8, "\\");
+		case 7:
+			hangmanDrawing(6, 6, 5, 5, "/");
+			hangmanDrawing(7, 7, 4, 4, "/");
+		case 6:
+			hangmanDrawing(3, 3, 7, 7, "\\");
+			hangmanDrawing(4, 4, 8, 8, "\\");
+		case 5:
+			hangmanDrawing(3, 3, 5, 5, "/");
+			hangmanDrawing(4, 4, 4, 4, "/");
+		case 4:
+			hangmanDrawing(2, 2, 5, 5, "(");
+			hangmanDrawing(2, 2, 7, 7, ")");
+		case 3:
+			hangmanDrawing(0, 5, 6, 6, "|");
+		case 2:
+			hangmanDrawing(0, 0, 2, 6, "-");
+
+		case 1:
+			hangmanDrawing(9, 9, 0, 4, "-");
+			hangmanDrawing(0, 9, 2, 2, "|");
+			break;
+
+		}
+	}
+
+	public void showHangman() {
+		for (int dummyCounter1 = 0; dummyCounter1 <= 9; dummyCounter1++) {
+			for (int dummyCounter2 = 0; dummyCounter2 <= 9; dummyCounter2++) {
+				System.out.print(hangmanDrawing[dummyCounter1][dummyCounter2]);
+			}
+			System.out.println();
+		}
+	}
+
+}

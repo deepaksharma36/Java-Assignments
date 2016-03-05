@@ -1,0 +1,40 @@
+
+import java.util.Arrays;
+public class Primefactor {
+
+	public static void main(String[] args)
+	{
+		int number=Integer.parseInt(args[0]);
+		int power=0;
+		int dummy=3;
+		String output= "";
+		System.out.println(number);
+		while(number%2==0)
+		{   output=output+"2*";    //.print(2 + "*");
+			power=power+1;
+			number=number/2;
+		}
+        if(power>0)
+        {
+        	//System.out.println(2 + "^" + power );
+        }
+        
+        for(dummy=3;dummy<Math.sqrt(number)+1;dummy=dummy+2)
+        {
+          power=0;
+          while(number%dummy==0)
+          {   output=output+dummy+"*";
+        	  power=power+1;
+        	  number=number/dummy;
+          }
+          if(power>0)
+          {
+          //System.out.println(dummy + "^" + power );
+          }
+          power=0;
+          System.out.println(output[0,output.length()-2] );
+        }
+		
+		
+	}
+}

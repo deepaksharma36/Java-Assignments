@@ -1,0 +1,30 @@
+import java.util.Random;
+import java.util.Scanner;
+import java.io.*;
+
+public class tryingScanner {
+	public static void main(String[] args) {
+		int counter=0;
+		Random rand = new Random();
+		int wordNumber= rand.nextInt(3900);
+		Scanner sc;
+		String line="";
+		try {
+			sc = new Scanner(new File("/home/deepak/words"));
+			System.out.printf("> ");
+			while (sc.hasNext() && counter<wordNumber) {
+				counter=counter+1;
+				 line = sc.nextLine();
+			}
+			
+				System.out.printf("%s ", line);
+				System.out.println();
+				
+			
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

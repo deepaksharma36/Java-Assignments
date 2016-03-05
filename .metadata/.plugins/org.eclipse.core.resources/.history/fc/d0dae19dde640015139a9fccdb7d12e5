@@ -1,0 +1,137 @@
+
+public class StorageFixed<E, V> implements Storage<E, V>{
+    private Node<E,V> Start;
+    private int size=0;
+    private final int storageSize=10000;
+	StorageFixed()
+	{
+		this.Start=null;
+	}
+	@Override
+	public boolean add(E e) {
+		if(size<storageSize)
+		{
+		Node<E,V> copyRef =this.Start;
+		   Node <E,V> newNode= new Node<E,V>(e,null);
+		   copyRef=Start;
+		   if(Start!=null)
+		   {
+			while(copyRef.getNext()!=null)
+			{
+				copyRef=copyRef.getNext();
+			}
+			if(copyRef.getNext()==null)
+			{
+			copyRef.setNext(newNode);
+			size++;
+			   System.out.println("new nodes added");
+			}
+		   }
+		   else if(Start==null)
+		   {   System.out.println("First node added");
+		       size++;
+			   Start=newNode;
+		   }
+		   return true;
+		}
+		else
+		{
+		return false;
+		}
+	}
+
+	@Override
+	public void add(int index, E element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addElement(E obj) {
+		   Node<E,V> copyRef =this.Start;
+		   Node <E,V> newNode= new Node<E,V>(obj,null);
+		   copyRef=Start;
+		   if(Start!=null)
+		   {
+			while(copyRef.getNext()!=null)
+			{
+				copyRef=copyRef.getNext();
+			}
+			if(copyRef.getNext()==null)
+			{
+			copyRef.setNext(newNode);
+			size++;
+			   System.out.println("new nodes added");
+			}
+		   }
+		   else if(Start==null)
+		   {   System.out.println("First node added");
+		       size++;
+			   Start=newNode;
+		   }
+		
+	}
+
+	@Override
+	public void addElement(E obj, V elem) {
+		   Node<E,V> copyRef =this.Start;
+		   Node <E,V> newNode= new Node<E,V>(obj,elem);
+		   copyRef=Start;
+		   if(Start!=null)
+		   {
+			while(copyRef.getNext()!=null)
+			{
+				copyRef=copyRef.getNext();
+			}
+			if(copyRef.getNext()==null)
+			{
+				size++;
+			copyRef.setNext(newNode);
+			   System.out.println("new nodes added");
+			}
+		   }
+		   else if(Start==null)
+			   
+		   {   size++;
+			   System.out.println("First node added");
+			   Start=newNode;
+		   }
+		
+	}
+
+	@Override
+	public int capacity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public E firstElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E lastElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Object	clone()
+	{  
+		StorageFixed<E, V> obj=this;
+		return obj;
+	}
+
+}

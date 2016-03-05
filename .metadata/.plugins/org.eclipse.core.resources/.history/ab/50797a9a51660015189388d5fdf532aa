@@ -1,0 +1,35 @@
+// this implementation implements the methods,
+// but the methods are null methods;
+public class StringStackOld implements StackInterfaceOld {
+    
+    public void push( Object item )	{	       }
+    public Object pop() 		{ return null; }
+    public Object peek() 		{ return "hi"; }
+    public boolean isEmpty() 		{ return true; }
+
+    public static void main(String args[])	{
+	StackInterfaceOld aStackInterfaceOld = new StringStackOld();
+	
+	// Because we are passing string here which is of type Object.
+	// Every class inherits from Object base class. That is why no warning here
+	aStackInterfaceOld.push("hello");
+	
+	// Here we are returning a type of base class Object and assigning it to its
+	// derived class String. The object class does not have information about base
+	// class string. Casting will remove the compile time error but at run time this 
+	// may cause problems as we may be trying to call methods of string class which
+	// is not present in base Object class.
+	String aString = (String)aStackInterfaceOld.pop();
+    }
+/*
+javac StringStackOld.java			// explain this error
+StringStackOld.java:11: incompatible types	// explain what a cast would do
+found   : java.lang.Object			// regarding possible compiler error detection
+required: java.lang.String
+	String aString = aStackInterfaceOld.pop();
+	                                       ^
+1 error
+
+*/
+
+}

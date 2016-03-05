@@ -1,0 +1,217 @@
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+import java.io.*;
+
+public class tryingScanner {
+	public static void main(String[] args) {
+		int numberOfPlayers = 0;
+		String playerName = "";
+		Scanner scan1;
+		//ArrayList<Player> playerArr = new ArrayList<Player>();
+		Player[] players = new Player[numberOfPlayers]; 
+		// how many players are playing ?- input from user
+		// create obj's of the player class same as the n, where the name of the
+		// obj will be the name of the player
+		// in a for loop all players will play their game o e by one by calling
+		// their respective play game method
+		System.out.println("provide the number of players playing hangman game");
+		try{
+		scan1= new Scanner(System.in);	
+		numberOfPlayers = Integer.parseInt(scan1.nextLine());
+		// I have to create Validation Function for My guess
+		//scan1.close();
+		}
+		catch (Exception e) {
+			System.out.print("I was never here");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//scan2.close();
+		for (int dummyCounter = 0; dummyCounter < numberOfPlayers; dummyCounter++)
+		{
+			System.out.println("provide the name of the player " + dummyCounter
+					+ " who is playing hangman game");
+			try{
+			scan1 = new Scanner(System.in);
+			playerName = scan1.nextLine();
+			System.out.println(playerName);
+			
+			
+			}
+			catch(Exception e)
+			{
+				System.out.println("This is not working Exception"+e);
+				
+			}
+			players[dummyCounter] = new  Player(playerName);
+			
+		}
+	    while(Player.noOfActivePlayer>0)
+	    {
+	    	for ( int dummyCounter = 0; dummyCounter < numberOfPlayers; dummyCounter++)
+	    	{
+	    		if(players[dummyCounter].isPlayerActive())
+	    		{
+	    			players[dummyCounter].playGame();
+	    		}
+	    	}
+	    }
+		}
+}
+class Player {
+	// TODO : clues should be assigned at random
+	private String playerName;
+	private int score;
+	private Game myGame;
+	
+	private boolean playerActive = true;
+	public static int noOfActivePlayer=0;
+
+	public Player(String name) {
+		playerName = name;
+		score = 0;
+		noOfActivePlayer++;
+		Game myGame = new Game();
+
+	}
+
+	public void playGame() {
+		if (getPlayerActive()) {
+			System.out.println("Hi " + getPlayerName() + " ! It's your turn");
+			String guessCharacter = guessWord();
+			if (myGame.iswordPresent(guessCharacter) > -1)
+				myGame.playerAnswer[myGame.iswordPresent(guessCharacter)] = guessCharacter;
+			else
+				myGame.IncreaseGuessesCount();
+			showPlayerAnswer();
+			setPlayerActive(isPlayerActive());
+		}
+	}
+
+	public String guessWord() {
+		System.out.println("Please provide your guess for below word");
+
+		for (int dummyCounter = 0; dummyCounter < myGame.getWord().length(); dummyCounter++) {
+			System.out.print(this.myGame.playerAnswer[dummyCounter]);
+		}
+		System.out.println("");
+
+		Scanner scan = new Scanner(System.in);
+		String myGuess = scan.nextLine();
+		// I have to create Validation Function for My guess
+		scan.close();
+		return myGuess;
+
+	}
+
+	public void updatePlayerAnswer(int index, String c) {
+		if (index > -1) {
+			myGame.playerAnswer[index] = c;
+		} else {
+			// Creating new Answer array for a player
+			myGame.playerAnswer = new String[myGame.getWord().length()];
+			for (int dummyCounter = 0; dummyCounter < myGame.getWord().length(); dummyCounter++) {
+				myGame.playerAnswer[dummyCounter] = c;
+			}
+
+		}
+	}
+
+	public String[] getPlayerAnswer() {
+		return playerAnswer;
+	}
+
+	public void showPlayerAnswer() {
+		for (int dummyCounter = 0; dummyCounter < getPlayerAnswer().length; dummyCounter++) {
+			System.out.print(playerAnswer[dummyCounter]);
+		}
+
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public boolean getPlayerActive() {
+		return playerActive;
+
+	}
+
+	public void setPlayerActive(boolean playerActive) {
+		this.playerActive = playerActive;
+	}
+
+	public boolean isPlayerActive() {
+		if (myGame.getGuessesCount() >= myGame.GameOverCount)
+		{	
+			noOfActivePlayer--;
+			return false;
+		}
+		else
+			return true;
+	}
+
+	}
+
+private class Game {
+	private String[] playerAnswer ;
+	public Game() {
+		System.out.print("constructer called");
+		int counter = 0;
+		Random rand = new Random();
+		// dont hardcode here
+		int wordNumber = rand.nextInt(3900);
+		Scanner sc;
+		String line = "";
+	try {
+			sc = new Scanner(new File("/home/deepak/words"));
+
+			while (sc.hasNext() && counter < wordNumber) {
+				counter = counter + 1;
+				line = sc.nextLine();
+			}
+			System.out.printf("%s ", line);
+			word = line;
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   playerAnswer=new String[getWord().length()];
+		// create setplayeranswer
+		
+		updatePlayerAnswer(-1, "_");
+	}
+
+	public String getWord() {
+		
+		return word;
+	}
+
+	private String word;
+	private int guessesCount = 0;
+	public final int GameOverCount = 8;
+
+	
+	public void IncreaseGuessesCount() {
+		guessesCount = guessesCount + 1;
+	}
+
+	public int getGuessesCount() {
+		return guessesCount;
+	}
+
+	public int iswordPresent(String guess) {
+		for (int dummyCounter = 0; dummyCounter < getWord().length(); dummyCounter++) {
+			if (Character.toString(getWord().charAt(dummyCounter)) == guess)
+				return dummyCounter;
+
+		}
+		return -1;
+
+	}
+
+}

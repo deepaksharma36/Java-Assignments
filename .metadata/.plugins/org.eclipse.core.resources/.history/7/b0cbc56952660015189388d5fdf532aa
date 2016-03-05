@@ -1,0 +1,45 @@
+// this implementation implements the methods,
+// but the methods are null methods;
+public class StringStackOld implements StackInterfaceOld {
+    
+    public void push( Object item )	{	       }
+    public Object pop() 		{ return null; }
+    public Object peek() 		{ return "hi"; }
+    public boolean isEmpty() 		{ return true; }
+
+    public static void main(String args[])	{
+	StackInterfaceOld aStackInterfaceOld = new StringStackOld();
+	
+	/**
+	 * Input parameter for push method is Object class type, String class inharite 
+	 * from the object class. An reference of Parent type can hold an element of child 
+	 * type.   
+	 */
+	
+	aStackInterfaceOld.push("hello");
+	/**
+	 * In below statement, Object of Object class is hold by refrence of String class 
+	 * which is a drived class of Object class. Hence while doing Down casting and this casting  
+	 *though fixing the compile time error but at run time it may show run time error
+	 * as  we can call method of drived class which is not present in base class.   
+	 *  
+	 */
+	// Here we are returning a type of base class Object and assigning it to its
+	// derived class String. The object class does not have information about base
+	// class string. Casting will remove the compile time error but at run time this 
+	// may cause problems as we may be trying to call methods of string class which
+	// is not present in base Object class.
+	String aString = (String)aStackInterfaceOld.pop();
+    }
+/*
+javac StringStackOld.java			// explain this error
+StringStackOld.java:11: incompatible types	// explain what a cast would do
+found   : java.lang.Object			// regarding possible compiler error detection
+required: java.lang.String
+	String aString = aStackInterfaceOld.pop();
+	                                       ^
+1 error
+
+*/
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring clone="true" comment="Infer generic type arguments on &apos;Assignment14&apos;&#x0A;- Original project: &apos;Assignment14&apos;&#x0A;- Original elements:&#x0A;     MyHashMap.java&#x0A;- Assume clone() returns an instance of the receiver type&#x0A;- Leave unconstrained type arguments raw" description="Infer generic type arguments" element1="/src&lt;{MyHashMap.java" flags="6" id="org.eclipse.jdt.ui.infer.typearguments" leave="true" stamp="1449392344238" version="1.0"/>
+</session>

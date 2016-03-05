@@ -1,0 +1,4 @@
+
+public class StorageFixed<E, V> implements Storage<E, V>{
+
+}

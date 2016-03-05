@@ -1,0 +1,68 @@
+import java.util.jar.Attributes.Name;
+
+class Runner implements Runnable
+{
+
+	public String toString()
+	{
+		System.out.println();
+		return this.getClass().getName();
+	}
+	
+	public void run() {
+		
+		//Thread thread = Thread.currentThread();
+		System.out.println("This one is ruuning " + Thread.currentThread().getName() );
+			//System.out.println("hello");
+	/*		try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			
+		}*/
+		System.out.println("This one comes to an end " + Thread.currentThread().getName());
+	}
+
+
+}
+public class Basic2
+{
+	public static void  main(String[] args)
+	{
+		Thread t1 = new Thread(new Runner());
+		t1.setName("mine");
+		t1.setDaemon(true);
+		Thread t2 =new Thread(new Runner());
+		t2.setName("yours");
+		t1.setPriority(Thread.MIN_PRIORITY);
+		t2.setPriority(Thread.MAX_PRIORITY)
+		
+		/*Thread t3 = new Thread(new Runnable(){
+			public void run() {
+				
+
+				for(int i=0;i<10;i++)
+				{
+					System.out.println("hello"+i);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+
+			
+		})*/;
+		t1.start();
+		t2.start();
+		//t3.start();
+	}
+	
+	}
+
+

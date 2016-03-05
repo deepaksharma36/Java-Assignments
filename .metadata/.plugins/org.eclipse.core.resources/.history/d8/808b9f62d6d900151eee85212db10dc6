@@ -1,0 +1,61 @@
+//import files are here.
+import java.net.InetAddress;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+/**
+ * This Class will Initiate the RMI server on the port no given by server
+ * Administrator.
+ * 
+ * @author Sharma, Deepak DS5930
+ * @author Kurra, Sree Lakshmi SK9040
+ * 
+ */
+
+public class ServerRMI {
+	/**
+	 * this remote server creates registry at giver url and port number,then
+	 * registers game serve object on the registry.
+	 * 
+	 * @param args
+	 */
+	//static String localhost="129.21.91.213";
+	public static void main(String[] args) {
+		
+		String portNum, registryURL;
+		try {
+			//System.out.println("Please Enter the RMIregistry port number:");
+		
+		
+			int RMIPortNum=1099;
+			//startRegistry(RMIPortNum);
+			Server exportedServer = new Server();
+			//String localhost=InetAddress.getLocalHost().getHostAddress();
+			//registryURL = "rmi://"+ localhost +":" + RMIPortNum + "/server";
+			//Naming.rebind(registryURL, exportedServer);
+
+			Registry aRegistry = LocateRegistry.createRegistry(RMIPortNum);
+			aRegistry.rebind("server", exportedServer);
+			System.out.println("Server is Up and Running...");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// below method starts a RMI registry on the local host, this also can be
+	// done with command Line Argument
+	private static void startRegistry(int RMIPortNum) throws RemoteException {
+		try {
+			Registry aRegistry = LocateRegistry.getRegistry(RMIPortNum);
+			//aRegistry.rebind(name, obj)
+			aRegistry.list();
+		} catch (RemoteException e) {
+			// No registry exist on this port so a new one will be created here
+			Registry aRegistry = LocateRegistry.createRegistry(RMIPortNum);
+		}
+	}
+
+}

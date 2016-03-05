@@ -1,0 +1,8 @@
+public class Node <E,V>
+	{
+		private E dataOne;
+		private V dataTwo;
+		private Node <E,V> next;
+		
+		
+	}
