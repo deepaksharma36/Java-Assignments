@@ -4025,3 +4025,36 @@ org.eclipse.core.internal.resources.ResourceException: The project description f
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
 !SUBENTRY 2 org.eclipse.core.resources 4 567 2016-03-05 16:16:27.584
 !MESSAGE The project description file (.project) for 'Assignmet13anurag' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+
+!ENTRY org.eclipse.egit.core 4 0 2016-03-05 16:32:44.825
+!MESSAGE An exception occurred during push on URI https://github.com/deepaksharma36/Java-Assignments.git: Nothing to push.
+!STACK 0
+org.eclipse.jgit.errors.TransportException: Nothing to push.
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1238)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:189)
+	at org.eclipse.egit.ui.internal.push.PushWizard$PushJob.run(PushWizard.java:297)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.egit.ui 4 0 2016-03-05 16:32:44.842
+!MESSAGE Can't connect to any repository: https://github.com/deepaksharma36/Java-Assignments.git (Nothing to push.)
+
+!ENTRY org.eclipse.egit.core 4 0 2016-03-05 16:34:21.167
+!MESSAGE An exception occurred during push on URI https://github.com/deepaksharma36/Java-Assignments.git: Nothing to push.
+!STACK 0
+org.eclipse.jgit.errors.TransportException: Nothing to push.
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1238)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:189)
+	at org.eclipse.egit.ui.internal.push.PushWizard$PushJob.run(PushWizard.java:297)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.egit.ui 4 0 2016-03-05 16:34:21.168
+!MESSAGE Can't connect to any repository: https://github.com/deepaksharma36/Java-Assignments.git (Nothing to push.)
+!SESSION 2016-03-10 15:00:47.121 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-03-10 15:00:56.104
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

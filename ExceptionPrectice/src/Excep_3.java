@@ -1,3 +1,6 @@
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class Excep_3 {
 
   private void thisMethodThrowsAnException() throws Exception {
@@ -28,6 +31,13 @@ public class Excep_3 {
   }
 
   public static void main(String[] args) {
-	new Excep_3().caller();
+	//new Excep_3().caller();
+	  try {
+		System.out.println(InetAddress.getLocalHost().getCanonicalHostName());
+		System.out.println(InetAddress.getLocalHost().getHostAddress());
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 }

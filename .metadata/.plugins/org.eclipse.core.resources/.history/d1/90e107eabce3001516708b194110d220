@@ -1,0 +1,34 @@
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+
+public class Testing {
+
+	public static final String[] SERVERS = { "glados.cs.rit.edu", "kansas.cs.rit.edu", "doors.cs.rit.edu", "gorgon.cs.rit.edu",
+		"newyork.cs.rit.edu", "yes.cs.rit.edu", "kinks.cs.rit.edu", "medusa.cs.rit.edu", "joplin.cs.rit.edu",
+		"delaware.cs.rit.edu", "buddy.cs.rit.edu", "arizona.cs.rit.edu" };
+private ServerInterface ServerContact(String hostName) throws RemoteException{
+		
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ServerInterface aServer = (ServerInterface) Naming
+					.lookup(registryURL);
+			return aServer;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

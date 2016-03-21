@@ -1,0 +1,113 @@
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+
+public class Testing {
+
+	public  final String[] SERVERS = {  "kansas.cs.rit.edu",  "gorgon.cs.rit.edu",
+		"newyork.cs.rit.edu"};//, "yes.cs.rit.edu", "kinks.cs.rit.edu"};//, "medusa.cs.rit.edu", "joplin.cs.rit.edu",
+		//"delaware.cs.rit.edu", "buddy.cs.rit.edu", "arizona.cs.rit.edu" };
+	public final String rmiPort;
+	
+	Testing(String rmiPort)
+	{
+		this.rmiPort=rmiPort;
+	}
+private ServerInterface ServerContact(String hostName) throws RemoteException{
+		
+		String registryURL = "rmi://" + hostName + ":" + rmiPort + "/server";
+		try {
+			ServerInterface aServer = (ServerInterface) Naming
+					.lookup(registryURL);
+			return aServer;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+public void testFileAdd() throws RemoteException{
+	for (String server: SERVERS){
+		ServerInterface testingServer = ServerContact(server);
+		System.out.println("sending file from "+server+" in chord system ");
+			System.out.println(testingServer.testInsert("testFile"));
+			
+		}
+
+}
+
+public void viewTest() throws RemoteException{
+	for (String server: SERVERS){
+		ServerInterface testingServer = ServerContact(server);
+		
+			System.out.println("viewing "+server);
+			System.out.println(testingServer.testView());
+		}
+	
+}
+
+public void testAdd() throws RemoteException
+{
+	for (String server: SERVERS){
+		ServerInterface testingServer = ServerContact(server);
+		System.out.println("adding "+server);
+			System.out.println(testingServer.testAdd());
+			viewTest();
+		}
+	/*
+	for (String server: SERVERS){
+		ServerInterface testingServer = ServerContact(server);
+		
+			System.out.println("viewing "+server);
+			System.out.println(testingServer.testView());
+		}
+	*/
+	
+}
+
+public void testleave() throws RemoteException
+{   ArrayList<String> removed = new ArrayList<String>();
+	for (String server: SERVERS){
+		ServerInterface testingServer = ServerContact(server);
+		System.out.println("removing "+server);
+			testingServer.testLeave();
+			viewTest();
+			removed.add(server);
+	/*		for (String Viewserver: SERVERS){
+				if (!removed.contains(Viewserver)){
+				ServerInterface testingView = ServerContact(server);
+					testingServer.testView();}
+				}*/
+			
+		}
+	
+	
+	
+}
+
+	public static void main(String[] args) {
+		Testing aTesting = new Testing(args[0]);
+		try {
+			System.out.println("**********************Node Add Test*****************************");
+			aTesting.testAdd();
+			System.out.println("**********************Node View Test****************************");
+			aTesting.viewTest();
+			System.out.println("**********************File Add Test*****************************");
+			aTesting.testFileAdd();
+			System.out.println("**********************Node Leave Test***************************");
+			aTesting.testleave();
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

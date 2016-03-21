@@ -1,0 +1,296 @@
+//import files are places here.
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ * this Server class interacts with various client who request for file.
+ * @author Sharma, Deepak DS5930
+ *  */
+
+public class Server extends UnicastRemoteObject implements ServerInterface {
+	public  final int RMIport;
+	public final String EntryServer;
+	HashMap<Integer,String> serverMap = new HashMap<Integer,String>();
+	HashMap<String,Integer> fileRequestCount = new HashMap<String, Integer>();
+	private String predecessor=null;
+	private String successor=null;
+	private int[] range=new int[2];
+	String myAddress;
+	String myPath="/home/stu13/s17/ds5930/";
+	protected Server(int RMIport, String EntryServer) throws RemoteException {
+		super();
+		this.RMIport=RMIport;
+		this.EntryServer=EntryServer;
+		try {
+			//this.RMIport=RMIport;
+			this.myAddress=InetAddress.getLocalHost().getHostName();
+			this.myPath=myPath+this.myAddress+'/';
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+	
+	}
+
+	private int ServerHashCode(String aString)
+	{
+		return aString.hashCode()%NUMBEROFIDSPCES;
+	}
+	private int FileHashCode(String aString)
+	{
+		return aString.hashCode()%NUMBEROFIDSPCES;
+	}
+	public int[] getRange() throws RemoteException {
+		return range;
+	}
+	public void setRange(int[] range) throws RemoteException {
+		this.range = range;
+	}
+	public void setPredecessor(String predecessor) throws RemoteException {
+		this.predecessor = predecessor;
+	}
+	public void setSuccessor(String successor) throws RemoteException{
+		this.successor = successor;
+	}
+	private void updateMyIdSpace(int hashCode){
+		range[0]=hashCode+1;
+	}
+	private void contactMyOldPredecessorForSuccessorUpdate(String hostName){
+		ServerInterface predecessor =ServerContact(this.predecessor);
+		try {
+			predecessor.setSuccessor(hostName);
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+	};
+	public void updateNewNode(String predecessor, String successor,int minRange,int maxRange ) throws RemoteException
+	{
+	 this.predecessor=predecessor;
+	 int[] range = {minRange,maxRange};
+	 this.setRange(range);
+	 this.successor=successor;
+	}
+	public synchronized void addNode(String hostName) throws RemoteException {
+		int hashCode = ServerHashCode(hostName);
+		if (hashCode>=range[0] && hashCode<=range[1])
+				{
+				contactMyOldPredecessorForSuccessorUpdate(hostName);
+				setPredecessor(hostName);
+				ServerContact(hostName).updateNewNode(predecessor,myAddress,hashCode,range[1]);
+				updateMyIdSpace(hashCode);}
+		else if(Math.min(Math.abs(hashCode-range[0]),NUMBEROFIDSPCES-Math.abs(hashCode-range[0]))<
+		Math.min(Math.abs(hashCode-range[1]),NUMBEROFIDSPCES-Math.abs(hashCode-range[1]))){
+				ServerContact(predecessor).addNode(hostName);
+		}
+		else
+			ServerContact(successor).addNode(hostName);
+				
+	}
+ 	public synchronized void leave() throws RemoteException{
+		int[] predRange  ={range[0],ServerContact(predecessor).getRange()[1]};
+		ServerContact(predecessor).setRange(predRange);
+		moveAllFile(predecessor);
+		this.setPredecessor(null);
+		this.setSuccessor(null);
+		this.range=null;
+	} 
+	public void moveAllFile(String predecessor)
+	{
+
+
+		File folder = new File("/Users/you/folder/");
+		File[] listOfFiles = folder.listFiles();
+
+		for (File file : listOfFiles) {
+		 transmitFile(file.getName(), ServerContact(predecessor));
+}
+
+
+	}
+	public void insert(String keyWord) throws RemoteException
+	{
+		
+		int idSpace=FileHashCode(keyWord);
+		
+		
+	}
+	
+	public void add(){
+		try {
+			ServerContact(EntryServer).addNode(myAddress);
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	private ServerInterface ServerContact(String hostName){
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ServerInterface aServer = (ServerInterface) Naming
+					.lookup(registryURL);
+			return aServer;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Remote Method for copying file on Server, this method will be called by other servers (parent) 
+	 * for replicating  file.
+	 */
+	public void insertFile(String name, byte[] data)
+			throws RemoteException {
+		Path Currentpath = Paths.get(myPath+name);
+		try {
+			Files.write(Currentpath, data);
+			System.out.println("Received "+name+" File");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Helper Method (replication process) for reading local file and sending to the Server 
+	 * @param name File name
+	 * @param destination Remote object of the Child Server
+	 * @param requestCode 
+	 */
+	private void transmitFile(String name,ServerInterface destination ){
+		Path path = Paths.get(myPath+name);
+		 
+	      try {
+			byte[] data = Files.readAllBytes(path);
+			destination.insertFile(name, data);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * This method will be invoked when file not found at server and request is forward to parent server
+	 * @param name File name
+	 * @param destination Remote object of the Client which has requested for File.
+	 * @param requestCode Array containing coordinates of the Server in Binary Tree.
+	 *//*
+	private void forwardRequest(String name, ClientInterface destination,int[] requestCode)
+	{
+		try {
+			requestCode[0]-=1;
+			requestCode[1]=requestCode[1]%2==0?requestCode[1]/2:(requestCode[1]-1)/2;
+			String hostName=serverMap.get(Math.abs(new String(""+name+requestCode[0]+requestCode[1]).hashCode()%NUMBEROFSERVER)).toString();
+			System.out.println("Request will be forwarded to: "+hostName);
+			String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+			ServerInterface aServer = (ServerInterface) Naming
+					.lookup(registryURL);
+			destination.updateRequestTrail(hostName);
+			aServer.getFile(name,destination,requestCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+	*//**
+	 * This method will send the file to client once the requested file found 
+	 * @param name name of the file
+	 * @param destination Remote object of the Client
+	 * @param requestCode Array containing server coordinate in random tree. 
+	 *//*
+	private void transmitFile(String name,ClientInterface destination,int[] requestCode){
+		System.out.println("Transmitting File to the client destination");
+		Path path = Paths.get(new String(myPath+name));
+		 //Path path = currentDir.toAbsolutePath();
+		 
+	      try {
+			byte[] data = Files.readAllBytes(path);
+			destination.getFile(data, name,myAddress);
+			updateFileCount(name);
+			//destination.updateRequestTrail(myAddress);
+			replication(name,requestCode);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+			*//**
+	 * This method will be invoked by Client in order to inquiring for file 
+	 * @param name name of the File inquired by client
+	 * @param destination Client's remote object from which request has been received
+	 * @param requestCode array containing coordinates of the Server 
+	 * @throws RemoteException
+	 *//*
+	public void getFile(String name, ClientInterface destination,int[] requestCode) throws RemoteException {
+		try {
+			//if server is root and don't have file
+			System.out.println(InetAddress.getLocalHost().getHostAddress().toString());
+			System.out.println(myAddress);
+			System.out.println(Math.abs(new String(""+name+"00").hashCode()%NUMBEROFSERVER));
+			System.out.println(serverMap.get(Math.abs(new String(""+name+"00").hashCode()%NUMBEROFSERVER)));
+			System.out.println(myAddress.equals(serverMap.get(Math.abs(new String(""+name+"00").hashCode()%NUMBEROFSERVER)).toString()));
+			String aRoot=serverMap.get(Math.abs(new String(""+name+"00").hashCode()%NUMBEROFSERVER));
+			aRoot=aRoot.substring(0, aRoot.indexOf('.'));
+			if(myAddress.equals(aRoot) && !new File(myPath+name).exists())
+				destination.Error("FileNotFound");//transmitFile(name,destination,requestCode);//throw new FileNotFoundException();
+			
+			else if(new File(myPath+name).exists()){System.out.println("Transmitting File");
+				transmitFile(name,destination,requestCode);}
+			else{
+				System.out.println("Forwarding request for File to parent Server");
+				forwardRequest(name, destination,requestCode);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+	
+}
