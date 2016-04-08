@@ -1,0 +1,28 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+public class Profiler {
+
+	
+	public static void main(String[] args) {
+		TestCaseGenerator aTestCaseGenerator = new TestCaseGenerator();
+		TestCaseExecutor aTestCaseExecutor = new TestCaseExecutor(args[0],args[1]);
+		ArrayList<String> testType=new ArrayList<String>();
+		int numberofTestCases=Integer.parseInt(args[2]);
+		int counter=3;
+		while(counter<args.length)
+			testType.add(args[counter++]);
+		
+		try {
+			File testCaseFile =aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");
+			aTestCaseExecutor.TestExecutor(testCaseFile);
+			
+		} catch (IOException e) {
+	
+		}
+		
+	}
+
+}

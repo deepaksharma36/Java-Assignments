@@ -1,0 +1,10 @@
+
+public class naiveAlgo implements Algo {
+
+	public Result execute() {
+		
+		return new Result(5, comSubSeq, timeTaken)
+	}
+
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;DS_HW_02&apos; to &apos;DS_HW_02_Vector_TimeStamp&apos;&#x0A;- Original element: &apos;DS_HW_02&apos;&#x0A;- Renamed element: &apos;DS_HW_02&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;DS_HW_02&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=DS_HW_02" name="DS_HW_02_Vector_TimeStamp" references="true" stamp="1459058652563" version="1.0"/>
+</session>

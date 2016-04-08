@@ -1,0 +1,39 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+/**
+ * This is the controller of the program, based on the nature of the inputs String
+ * and selection of the algorithm this will first create test cases and then 
+ * execute the test cases, the result will be saved in an Excel Sheet.   
+ * @author deepak Sharma
+ *
+ */
+public class Profiler {
+
+	/**
+	 * @param args
+	 * args[0]=Name of the algorithm
+	 * args[1]=File name of the excel Sheet
+	 */
+	public static void main(String[] args) {
+		TestCaseGenerator aTestCaseGenerator = new TestCaseGenerator();
+		TestCaseExecutor aTestCaseExecutor = new TestCaseExecutor(args[0],args[1]);
+		ArrayList<String> testType=new ArrayList<String>();
+		int numberofTestCases=Integer.parseInt(args[2]);
+		int counter=3;
+		while(counter<args.length)
+			testType.add(args[counter++]);
+		
+		try {
+			File testCaseFile =
+				aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");
+			aTestCaseExecutor.TestExecutor(testCaseFile);
+			
+		} catch (IOException e) {
+	
+		}
+		
+	}
+
+}

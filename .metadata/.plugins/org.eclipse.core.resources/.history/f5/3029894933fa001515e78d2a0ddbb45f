@@ -1,0 +1,27 @@
+import java.io.File;
+import java.io.FileOutputStream;
+
+
+public class TestCaseGenerator {
+
+public File TestCasesGenerator()
+{
+    File testCases = new File("testCase.txt");
+	if (!testCases.exists()) {
+		testCases.createNewFile();
+	}
+
+    FileOutputStream fileWriter = new FileOutputStream(testCases);
+
+	byte[] sequance1 = stringGenerator();
+	byte[] sequance2 = stringGenerator();
+
+	fileWriter.write(sequance1);
+	fileWriter.write(sequance2);
+	fileWriter.flush();
+	fileWriter.close();
+
+	System.out.println("Done");	return 
+}
+
+}

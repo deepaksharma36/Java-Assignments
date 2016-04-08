@@ -1,0 +1,27 @@
+/**
+ * This is an implementation of Abstract Factory Design Pattern 
+ * at the run time this static method will provide object of 
+ * requisit implementation of algorithm for LCS
+ * @author deepak Sharma
+ *
+ */
+class AlgoFactory {
+/**
+ * Create an Object of the implementation of requiste algorithm 
+ * @param algoType Name of the algorithm 
+ * @return Object of implementation
+ */
+       public static Algo createAlgo (String algoType) {
+       if (algoType. equalsIgnoreCase ("sample")){
+              return new sampleAlgo();
+       }else if(algoType. equalsIgnoreCase ("sample")){
+    	   return new sampleAlgo();
+       }else if(algoType. equalsIgnoreCase ("sample")){
+    	   return new sampleAlgo();
+        }
+       throw new IllegalArgumentException("No such Algorithm exist");
+       }
+}
+
+
+

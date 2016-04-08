@@ -1,0 +1,21 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+public class Profiler {
+
+	
+	public static void main(String[] args) {
+		TestCaseGenerator aCaseGenerator = new TestCaseGenerator();
+		ArrayList<String> testType=new ArrayList<String>();
+		testType.add("DNA");
+		try {
+			aCaseGenerator.TestCasesGenerator(5,testType );
+		} catch (IOException e) {
+	
+			e.printStackTrace();
+		}
+		
+	}
+
+}

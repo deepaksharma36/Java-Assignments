@@ -1,0 +1,24 @@
+
+public class Result {
+private int LCSlength;
+public int getLCSlength() {
+	return LCSlength;
+}
+public String getComSubSeq() {
+	return comSubSeq;
+}
+public long getTimeTaken() {
+	return timeTaken;
+}
+private String comSubSeq;
+private long timeTaken; 
+public Result(int LCSlenght, String comSubSeq, long timeTaken)
+{
+	this.LCSlength=LCSlenght;
+	this.comSubSeq=comSubSeq;
+	this.timeTaken=timeTaken;
+}
+
+
+
+}

@@ -1,0 +1,16 @@
+ class AlgoFactory {
+
+       public static Algo createAlgo (String algoType) {
+       if (algoType. equalsIgnoreCase ("sample")){
+              return new sampleAlgo();
+       }else if(algoType. equalsIgnoreCase ("sample")){
+    	   return new sampleAlgo();
+       }else if(algoType. equalsIgnoreCase ("sample")){
+    	   return new sampleAlgo();
+        }
+       throw new IllegalArgumentException("No such Algorithm exist");
+       }
+}
+
+
+

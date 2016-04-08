@@ -1,0 +1,24 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+public class Profiler {
+
+	
+	public static void main(String[] args) {
+		TestCaseGenerator aTestCaseGenerator = new TestCaseGenerator();
+		TestCaseExecutor aTestCaseExecutor = new TestCaseExecutor();
+		ArrayList<String> testType=new ArrayList<String>();
+		testType.add("DNA");
+		try {
+			File testCaseFile =aTestCaseGenerator.TestCasesGenerator(5000,testType ,"test.txt");
+			aTestCaseExecutor.TestExecutor(testCaseFile);
+			
+		} catch (IOException e) {
+	
+		}
+		
+	}
+
+}

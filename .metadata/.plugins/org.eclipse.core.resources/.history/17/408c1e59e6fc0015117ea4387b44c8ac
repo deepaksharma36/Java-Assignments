@@ -1,0 +1,41 @@
+/**
+ * The objective of this class is to store the results received after 
+ * a particular execution for specific input 
+ * @author deepak Sharma
+ *
+ */
+public class Result {
+private int LCSlength;
+private String comSubSeq;
+private long timeTaken;
+/**
+ * return the length of Common LCS
+ * 
+ */
+public int getLCSlength() {
+	return LCSlength;
+}
+/**
+ * 
+ * @return the Common SubSequance
+ */
+public String getComSubSeq() {
+	return comSubSeq;
+}
+/**
+ * 
+ * @return the time taken for executing the implementation of algorithm
+ */
+public long getTimeTaken() {
+	return timeTaken;
+}
+public Result(int LCSlenght, String comSubSeq, long timeTaken)
+{
+	this.LCSlength=LCSlenght;
+	this.comSubSeq=comSubSeq;
+	this.timeTaken=timeTaken;
+}
+
+
+
+}

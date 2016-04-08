@@ -1,0 +1,50 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+/**
+ * This is the controller program, based on the selection of the nature of the inputs Strings
+ * and  the algorithm this will first create test cases and then 
+ * execute the test cases, then the result will be saved in an Excel Sheet.   
+ * @author deepak Sharma
+ *
+ */
+public class Profiler {
+
+	/**
+	 * @param args
+	 * args[0]=Names of the LCS algorithms(comma Separated)
+	 * args[1]=File name of the excel Sheet
+	 * args[2]=Number of test Cases
+	 * args[3]=types of elements required by strings(comma Separated)
+	 */
+	public static void main(String[] args) {
+		//Creating a generator
+		TestCaseGenerator aTestCaseGenerator = new TestCaseGenerator();
+		//creating an executor for user mentioned algorithms
+		TestCaseExecutor aTestCaseExecutor = new TestCaseExecutor(args[0],args[1]);
+		//creating a list of type of element(numeric/alphabetic) required in strings
+		ArrayList<String> testType=new ArrayList<String>();
+		int numberofTestCases=Integer.parseInt(args[2]);
+		int counter=0;
+		String[] stringType=args[3].split(",");
+		while(counter<stringType.length)
+			testType.add(args[counter++]);
+		
+		try {
+			//creating test Cases in text.txt file
+			File testCaseFile =
+				aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");
+			//Executing the textCases
+				aTestCaseExecutor.TestExecutor(testCaseFile);
+			
+		} catch (IOException e) {
+			//if files were not found then IO exception will be raised by
+			//executor or 
+			e.printStackTrace();
+	
+		}
+		
+	}
+
+}

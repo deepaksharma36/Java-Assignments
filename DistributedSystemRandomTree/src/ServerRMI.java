@@ -1,12 +1,7 @@
 //import files are here.
-import java.net.InetAddress;
-import java.rmi.AccessException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Scanner;
 
 /**
  * This Class will Initiate the RMI server on the port no Assign by Network Administrator.

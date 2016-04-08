@@ -1,0 +1,30 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class TestCaseExecutor {
+
+public void TestExecutor(File testFile) throws IOException
+{
+
+	String sCurrentLine;
+	
+	String[] input;
+	long startTime; 
+	BufferedReader fileReader = new BufferedReader(new FileReader(testFile));
+
+	while ((sCurrentLine = fileReader.readLine()) != null) {
+		
+		input=sCurrentLine.split("\t");
+		startTime= System.currentTimeMillis(); 
+		//Here Shrill's Algo will receive Input 
+		
+		long stopTime = System.currentTimeMillis();
+	    long elapsedTime = stopTime - startTime;
+	}
+
+}	
+	
+}

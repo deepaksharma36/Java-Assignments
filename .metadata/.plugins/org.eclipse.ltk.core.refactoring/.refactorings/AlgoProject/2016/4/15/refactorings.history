@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;naiveAlgo.java&apos; to &apos;sampleAlgo.java&apos;&#x0A;- Original project: &apos;AlgoProject&apos;&#x0A;- Original element: &apos;naiveAlgo.java&apos;&#x0A;- Renamed element: &apos;sampleAlgo.java&apos;" description="Rename compilation unit &apos;naiveAlgo.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{naiveAlgo.java" name="sampleAlgo.java" references="false" stamp="1460042157879" version="1.0"/>
+</session>

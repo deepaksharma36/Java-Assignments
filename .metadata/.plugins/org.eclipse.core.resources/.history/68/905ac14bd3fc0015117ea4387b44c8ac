@@ -1,0 +1,11 @@
+
+public class Result {
+String LCSlength;
+String comSubSeq;
+long timeTaken; 
+public Result(String LCSlenght, String comSubSeq, long timeTaken)
+{
+	
+}
+
+}

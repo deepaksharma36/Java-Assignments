@@ -1,0 +1,10 @@
+
+public class sampleAlgo implements Algo {
+
+	public Result execute(String stringA,String stringB) {
+		
+		return new Result(5, "sample", 999);
+	}
+
+
+}

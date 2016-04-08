@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ServerRMI.java&apos; to &apos;DS_HW_02/src/(default package)&apos;&#x0A;- Original project: &apos;DistributedSystemRandomTree&apos;&#x0A;- Destination element: &apos;DS_HW_02/src/(default package)&apos;&#x0A;- Original element: &apos;ServerRMI.java&apos;" description="Copy compilation unit" destination="=DS_HW_02/src&lt;" element1="/src&lt;{ServerRMI.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1458881088539" units="1" version="1.0"/>
+</session>

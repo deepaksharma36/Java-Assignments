@@ -1,0 +1,11 @@
+
+public class Naive implements Algo {
+
+	public Result execute(String stringA, String stringB) {
+	
+		return null;
+	}
+
+
+
+}
