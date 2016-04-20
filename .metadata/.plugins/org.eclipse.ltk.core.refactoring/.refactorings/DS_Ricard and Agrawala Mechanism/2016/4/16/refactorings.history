@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;DS_HW_Raymond_Algorithm/src&apos;&#x0A;- Original project: &apos;DS_Ricard and Agrawala Mechanism&apos;&#x0A;- Destination element: &apos;DS_HW_Raymond_Algorithm/src&apos;&#x0A;- Original elements:&#x0A;     Process.java&#x0A;     ServerRMI.java&#x0A;     CSRequest.java&#x0A;     ProcessInterface.java" description="Copy compilation units" destination="=DS_HW_Raymond_Algorithm/src" element1="/src&lt;{Process.java" element2="/src&lt;{ServerRMI.java" element3="/src&lt;{CSRequest.java" element4="/src&lt;{ProcessInterface.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1460770405204" units="4" version="1.0"/>
+</session>

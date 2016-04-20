@@ -41,41 +41,51 @@
 <part id="5"/>
 <part id="6"/>
 <part id="7"/>
+<part id="8"/>
+<part id="9"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TestCaseExecutor.java" partName="TestCaseExecutor.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/TestCaseExecutor.java" title="TestCaseExecutor.java" tooltip="AlgoProject/src/TestCaseExecutor.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/TestCaseExecutor.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1364" selectionTopPixel="527"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Profiler.java" partName="Profiler.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/Profiler.java" title="Profiler.java" tooltip="AlgoProject/src/Profiler.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/Profiler.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1640" selectionTopPixel="357"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AlgoFactory.java" partName="AlgoFactory.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/AlgoFactory.java" title="AlgoFactory.java" tooltip="AlgoProject/src/AlgoFactory.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/AlgoFactory.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="690" selectionTopPixel="104"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="270" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Algo.java" partName="Algo.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/Algo.java" title="Algo.java" tooltip="AlgoProject/src/Algo.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/Algo.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="162" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Result.java" partName="Result.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/Result.java" title="Result.java" tooltip="AlgoProject/src/Result.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/Result.java"/>
-<editorState selectionHorizontalPixel="58" selectionLength="0" selectionOffset="903" selectionTopPixel="612"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="sampleAlgo.java" partName="sampleAlgo.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/sampleAlgo.java" title="sampleAlgo.java" tooltip="AlgoProject/src/sampleAlgo.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/sampleAlgo.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="677" selectionTopPixel="68"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="677" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TestCaseGenerator.java" partName="TestCaseGenerator.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/TestCaseGenerator.java" title="TestCaseGenerator.java" tooltip="AlgoProject/src/TestCaseGenerator.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/TestCaseGenerator.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2135" selectionTopPixel="578"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2135" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Naive.java" partName="Naive.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/AlgoProject/src/Naive.java" title="Naive.java" tooltip="AlgoProject/src/Naive.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AlgoProject/src/Naive.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="152" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Process.java" partName="Process.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/DS_Ricard and Agrawala Mechanism/src/Process.java" title="Process.java" tooltip="DS_Ricard and Agrawala Mechanism/src/Process.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DS_Ricard and Agrawala Mechanism/src/Process.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5753" selectionTopPixel="714"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TransactionsLog.java" partName="TransactionsLog.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java" title="TransactionsLog.java" tooltip="DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="340" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessInterface.java" partName="ProcessInterface.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java" title="ProcessInterface.java" tooltip="DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1386" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ServerRMI.java" partName="ServerRMI.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/DS_Ricard and Agrawala Mechanism/src/ServerRMI.java" title="ServerRMI.java" tooltip="DS_Ricard and Agrawala Mechanism/src/ServerRMI.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DS_Ricard and Agrawala Mechanism/src/ServerRMI.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="15" selectionOffset="1034" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Process.java" partName="Process.java" path="/home/deepak/Dropbox/Java_Assignment/Java-Assignments/DS_HW_02_Chandy_Lampord/src/Process.java" title="Process.java" tooltip="DS_HW_02_Chandy_Lampord/src/Process.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DS_HW_02_Chandy_Lampord/src/Process.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="300" selectionOffset="9534" selectionTopPixel="785"/>
 </editor>
 </editors>
 <views>
@@ -178,12 +188,6 @@
 </view>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
 <viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
-</view>
-<view id="org.eclipse.debug.ui.VariableView" partName="Variables">
-<viewState/>
-</view>
-<view id="org.eclipse.debug.ui.BreakpointView" partName="Breakpoints">
-<viewState/>
 </view>
 </views>
 <perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
@@ -288,40 +292,27 @@
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
-<fastViewBars>
-<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@4eaa9c5d" orientation="256" selectedTabId="org.eclipse.debug.ui.VariableView" style="1">
-<fastViews>
-<view id="org.eclipse.debug.ui.VariableView" ratio="0.3"/>
+<fastViewBars>&#x0A;<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@4eaa9c5d" orientation="256" selectedTabId="org.eclipse.debug.ui.VariableView" style="1">&#x0A;<fastViews>&#x0A;<view id="org.eclipse.debug.ui.VariableView" ratio="0.3"/>
 <view id="org.eclipse.debug.ui.BreakpointView" ratio="0.3"/>
 </fastViews>
 </fastViewBar>
-<fastViewBar fastViewLocation="131072" id="org.eclipse.debug.internal.ui.NavigatorFolderView" orientation="256" selectedTabId="org.eclipse.debug.ui.DebugView" style="1">
-<fastViews>
-<view id="org.eclipse.ui.views.TaskList" ratio="0.3"/>
+<fastViewBar fastViewLocation="131072" id="org.eclipse.debug.internal.ui.NavigatorFolderView" orientation="256" selectedTabId="org.eclipse.debug.ui.DebugView" style="1">&#x0A;<fastViews>&#x0A;<view id="org.eclipse.ui.views.TaskList" ratio="0.3"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="0">
-<page content="org.eclipse.ui.views.TaskList" label="LabelNotFound"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="0">&#x0A;<page content="org.eclipse.ui.views.TaskList" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.74948454" ratioLeft="727" ratioRight="243" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.74948454" ratioLeft="727" ratioRight="243" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.9354354" ratioLeft="623" ratioRight="43" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.9354354" ratioLeft="623" ratioRight="43" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
 <page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
@@ -329,33 +320,24 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.9444444" ratioLeft="629" ratioRight="37" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.8147287" ratioLeft="1051" ratioRight="239" relationship="2" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.8147287" ratioLeft="1051" ratioRight="239" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@4eaa9c5d" ratio="0.53912216" ratioLeft="565" ratioRight="483" relationship="2" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="0">
-<page content="org.eclipse.debug.ui.VariableView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@4eaa9c5d" ratio="0.53912216" ratioLeft="565" ratioRight="483" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder appearance="2" expanded="0">&#x0A;<page content="org.eclipse.debug.ui.VariableView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@246f7230" ratio="0.611465" ratioLeft="384" ratioRight="244" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@246f7230" ratio="0.611465" ratioLeft="384" ratioRight="244" relationship="4" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="485" ratioRight="485" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.5" ratioLeft="485" ratioRight="485" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
@@ -440,7 +422,7 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.29217792" ratioLeft="381" ratioRight="923" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.45628834" ratioLeft="595" ratioRight="709" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.7717718" ratioLeft="514" ratioRight="152" relationship="4" relative="org.eclipse.ui.editorss">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
@@ -476,7 +458,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@39df6b9b" ratio="0.5393082" ratioLeft="343" ratioRight="293" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@39df6b9b" ratio="0.9418239" ratioLeft="599" ratioRight="37" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
@@ -600,127 +582,28 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/TestCaseGenerator.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/Result.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/sampleAlgo.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/Algo.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/AlgoFactory.java"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=AlgoProject/\/usr\/lib\/jvm\/java-8-oracle\/jre\/lib\/rt.jar&lt;java.util(ArrayList.class"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/TestCaseExecutor.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/Naive.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/TestCaseExecutor.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/Profiler.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/AlgoFactory.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/Algo.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/sampleAlgo.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AlgoProject/src/TestCaseGenerator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DistributedSystemRicard_and_Agrawala_Mechanism/src/snippet/Snippet.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DS_Ricard and Agrawala Mechanism/src/Process.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DS_Ricard and Agrawala Mechanism/src/ServerRMI.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DS_HW_02_Chandy_Lampord/src/Process.java"/>
 </editors>
-<item historyLabel="Algo.java" index="4">
-<position info="not_deleted" x="162" y="0"/>
-</item>
-<item historyLabel="Result.java" index="2">
-<position info="not_deleted" x="192" y="0"/>
-</item>
-<item historyLabel="sampleAlgo.java" index="3">
-<position info="not_deleted" x="269" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="358" y="0"/>
-</item>
-<item historyLabel="Profiler.java" index="0">
-<position info="not_deleted" x="392" y="0"/>
-</item>
-<item historyLabel="sampleAlgo.java" index="3">
-<position info="not_deleted" x="269" y="0"/>
-</item>
-<item historyLabel="AlgoFactory.java" index="5">
-<position info="not_deleted" x="4" y="0"/>
-</item>
-<item historyLabel="AlgoFactory.java" index="5">
-<position info="not_deleted" x="690" y="0"/>
-</item>
-<item historyLabel="Result.java" index="2">
-<position info="not_deleted" x="192" y="0"/>
-</item>
-<item historyLabel="sampleAlgo.java" index="3">
-<position info="not_deleted" x="199" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="358" y="0"/>
-</item>
-<item historyLabel="Profiler.java" index="0">
-<position info="not_deleted" x="442" y="0"/>
-</item>
-<item historyLabel="sampleAlgo.java" index="3">
-<position info="not_deleted" x="199" y="0"/>
-</item>
-<item historyLabel="Result.java" index="2">
-<position info="not_deleted" x="192" y="0"/>
-</item>
-<item historyLabel="Profiler.java" index="0">
-<position info="not_deleted" x="442" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="358" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="834" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3519" y="40"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="931" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="2002" y="62"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="2129" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3519" y="40"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="1165" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3560" y="0"/>
-</item>
-<item historyLabel="ArrayList.class" index="6">
-<position info="not_deleted" x="20904" y="33"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3560" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3519" y="40"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="1164" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="3519" y="0"/>
-</item>
-<item historyLabel="Profiler.java" index="0">
-<position info="not_deleted" x="442" y="0"/>
-</item>
-<item historyLabel="TestCaseExecutor.java" index="7">
-<position info="not_deleted" x="30" y="0"/>
-</item>
-<item historyLabel="TestCaseExecutor.java" index="7">
-<position info="not_deleted" x="1527" y="0"/>
-</item>
-<item historyLabel="TestCaseGenerator.java" index="1">
-<position info="not_deleted" x="2467" y="0"/>
-</item>
-<item historyLabel="Profiler.java" index="0">
-<position info="not_deleted" x="1640" y="0"/>
-</item>
-<item historyLabel="TestCaseExecutor.java" index="7">
-<position info="not_deleted" x="1669" y="0"/>
-</item>
-<item historyLabel="Result.java" index="2">
-<position info="not_deleted" x="327" y="0"/>
-</item>
 <item historyLabel="sampleAlgo.java" index="3">
 <position info="not_deleted" x="677" y="0"/>
 </item>
 <item historyLabel="Result.java" index="2">
 <position info="not_deleted" x="3" y="0"/>
 </item>
-<item historyLabel="TestCaseExecutor.java" index="7">
+<item historyLabel="TestCaseExecutor.java" index="4">
 <position info="not_deleted" x="2502" y="0"/>
 </item>
 <item historyLabel="Result.java" index="2">
@@ -729,7 +612,7 @@
 <item historyLabel="Profiler.java" index="0">
 <position info="not_deleted" x="1640" y="0"/>
 </item>
-<item historyLabel="TestCaseExecutor.java" index="7">
+<item historyLabel="TestCaseExecutor.java" index="4">
 <position info="not_deleted" x="2228" y="0"/>
 </item>
 <item historyLabel="Profiler.java" index="0">
@@ -738,23 +621,131 @@
 <item historyLabel="TestCaseGenerator.java" index="1">
 <position info="not_deleted" x="2135" y="0"/>
 </item>
-<item historyLabel="TestCaseExecutor.java" index="7">
+<item historyLabel="TestCaseExecutor.java" index="4">
 <position info="not_deleted" x="1364" y="0"/>
 </item>
-<item historyLabel="Naive.java" index="8">
+<item historyLabel="Naive.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Naive.java" index="8">
+<item historyLabel="Naive.java" index="5">
 <position info="not_deleted" x="189" y="0"/>
 </item>
-<item historyLabel="Naive.java" index="8">
+<item historyLabel="Naive.java" index="5">
 <position info="not_deleted" x="152" y="0"/>
 </item>
 <item historyLabel="TestCaseGenerator.java" index="1">
 <position info="not_deleted" x="2135" y="0"/>
 </item>
-<item active="true" historyLabel="Result.java" index="2">
+<item historyLabel="Result.java" index="2">
 <position info="not_deleted" x="903" y="0"/>
+</item>
+<item historyLabel="TestCaseExecutor.java" index="6">
+<position info="not_deleted" x="1364" y="0"/>
+</item>
+<item historyLabel="Profiler.java" index="7">
+<position info="not_deleted" x="1640" y="0"/>
+</item>
+<item historyLabel="AlgoFactory.java" index="8">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="AlgoFactory.java" index="8">
+<position info="not_deleted" x="708" y="0"/>
+</item>
+<item historyLabel="Algo.java" index="9">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="Algo.java" index="9">
+<position info="not_deleted" x="162" y="0"/>
+</item>
+<item historyLabel="sampleAlgo.java" index="10">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="sampleAlgo.java" index="10">
+<position info="not_deleted" x="677" y="0"/>
+</item>
+<item historyLabel="TestCaseGenerator.java" index="11">
+<position info="not_deleted" x="2135" y="0"/>
+</item>
+<item historyLabel="Algo.java" index="9">
+<position info="not_deleted" x="162" y="0"/>
+</item>
+<item historyLabel="AlgoFactory.java" index="8">
+<position info="not_deleted" x="270" y="0"/>
+</item>
+<item historyLabel="Algo.java" index="9">
+<position info="not_deleted" x="162" y="0"/>
+</item>
+<item historyLabel="TestCaseGenerator.java" index="11">
+<position info="not_deleted" x="2135" y="0"/>
+</item>
+<item historyLabel="Snippet.java" index="12">
+<position info="not_deleted" x="75" y="0"/>
+</item>
+<item historyLabel="TestCaseGenerator.java" index="11">
+<position info="not_deleted" x="2135" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="307" y="0"/>
+</item>
+<item historyLabel="TransactionsLog.java" index="14">
+<position info="not_deleted" x="340" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="611" y="0"/>
+</item>
+<item historyLabel="ProcessInterface.java" index="15">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ProcessInterface.java" index="15">
+<position info="not_deleted" x="1428" y="0"/>
+</item>
+<item historyLabel="ProcessInterface.java" index="15">
+<position info="not_deleted" x="1386" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="611" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="5085" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="5321" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="693" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="668" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="5281" y="0"/>
+</item>
+<item historyLabel="ServerRMI.java" index="16">
+<position info="not_deleted" x="1034" y="15"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="6436" y="0"/>
+</item>
+<item historyLabel="Process.java" index="17">
+<position info="not_deleted" x="9534" y="300"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="6436" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="6192" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="6227" y="0"/>
+</item>
+<item historyLabel="Process.java" index="13">
+<position info="not_deleted" x="5049" y="0"/>
+</item>
+<item historyLabel="ProcessInterface.java" index="15">
+<position info="not_deleted" x="1386" y="0"/>
+</item>
+<item active="true" historyLabel="Process.java" index="13">
+<position info="not_deleted" x="5049" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -762,10 +753,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@4eaa9c5d"/>
-<trimItem IMemento.internal.id="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -778,6 +765,24 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Process.java" tooltip="DS_HW_02_Chandy_Lampord/src/Process.java">
+<persistable path="/DS_HW_02_Chandy_Lampord/src/Process.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ServerRMI.java" tooltip="DS_Ricard and Agrawala Mechanism/src/ServerRMI.java">
+<persistable path="/DS_Ricard and Agrawala Mechanism/src/ServerRMI.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessInterface.java" tooltip="DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java">
+<persistable path="/DS_Ricard and Agrawala Mechanism/src/ProcessInterface.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TransactionsLog.java" tooltip="DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java">
+<persistable path="/DS_Ricard and Agrawala Mechanism/src/TransactionsLog.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Process.java" tooltip="DS_Ricard and Agrawala Mechanism/src/Process.java">
+<persistable path="/DS_Ricard and Agrawala Mechanism/src/Process.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Snippet.java" tooltip="DistributedSystemRicard_and_Agrawala_Mechanism/src/snippet/Snippet.java">
+<persistable path="/DistributedSystemRicard_and_Agrawala_Mechanism/src/snippet/Snippet.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Naive.java" tooltip="AlgoProject/src/Naive.java">
 <persistable path="/AlgoProject/src/Naive.java"/>
 </file>
@@ -804,24 +809,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AlgoFactory.java" tooltip="AlgoProject/src/AlgoFactory.java">
 <persistable path="/AlgoProject/src/AlgoFactory.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Profiler.java" tooltip="AlgoProject/src/Profiler.java">
-<persistable path="/AlgoProject/src/Profiler.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TestCaseExecutor.java" tooltip="AlgoProject/src/TestCaseExecutor.java">
-<persistable path="/AlgoProject/src/TestCaseExecutor.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" tooltip="DistributedSystemRandomTree/src/Server.java">
-<persistable path="/DistributedSystemRandomTree/src/Server.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChannelSnapShot.java" tooltip="DS_HW_02_Chandy_Lampord/src/ChannelSnapShot.java">
-<persistable path="/DS_HW_02_Chandy_Lampord/src/ChannelSnapShot.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessInterface.java" tooltip="DS_HW_02_Chandy_Lampord/src/ProcessInterface.java">
-<persistable path="/DS_HW_02_Chandy_Lampord/src/ProcessInterface.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Process.java" tooltip="DS_HW_02_Chandy_Lampord/src/Process.java">
-<persistable path="/DS_HW_02_Chandy_Lampord/src/Process.java"/>
 </file>
 </mruList>
 </workbench>

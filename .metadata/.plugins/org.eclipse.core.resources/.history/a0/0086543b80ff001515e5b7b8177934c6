@@ -1,0 +1,13 @@
+import java.util.Arrays;
+
+
+public class CSRequest {
+public int[] time;
+public int processID;
+public CSRequest(int[] time, int processID) {
+
+	this.time=Arrays.copyOf(time, time.length);
+	this.processID=processID;
+}
+
+}

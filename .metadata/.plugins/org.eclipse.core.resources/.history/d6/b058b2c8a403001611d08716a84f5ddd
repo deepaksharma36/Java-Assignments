@@ -1,0 +1,306 @@
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+
+
+
+/**
+ * This is an implementation of the Ricard and Agrawala Mechanism, 
+ *  
+ * @author sharma, deepak
+ *
+ */
+
+public class Process extends UnicastRemoteObject implements ProcessInterface{
+	
+	
+	// maintain log of transactions/requests/events for future use
+	
+	int processID;
+	volatile int holderID;
+	int processCount;
+	volatile String processState="RELEASED";
+	String RMIport;
+	Object CSLock = new Object();
+	Object holderLock = new Object();
+	Object tokenLock = new Object();
+	Object stateLock = new Object();
+	Object tokenReceiving= new Object();
+	boolean working=true;
+	
+	
+	HashMap<String, ProcessInterface> remoteObjectStorage;
+
+	Queue<Integer> csRequests = new LinkedList<Integer>();
+	Queue<Integer> processorQue = new LinkedList<Integer>();
+	/**
+	 * Constructor of process
+	 * @param processCount Number of process available 
+	 * @param processID Id for process
+	 * @param RMIport Port number for communicating with peers
+	 * @throws RemoteException
+	 */
+	Process(int processCount,int processID, String RMIport) throws RemoteException{
+	
+		this.processID=processID;
+		this.processCount=processCount;
+
+		
+		this.RMIport=RMIport;
+		remoteObjectStorage = new HashMap<String, ProcessInterface>();
+		
+	
+	}
+			
+	/**
+	 * For accessing  the remote Process this method prvoid STUB using rmi  
+	 * @param hostName Name of the Remote Process
+	 * @return Stub of Remote Process
+	 * @throws RemoteException
+	 */
+	private ProcessInterface getProcess(String hostName) throws RemoteException{
+		
+		if (remoteObjectStorage.containsKey(hostName))
+			return remoteObjectStorage.get(hostName);
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ProcessInterface aProcess = (ProcessInterface) Naming
+					.lookup(registryURL);
+			remoteObjectStorage.put(hostName, aProcess);
+			return aProcess;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}  catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public  void  tokenRequest(int requistersID) throws RemoteException {
+		
+			synchronized(tokenLock){
+			processorQue.add(requistersID);
+			tokenLock.notify();
+			}
+		
+		
+	}
+	/**
+	 * This method is used by Resolver Thread to resolve a token request
+	 * @param requistersID ID of remote server which have made request
+	 * @param time Time since remote server Seeking Critical Section
+	 * @param localTime Time seice Local Server Seeking critical section
+	 * @throws RemoteException
+	 * @throws InterruptedException 
+	 */
+	public void processTokenRequest() throws RemoteException, InterruptedException
+	{int aRequest;
+		while(true){
+		synchronized(tokenLock){
+			if(processorQue.size()==0)
+				tokenLock.wait();
+			aRequest=processorQue.poll();
+		}
+		
+		if(!csRequests.contains(aRequest))
+		{
+			csRequests.add(aRequest);
+			synchronized(holderLock){
+			if(holderID!=processID)
+				getProcess(PROCESS[holderID-1]).tokenRequest(processID);
+			}
+			Thread.sleep(5);
+		}
+		
+		
+		
+		}
+
+
+		}
+	
+	private void resolvingCSrequest() throws InterruptedException, RemoteException{
+		int nextRequest =csRequests.poll();
+		if (nextRequest==processID)
+			critcalSection();
+		else
+			sendToken();
+	}
+	
+	private void sendToken() throws RemoteException
+	{
+	
+		
+		synchronized(holderLock){
+		updateThreadState("RELEASED");
+		if(getProcess(PROCESS[holderID-1]).reponseTokenRequest(processID)){
+		if (csRequests.size()>0)
+			getProcess(PROCESS[holderID-1]).tokenRequest(processID);
+		}}
+		
+	}
+
+	public boolean reponseTokenRequest(int requesterID) throws RemoteException {
+		synchronized(tokenReceiving)
+		{
+			this.holderID=processID;
+			return true;
+		}
+	}
+	
+	/**
+	 * Once all the requirements for Critical section is made then this method will be executed
+	 * by Critical Section Executer thread.
+	 * @throws InterruptedException 
+	 */
+	private void critcalSection() throws InterruptedException
+	{
+Random aRandom = new Random();
+ 
+		
+		System.out.println("Inside Critical Section");
+		Thread.sleep(aRandom.nextInt(1000)+1000);
+		
+}
+
+
+	/**
+	 * This method will empty the que, after the execution of Critical Section
+	 * @throws RemoteException
+	 */
+	private void closingTask() throws RemoteException
+	{
+
+		System.out.println("Released the Critical Section");
+	
+		updateThreadState("RELEASED");
+		
+	}
+/**
+ * This method will be executed by Critical Section Seeker Thread for achieving critical section 	
+ * @throws RemoteException
+ */
+private void lookingForCriticalSection() throws RemoteException
+	{
+	  if(this.holderID==this.processID)
+		  tokenRequest(processID);
+	  else{
+		  if(!csRequests.contains(processID))
+			  {csRequests.add(processID);
+			  getProcess(PROCESS[holderID-1]).tokenRequest(processID);}
+	  }
+	
+	}
+/**
+ * For updating the status of Thread	
+ * @param status
+ */
+private  void  updateThreadState(String status)
+	{
+		synchronized(stateLock){
+		this.processState=status;}
+	}
+	/**
+	 * This thread seeks/create opportunities for getting Critical Section 
+	 */
+	
+	public void criticalSectionSeeker(){
+		Thread criticalSectionSeeker = new Thread(new Runnable() {
+			Random randomWait = new Random(); 
+			public void run() {
+				while(true){
+				try {
+					Thread.sleep(randomWait.nextInt(1300)+3500);
+					if(processState.equals("RELEASED") )
+						{updateThreadState("WANTED");
+						lookingForCriticalSection();}
+					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+				}
+		
+		});criticalSectionSeeker.start();
+	}
+	/**
+	 * Once the requirements for accessing Critical Sections are met, This Thread take
+	 * the Process to critical Section. 
+	 */
+	
+	public void criticalSectionExecutor(){
+		Thread criticalSectionExecutor = new Thread( new Runnable() {
+			
+			public void run() {
+			while(true)
+			{
+				if(processState.equals("WANTED"))
+				{
+					System.out.println("All requirments Done!! ready to go Critical section");
+					synchronized(CSLock){
+						try {
+						CSLock.wait();
+					updateThreadState("HELD");
+					
+						critcalSection();
+						closingTask();
+					} catch (RemoteException e) {
+					
+						e.printStackTrace();
+					}
+					catch (Exception inException) {
+						
+					}
+					}
+				}
+			}
+				
+			}
+		});
+		
+		criticalSectionExecutor.start();
+	}
+
+	
+	public void requestResolver()
+	{
+		Thread requestResolverThread = new Thread(new Runnable() {
+			public void run() {
+				System.out.println("Activating Token Request Resolver,may take some Time," +
+						"Receiving Request Before the Activation may Result in DeadLock");
+				while(true)
+				{	try{
+					synchronized(tokenLock){
+						
+						tokenLock.wait();
+							
+						processTokenRequest(currentRequest.processID, Arrays.copyOf(currentRequest.time,currentRequest.time.length ),currentRequest.localTime);
+						currentRequest=null;
+					}
+					}catch (Exception e) {
+						System.out.println("Errro");
+					}
+				}
+					
+				}
+				
+			
+		});
+		requestResolverThread.start();
+		
+	}
+	
+}
