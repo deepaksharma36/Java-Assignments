@@ -18,10 +18,10 @@
 		</section>
 	</section>
 	<section name="org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl">
-		<item value="787" key="SashWeightTree"/>
-		<item value="212" key="SashWeightDetails"/>
-		<item value="646" key="WIDTH"/>
-		<item value="152" key="HEIGHT"/>
+		<item value="825" key="SashWeightTree"/>
+		<item value="174" key="SashWeightDetails"/>
+		<item value="620" key="WIDTH"/>
+		<item value="130" key="HEIGHT"/>
 	</section>
 	<section name="STRING_VALUE_INPUT_DIALOG">
 		<item value="346" key="DIALOG_WIDTH"/>

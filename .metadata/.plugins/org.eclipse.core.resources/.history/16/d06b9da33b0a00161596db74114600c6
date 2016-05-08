@@ -1,0 +1,6 @@
+
+ class ElectionMessage {
+int processID;
+int MessageID;
+
+}

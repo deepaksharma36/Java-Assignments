@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="processState" key="selection"/>
+		<item value="getPeerRecord" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="false" key="wholeword"/>
+		<item value="true" key="wholeword"/>
 		<list key="findhistory">
-			<item value="processState"/>
-			<item value="algoCounter"/>
-			<item value="\"/>
-			<item value="File"/>
-			<item value="amount"/>
-			<item value="snapShotState"/>
-			<item value="naming"/>
-			<item value="namming"/>
+			<item value="getPeerRecord"/>
+			<item value="Election Message Has Received from"/>
+			<item value="Election Message Has Received from:2"/>
+			<item value="ElectionMessage"/>
+			<item value="initiateElection"/>
+			<item value="initi"/>
+			<item value="sendCoordinatorMessage"/>
+			<item value="Waiting For Time Keeper Lock"/>
 		</list>
 		<list key="replacehistory">
 			<item value="&quot;,&quot;"/>
@@ -33,7 +33,7 @@
 		<item value="490" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<item value="716" key="DIALOG_HEIGHT"/>
-		<item value="48" key="DIALOG_Y_ORIGIN"/>
-		<item value="129" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="0" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

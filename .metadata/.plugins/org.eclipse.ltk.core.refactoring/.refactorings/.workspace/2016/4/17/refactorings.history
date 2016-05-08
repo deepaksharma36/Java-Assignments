@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;DS_HW_04_ bully_algorithm&apos; to &apos;DS_HW04_Bully_Algorithm&apos;&#x0A;- Original element: &apos;DS_HW_04_ bully_algorithm&apos;&#x0A;- Renamed element: &apos;DS_HW_04_ bully_algorithm&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;DS_HW_04_ bully_algorithm&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=DS_HW_04_ bully_algorithm" name="DS_HW04_Bully_Algorithm" references="true" stamp="1461451412192" version="1.0"/>
+</session>

@@ -1,0 +1,23 @@
+import java.util.Hashtable;
+
+
+public class File {
+String FileName;
+Hashtable<Integer,Peer> peerRecord= new Hashtable<Integer, Peer>();
+
+File(String fileName)
+	{
+		this.FileName=fileName;
+	
+	}
+
+public void addPeer(Peer aPeer){
+peerRecord.put(aPeer.getPeerId(), aPeer);
+}
+
+public Hashtable<Integer, Peer> getPeers()
+{
+	return peerRecord;
+}
+
+}

@@ -1,0 +1,16 @@
+
+public class DynamicAlgorithm implements Algo {
+
+	public Result execute(String stringA, String stringB) {
+		
+		return null;
+	}
+
+	public void dynmicAlgorithm(String A, String B){
+		int[][] table = new int[A.length()][B.length()];
+		
+		
+	} 
+
+
+}

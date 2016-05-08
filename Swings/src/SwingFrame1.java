@@ -30,13 +30,10 @@ public class SwingFrame1 implements ActionListener {
         );
 
 	win.getContentPane().setLayout( new FlowLayout() );
-	
-	for ( int i = 0; i < 10; i++ ) {
-	    JButton button = new JButton( 
-				   String.valueOf( i ) );
+	JButton button = new JButton( String.valueOf( "Submit" ) );
 	    button.addActionListener( this );
 	    win.getContentPane().add( button );
-	}
+	
 
 	win.pack();
 	win.show();

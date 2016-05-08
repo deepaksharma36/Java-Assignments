@@ -366,10 +366,10 @@ public class Process extends UnicastRemoteObject implements ProcessInterface, Ru
 		
 	}
 /**
- * This method will be executed by Critical Section Seeker Thread for achieving critical section 	
+ 	* This method will be executed by Critical Section Seeker Thread for achieving critical section 	
  * @throws RemoteException
  */
-private void lookingForCriticalSection() throws RemoteException
+	private void lookingForCriticalSection() throws RemoteException
 	{   Random randomWait = new Random();
 		int[] timeStamp=updateClock();
 		seekingCS = new Transaction("Seeking CS",(timeStamp),0,amount);
@@ -388,10 +388,10 @@ private void lookingForCriticalSection() throws RemoteException
 		}
 	}
 /**
- * For updating the status of Thread	
+ 	* For updating the status of Thread	
  * @param status
  */
-private  void  updateThreadState(String status)
+	private  void  updateThreadState(String status)
 	{
 		synchronized(stateLock){
 		this.processState=status;}

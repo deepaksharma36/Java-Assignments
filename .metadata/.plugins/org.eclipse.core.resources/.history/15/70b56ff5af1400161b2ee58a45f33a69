@@ -1,0 +1,19 @@
+import java.util.HashMap;
+
+
+ class GUI {
+	 
+HashMap<String, Integer> progress = new HashMap<String, Integer>(); 	 
+
+public void addFileOnGUI(String FileName, int totalNumberofPeices ){
+	
+	
+}	 
+	 
+	 
+public inform(int numberofPeices){
+	int progress=numberofPeices/totalNumberofPeices;
+	
+}	 
+
+}

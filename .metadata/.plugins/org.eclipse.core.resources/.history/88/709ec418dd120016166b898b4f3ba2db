@@ -1,0 +1,10 @@
+import java.util.Hashtable;
+
+
+public class PeerRecord {
+
+	int yourPeerId;
+	String fileName;
+	Hashtable<Integer,Peer> peerRecord;
+
+}

@@ -1,0 +1,11 @@
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+
+public interface TrackerInterface extends Remote {
+	//hashTable getPeers
+	//statusUpdate 
+	//
+	public void addPeer(String IPaddress, String portNumber,String fileName, byte[] peciesAvailabel) throws RemoteException;
+	
+}

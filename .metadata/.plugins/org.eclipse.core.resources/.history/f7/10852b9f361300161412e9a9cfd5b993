@@ -1,0 +1,38 @@
+
+public class Naive implements Algo {
+	private String s;
+	private String r;
+	private StringBuilder commSequance= new StringBuilder();
+	private int numberOfRecursiveCall=0;
+	
+	public Result execute(String stringA, String stringB) {
+		this.r=stringA;
+		this.s=stringB;
+		numberOfRecursiveCall=0;
+		commSequance=new StringBuilder();
+		long sTime = System.currentTimeMillis();
+		int output=naiveRecusriveLCS(stringA, stringB);
+		long stTime = System.currentTimeMillis();
+	    long timeTaken = sTime - stTime;
+		return new Result(output, commSequance.toString(), timeTaken, numberOfRecursiveCall-1, stringA.length(), stringB.length()) ;
+	}
+	
+	public int naiveRecusriveLCS(String A, String B){
+		numberOfRecursiveCall++;
+		int l1 = A.length();
+		int l2 = B.length();
+		int temp1,temp2;
+		if(A.charAt(l1-1)==B.charAt(l2-1))
+		{	commSequance.append(A.charAt(l1-1));
+			return 1+naiveRecusriveLCS(A.substring(0,l1-2), B.substring(0,l2-2));
+		}	
+		else{
+			temp1=naiveRecusriveLCS(A.substring(0,l1-2), B);
+			temp2=naiveRecusriveLCS(A, B.substring(0,l2-2));
+			return temp1>temp2?temp1 : temp2;
+		
+	} 
+	}
+
+
+}

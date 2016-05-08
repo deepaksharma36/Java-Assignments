@@ -1,8 +1,0 @@
-/**
- * This interface will be implemented by all the implementations of Algorithm for LCS 
- * @author deepak Sharma 
- *
- */
-public interface Algo {
-public Result execute(String stringA,String stringB);
-}

@@ -1,0 +1,13 @@
+
+ class GUI {
+int totalNumberofPeices;
+String FileName;
+GUI(String FileName,)	 
+	 
+	 
+public inform(int numberofPeices){
+	int progress=numberofPeices/totalNumberofPeices;
+	
+}	 
+
+}

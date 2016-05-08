@@ -1,0 +1,7 @@
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+
+
+public interface ClientInterfaceForTracker {
+	public Hashtable<Integer,Peer> ReceivePeerMap(String fileName) throws RemoteException;
+}

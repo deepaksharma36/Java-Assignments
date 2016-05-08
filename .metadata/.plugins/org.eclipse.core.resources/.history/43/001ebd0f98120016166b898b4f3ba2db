@@ -1,0 +1,14 @@
+import java.util.Hashtable;
+
+
+public class File {
+String FileName;
+Hashtable<Integer,Peer> peerRecord= new Hashtable<Integer, Peer>();
+
+File(String fileName)
+	{
+	this.FileName=fileName;
+	
+	}
+
+}

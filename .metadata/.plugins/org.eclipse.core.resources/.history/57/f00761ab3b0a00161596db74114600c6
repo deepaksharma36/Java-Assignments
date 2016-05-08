@@ -1,0 +1,11 @@
+
+ class ElectionMessage {
+int processID;
+int MessageID;
+ElectionMessage(int processID, int MessageID)
+{
+this.processID=processID;
+this.MessageID=MessageID;
+}
+
+}

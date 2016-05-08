@@ -1,0 +1,33 @@
+import java.util.BitSet;
+
+
+public class Testing {
+
+	private byte[] peiceInfo = new byte[100]; 
+	public static void main(String[] args) {
+		byte[] a = new byte[10];
+		//total packets 80
+		//change 57 packet to 1
+		a[57/8]=(byte)(a[57/8]| 1<< 57%8-1);
+		//b = (byte) (b | (1 << bitIndex));
+		//b = (byte) (b & ~(1 << bitIndex));
+	    BitSet bitset = BitSet.valueOf(a);  // java.util.BitSet
+	    int setBits = bitset.cardinality();
+		System.out.println(setBits);
+
+	}
+	
+	public int totalReceivedPackets(byte[] peiceInfo){
+	
+		   BitSet bitset = BitSet.valueOf(peiceInfo);  
+		    return bitset.cardinality();
+		
+	}
+	
+	
+	public void updatePeiceInfo(int packetNumber){
+		this.peiceInfo[packetNumber/8]=(byte)(this.peiceInfo[packetNumber/8]| 1<< packetNumber%8-1);
+		
+	}
+
+}

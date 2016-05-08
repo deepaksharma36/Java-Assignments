@@ -1,0 +1,60 @@
+import java.util.HashMap;
+
+
+
+public class RecursiveAlgorithmMemoization implements Algo {
+	int numberOfRecursiveCall=0;
+	HashMap<Strings,Result > results = new HashMap<Strings, Result>();
+	//commSequance=new StringBuilder();
+	public Result execute(String stringA, String stringB) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Result naiveRecusriveMemoLCS(String A, String B){
+		numberOfRecursiveCall++;
+		int l1 = A.length();
+		int l2 = B.length();
+		int temp1,temp2;
+		if(A.charAt(l1-1)==B.charAt(l2-1)){
+			if (results.containsKey(new Strings()))
+			
+			
+			
+		}
+			else
+				return results.put(A, new )  new Result()(A.substring(0,l1-2), B.substring(0,l2-2));
+		else{
+			temp1=naiveRecusriveMemoLCS(A.substring(0,l1-2), B);
+			temp2=naiveRecusriveMemoLCS(A, B.substring(0,l2-2));
+			return temp1>temp2?temp1 : temp2;
+		
+	} 
+	}
+
+class Strings {
+	String A;
+	String B;
+	Strings(String A, String B)
+	{
+		this.A=A;
+		this.B=B;
+	}
+   public boolean compare(String A, String B){
+	   if (this.A.equals(A) && this.B.equals(B))
+		   return true;
+	   else if (this.A.equals(B) && this.B.equals(A))
+		   return true;
+	   else 
+		   return false;
+	   
+   }
+   public boolean equals(Object B)
+   {
+	 Strings guest = (Strings)B; 
+	return compare(guest.A,guest.B);   
+   }
+   
+}
+}

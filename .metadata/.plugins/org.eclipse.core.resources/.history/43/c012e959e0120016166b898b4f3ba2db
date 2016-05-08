@@ -1,0 +1,35 @@
+import java.util.Hashtable;
+
+
+public class File {
+String FileName;
+int numberOfPecies;
+int peiceLength;
+Hashtable<Integer,Peer> peerRecord= new Hashtable<Integer, Peer>();
+
+public Hashtable<Integer, Peer> getPeerRecord() {
+	return peerRecord;
+}
+
+File(String fileName, int numberOfPecies, int peiceLength)
+	{
+		this.FileName=fileName;
+		this.numberOfPecies=numberOfPecies;
+		this.peiceLength=peiceLength;
+	
+	}
+
+public void addPeer(Peer aPeer){
+peerRecord.put(aPeer.getPeerId(), aPeer);
+}
+
+public Hashtable<Integer, Peer> getPeers()
+{
+	return peerRecord;
+}
+
+public void registerPublisher( String publisherIP, String publisherPort){
+	
+	
+};
+}

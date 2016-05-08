@@ -1,0 +1,344 @@
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+import java.util.HashMap;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+import java.util.Scanner;
+
+import javax.crypto.AEADBadTagException;
+
+
+/**
+ * This is an implementation of the bull Election Mechanism, 
+ *  
+ * @author sharma, deepak
+ *
+ */
+
+public class Process extends UnicastRemoteObject implements ProcessInterface{
+	
+	int processID;
+	int processCount;
+	volatile int leader=1;
+	volatile int electionCounter=0;
+	ElectionMessage electionMessage;
+	volatile boolean processState= true;
+	volatile boolean waitingCoordi=false;
+	String RMIport;
+	volatile	boolean election=false;
+	Object stateLock = new Object();
+	Object timeKeeper = new Object();
+	Object electionMessageLock = new Object();
+	Object leaderMonitor = new Object();
+	Object coordiResponseTimeKeeper = new Object();
+	Object noCoordiResponseTimeKeeper = new Object();
+	Object heartBeatLock = new Object();
+	Queue<Integer> electionResonse;
+	Queue<ElectionMessage> electionMessageQue = new LinkedList<ElectionMessage>();
+	HashSet<Integer> electionID = new HashSet<Integer>(); 
+	HashMap<String, ProcessInterface> remoteObjectStorage;
+	/**
+	 * Constructor of process
+	 * @param processCount Number of process available 
+	 * @param processID Id for process
+	 * @param RMIport Port number for communicating with peers
+	 * @throws RemoteException
+	 */
+	Process(int processID,int processCount, String RMIport) throws RemoteException{
+	
+		this.processID=processID;
+		this.processCount=processCount;
+		this.RMIport=RMIport;
+		remoteObjectStorage = new HashMap<String, ProcessInterface>();
+		this.electionResonse = new LinkedList<Integer>();
+	}
+	/**
+	 * For accessing  the remote Process this method provide STUB using RMI  
+	 * @param hostName Name of the Remote Process
+	 * @return Stub of Remote Process
+	 * @throws RemoteException
+	 */
+	private ProcessInterface getProcess(String hostName) throws RemoteException{
+		
+		if (remoteObjectStorage.containsKey(hostName))
+			return remoteObjectStorage.get(hostName);
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ProcessInterface aProcess = (ProcessInterface) Naming
+					.lookup(registryURL);
+			remoteObjectStorage.put(hostName, aProcess);
+			return aProcess;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}  catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private  void  updateProcessState(boolean status)
+	{
+		synchronized(stateLock){
+		this.processState=status;}
+	}
+	public void electionMessage(ElectionMessage requister) throws RemoteException {
+		
+		synchronized(electionMessageLock){
+		System.out.println("Election Message Has Received");	
+		electionMessageQue.add(requister);
+		electionID.add(requister.MessageID);
+		electionMessageLock.notify();
+		}
+		
+	}
+	private void electionMessageProcessor(ElectionMessage requester) throws RemoteException{
+		
+		if(processState)
+		{   System.out.println("Processing Election Message,sending Response");
+			
+		this.getProcess(PROCESS[requester.getProcessID()-1]).electionResponse(new ElectionMessage(processID, requester.MessageID));
+		if(!election && !electionID.contains(requester.getMessageID())){
+			initiateElection(new ElectionMessage(processID,requester.MessageID));}
+		}
+
+	}
+	public void coordinatorMessage(ElectionMessage leader) throws RemoteException {
+		if(this.processState &&(!election || leader.MessageID==electionMessage.MessageID)){
+			System.out.println("Recieved Coordinator Message from, " +leader.processID +" Election Over");
+			this.leader=leader.getProcessID();
+			this.election=false;
+			this.electionResonse.clear();
+			//token
+			this.electionResonse.add(-1);
+			this.electionID.add(leader.MessageID);
+			waitingCoordi=false;
+			
+		}
+	}
+	public boolean heartBeatChecker() throws RemoteException {
+		synchronized(heartBeatLock){
+		try{
+		if(this.processState)
+			return true;
+		else 
+			return false;
+		}
+		catch(Exception ex)
+		{
+			return false;
+		}}
+	}
+    private void initiateElection(ElectionMessage request) throws RemoteException{
+    	//ElectionMessage electionMsg = new ElectionMessage(processID, request.MessageID);
+    	synchronized(stateLock){
+    	election=true;
+    	leader=-1;
+    	System.out.println("Election Start sending Election Message");
+    	this.electionResonse.clear();
+    	if(processID<processCount){
+    		this.electionMessage=request;
+    		synchronized(timeKeeper){
+    			timeKeeper.notify();
+    		}
+    	for(int counter=processID+1;counter<processCount; counter++)
+			this.getProcess(PROCESS[counter-1]).electionMessage(request);}
+    	else
+    		{
+    		sendCoordinatorMessage(request);
+    		}
+    	
+    	
+    	}
+    }
+	public void electionResponse(ElectionMessage response) throws RemoteException {
+		//if I received a single Response I will wait for Coordinator till Time Out
+		System.out.println("Received Election Response");
+		this.electionResonse.add(response.getProcessID());
+		
+		if(electionResonse.size()==1 && !electionResonse.contains(-1) && processID<processCount &&  response.MessageID==this.electionMessage.MessageID){
+		synchronized(timeKeeper){
+			//notify from 5000 wait state
+			election=false;
+			waitingCoordi=true;
+			timeKeeper.notify();
+		}}
+		
+	}
+	private boolean sendCoordinatorMessage(ElectionMessage aElectionMessage) throws RemoteException
+	{
+		System.out.println("Sending Coordinator Message");
+		synchronized(stateLock){
+			if(electionResonse.size()==0)
+			{
+				for(int counter=0;counter<processCount;counter++)
+					getProcess(PROCESS[counter]).coordinatorMessage(aElectionMessage);
+				
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			}
+	}
+	
+	
+	public void electionMonitor(){
+		Thread electionMonitor = new Thread(new Runnable() {
+		 
+			public void run() {
+				while(true){
+				try {
+					synchronized(timeKeeper){
+						timeKeeper.wait();	
+						timeKeeper.wait(5000);}
+					System.out.println("Eel Moni: eiter response Recived or Time Out occure");
+					synchronized(coordiResponseTimeKeeper){
+						coordiResponseTimeKeeper.notify();
+					}
+					} 
+				
+				catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
+				
+			}
+				}
+		
+		});electionMonitor.start();
+	}
+	public void coordinatorMessageMonitor()
+	{
+		Thread coordinatorMessageMonitor = new Thread(new Runnable() {
+			
+			public void run() {
+				String messageID;
+				while(true){
+					synchronized(coordiResponseTimeKeeper){
+						try {
+							coordiResponseTimeKeeper.wait();
+						System.out.println("Cordi Moni: Checking Que if No response I will Send the Cordinator");	
+						synchronized(noCoordiResponseTimeKeeper){	
+						if(!sendCoordinatorMessage(electionMessage))
+						{	System.out.println("Cordi Moni: Have Response Messages In que, waiting for 5 sec");
+							noCoordiResponseTimeKeeper.wait(5000);}}
+						System.out.println("Cordi Moni: Either Cordinator message received or time out occure");
+							election=false;
+							if(leader==-1 && waitingCoordi)
+							{System.out.println("Cordi Moni: Time Out has occured, no Coordination Received");
+							System.out.println("intiating Election");
+							 messageID=""+processID+""+(electionCounter++);
+							 initiateElection(new ElectionMessage(processID,Integer.parseInt(messageID)));
+							}
+							
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						catch (RemoteException e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+					}
+				});
+				
+		coordinatorMessageMonitor.start();
+		
+	}
+	
+
+	public void leaderHeartBeatMonitor(){
+		Thread leaderHeartBeatMonitor = new Thread( new Runnable() {
+			public void run() {
+				
+				String messageID;
+				Random randomWait = new Random();
+				try {
+					while(true){
+						Thread.sleep(100+randomWait.nextInt(500));
+						
+						if(leader!=-1 && processID!=leader){
+						 if (!getProcess(PROCESS[leader-1]).heartBeatChecker() && !election && !waitingCoordi)
+						 {
+							 leader=-1;
+							 election=true;
+							 messageID=""+processID+""+(electionCounter++);
+							 electionMessage=new ElectionMessage(processID,Integer.parseInt(messageID));
+							 initiateElection(new ElectionMessage(processID,Integer.parseInt(messageID)));
+						}
+					}
+							
+				}
+				} catch (RemoteException e) {
+					e.printStackTrace();
+					System.out.println("\n**************** No RESPONSE FROM LEADER, LEADER HAS CRASHED, intitating election");
+					//initiateElection();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		leaderHeartBeatMonitor.start();
+	}
+	public void stateFliper(){
+		Thread stateMonitor = new Thread(new Runnable() {
+			
+			String userInput;
+			public void run() {
+				System.out.println("*State Fliper thread* Press s for sleep w for getting awake");
+				String messageID;
+				Scanner sc = new Scanner(System.in);
+				while(true){
+					try {
+					userInput=sc.nextLine();
+					if(userInput.equalsIgnoreCase("S")){
+						System.out.println("Swiching To sleep State");
+						updateProcessState(false);}
+					else if(userInput.equalsIgnoreCase("W")){
+						if(!processState){
+							 messageID=""+processID+""+electionCounter++;
+							 initiateElection(new ElectionMessage(processID,Integer.parseInt(messageID)));	
+							
+						updateProcessState(true);}
+						}
+				} 	catch (RemoteException e) {
+					e.printStackTrace();
+				}
+					catch (Exception Ex){
+						Ex.printStackTrace();
+					}
+					}
+			}
+		});
+		stateMonitor.start();	
+	}
+	public void electionMessageResponder(){
+		Thread electionMessageResponder = new Thread(new Runnable() {
+			
+			public void run() {
+				while(true){
+					synchronized(electionMessageLock){
+						try {
+						if(electionMessageQue.size()==0)
+							electionMessageLock.wait();
+						electionMessageProcessor(electionMessageQue.poll());
+						} catch (RemoteException e) {
+							e.printStackTrace();
+						}
+						catch(InterruptedException e){}
+					}
+				}
+			}
+		});
+		electionMessageResponder.start();
+	}
+
+}

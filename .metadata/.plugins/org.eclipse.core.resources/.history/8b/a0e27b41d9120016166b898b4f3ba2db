@@ -1,0 +1,10 @@
+import java.rmi.Remote;
+
+
+public interface TrackerInterface extends Remote {
+	//hashTable getPeers
+	//statusUpdate 
+	//
+
+	
+}

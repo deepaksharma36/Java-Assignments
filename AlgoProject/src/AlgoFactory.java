@@ -14,17 +14,17 @@ class AlgoFactory {
  */
        public static Algo createAlgo (String algoType) {
        if (algoType. equalsIgnoreCase ("Naive")){
-              return new sampleAlgo();
+              return new Naive();
        }else if(algoType. equalsIgnoreCase ("Dynamic")){
-    	   return new sampleAlgo();
+    	   return new DynamicAlgorithm();
        }else if(algoType. equalsIgnoreCase ("Recursive")){
-    	   return new sampleAlgo();
+    	   return new Naive();
         }
        else if(algoType. equalsIgnoreCase ("Memoization")){
-    	   return new sampleAlgo();
+    	   return new RecursiveAlgorithmMemoization();
         }
        else if(algoType. equalsIgnoreCase ("HSB")){
-    	   return new sampleAlgo();
+    	   return new HirshbergAlgorithm();
        }
        throw new IllegalArgumentException("No such Algorithm exist");
        }

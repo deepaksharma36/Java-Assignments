@@ -1,0 +1,12 @@
+
+public class DynamicAlgorithm implements Algo {
+
+	public Result execute(String stringA, String stringB) {
+		
+		return null;
+	}
+
+	public 
+
+
+}

@@ -1,0 +1,233 @@
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+
+import org.w3c.dom.css.Counter;
+
+
+
+/**
+ * This is an implementation of the Ricard and Agrawala Mechanism, 
+ *  
+ * @author sharma, deepak
+ *
+ */
+
+public class Process extends UnicastRemoteObject implements ProcessInterface{
+	
+	
+	// maintain log of transactions/requests/events for future use
+	
+	int processID;
+	int processCount;
+	int leader=1;
+	volatile boolean processState= true;
+	String RMIport;
+
+	
+   volatile	boolean election=true;
+
+	Object stateLock = new Object();
+	Object timeKeeper = new Object();
+	
+	Queue<Integer> electionResonse;
+	HashMap<String, ProcessInterface> remoteObjectStorage;
+
+	/**
+	 * Constructor of process
+	 * @param processCount Number of process available 
+	 * @param processID Id for process
+	 * @param RMIport Port number for communicating with peers
+	 * @throws RemoteException
+	 */
+	Process(int processID,int processCount, String RMIport) throws RemoteException{
+	
+		this.processID=processID;
+		this.processCount=processCount;
+		this.RMIport=RMIport;
+		remoteObjectStorage = new HashMap<String, ProcessInterface>();
+		this.electionResonse = new LinkedList<Integer>();
+	}
+			
+	/**
+	 * For accessing  the remote Process this method provide STUB using RMI  
+	 * @param hostName Name of the Remote Process
+	 * @return Stub of Remote Process
+	 * @throws RemoteException
+	 */
+	private ProcessInterface getProcess(String hostName) throws RemoteException{
+		
+		if (remoteObjectStorage.containsKey(hostName))
+			return remoteObjectStorage.get(hostName);
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ProcessInterface aProcess = (ProcessInterface) Naming
+					.lookup(registryURL);
+			remoteObjectStorage.put(hostName, aProcess);
+			return aProcess;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}  catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+
+/**
+ * For updating the status of Process: Released Held	
+ * @param status
+ */
+	private  void  updateProcessState(boolean status)
+	{
+		synchronized(stateLock){
+		this.processState=status;}
+	}
+	/**
+	 * This thread seeks/create opportunities for getting Critical Section after Random Time
+	 */
+	
+
+
+	public void electionMessage(int requistersID) throws RemoteException {
+		if(processState)
+		{
+			leader=-1;
+			election=true;
+			this.getProcess(PROCESS[requistersID-1]).electionResponse(processID);
+		
+		initiateElection();
+		}
+	}
+
+	public void coordinatorMessage(int leader) throws RemoteException {
+		this.leader=leader;
+		this.election=false;
+	}
+
+	public boolean heartBeatChecker(int requesterID) throws RemoteException {
+		try{
+		if(this.processState)
+			return true;
+		else 
+			return false;
+		}
+		catch(Exception ex)
+		{
+			return false;
+		}
+	}
+
+
+    private void initiateElection() throws RemoteException{
+    	synchronized(stateLock){
+    	election=true;
+    	for(int counter=processID+1;counter<processCount; counter++)
+			this.getProcess(PROCESS[counter-1]).electionMessage(processID);
+    	synchronized(timeKeeper){
+    		timeKeeper.notify();
+    	}
+    	}
+    }
+
+	public void electionResponse(int responserID) throws RemoteException {
+		this.electionResonse.add(responserID);
+		
+	}
+	private void sendCoordinatorMessage() throws RemoteException
+	{
+		synchronized(stateLock){
+			if(electionResonse.size()==0)
+			{
+				for(int counter=0;counter<processCount;counter++)
+					getProcess(PROCESS[counter]).coordinatorMessage(processID);
+			}}
+	}
+	public void electionMonitor(){
+		Thread electionMonitor = new Thread(new Runnable() {
+		 
+			public void run() {
+				while(true){
+				try {
+					synchronized(timeKeeper){
+					timeKeeper.wait();	
+					Thread.sleep(5000);
+					// sending cordinator message
+					sendCoordinatorMessage();
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+				}
+		
+		});electionMonitor.start();
+	}
+	/**
+	 * This Thread Resolve CS requests once process receive the token, get notified/activated once it receive the Token 
+	 *  
+	 */
+	
+	public void leaderHeartBeatMonitor(){
+		Thread leaderHeartBeatMonitor = new Thread( new Runnable() {
+			public void run() {
+				Random randomWait = new Random();
+				try {
+					while(true){
+						Thread.sleep(100+randomWait.nextInt(500));
+						if(leader!=-1){
+						 if (!getProcess(PROCESS[leader]).heartBeatChecker() && !election)
+						 {
+							 leader=-1;
+							 initiateElection();
+						}
+					}
+							
+				}
+				} catch (RemoteException e) {
+					e.printStackTrace();
+					System.out.println("\n**************** No RESPONSE FROM LEADER, LEADER HAS CRASHED, intitating election");
+					//initiateElection();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		leaderHeartBeatMonitor.start();
+	}
+	public void stateFliper(){
+		Thread stateMonitor = new Thread(new Runnable() {
+			
+			public void run() {
+				while(true){
+					try {
+					Thread.sleep(10000);
+					updateProcessState(false);
+					Thread.sleep(10000);
+					updateProcessState(true);
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}}
+			}
+		});
+		stateMonitor.start();	
+	}
+
+	
+		
+}

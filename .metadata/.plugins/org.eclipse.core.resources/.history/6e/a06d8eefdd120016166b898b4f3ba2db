@@ -1,0 +1,20 @@
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+
+/**
+ * This interface will be at Client side for creating remote object of Client
+ * Create a remote reference of this interface, get Remote object of tracker 
+ * then call method add peer for get registered.
+ * it will return a peer ID, keep it with you
+ * @author deepak
+ *
+ */
+public interface TrackerInterface extends Remote {
+	//hashTable getPeers
+	//statusUpdate 
+	//
+	public int addPeer(String IPaddress, String portNumber,String fileName, byte[] peciesAvailabel) throws RemoteException;
+	public Hashtable<Integer,Peer> getPeers(String fileName) throws RemoteException;
+	public void updateStatus(int peerID, byte[] packetInfo) throws RemoteException;
+}

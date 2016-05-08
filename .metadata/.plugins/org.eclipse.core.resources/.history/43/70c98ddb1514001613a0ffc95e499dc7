@@ -1,0 +1,92 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class HirshbergAlgorithm implements Algo {
+
+	public Result execute(String stringA, String stringB) {
+		
+		return null;
+	}
+	
+	public ArrayList<Integer> AlgorithmB(StringBuilder A,StringBuilder B){
+		
+	
+	int[][] table = new int[2][B.length()+1];
+		
+		for (int counter=0;counter<= A.length();counter++){
+			for (int innerCounter=0;innerCounter<= B.length();innerCounter++)
+			{
+				if(innerCounter==0 || counter==0)
+				table[counter%2][innerCounter]=0;
+				else if(A.charAt(counter-1)==B.charAt(innerCounter-1))
+					table[1][innerCounter]=table[0][innerCounter-1]+1;
+				else
+					table[1][innerCounter]=table[1][innerCounter-1]>table[0][innerCounter]?table[1][innerCounter-1]:table[0][innerCounter];
+			}
+			for (int innerCounter=0;innerCounter<= B.length();innerCounter++)
+				{table[0][innerCounter]=table[1][innerCounter];
+				table[1][innerCounter]=0;}
+		}
+		ArrayList<Integer> result =new ArrayList<Integer>();
+		for(int counter=0;counter<table[0].length;counter++)
+			   result.add(table[0][counter]);
+		return result;
+	}
+	public StringBuilder   AlgorithmC(StringBuilder A, StringBuilder B, StringBuilder C){
+	    int m = A.length();
+	    int n = B.length();
+	    if (m == 0)
+	        return new StringBuilder("");
+	    else if( A.length() == 1)
+	    {
+	    	if(B.indexOf(A.toString())!=-1)
+	    		return A;
+	    	else
+	    		return new StringBuilder("");
+	    }
+	    else
+	    	
+	    {
+	        int i = m/2;
+	        StringBuilder A1= new StringBuilder(A.substring(0, i));
+	        StringBuilder A2= new StringBuilder(A.substring(1, A.length()));
+	        StringBuilder B2 =new StringBuilder(B.toString());
+	        B2.reverse();
+	        A2.reverse();
+	        
+	        ArrayList<Integer> L1 = AlgorithmB(A1, B);
+	        ArrayList<Integer> L2 = AlgorithmB(A2, B2);
+	        int k = getK(L1,L2);
+	        System.out.println(k);
+	        
+	        StringBuilder B3 =new StringBuilder(B.substring(0,k));
+	        StringBuilder B4 =new StringBuilder(B.substring(k,n));
+	        StringBuilder C1= AlgorithmC(A1, B3, C);
+	        System.out.println(C1.toString());
+	        StringBuilder C2 = AlgorithmC(A1, B4, C);
+	        System.out.println(C2.toString());
+	        return  new StringBuilder(C1.append(C2.toString()));
+	
+}
+	    }
+	private int getK(ArrayList<Integer> L1 ,ArrayList<Integer> L2){
+		int max=0;
+		int k=0;
+		int s=L1.size()-1;
+		for (int counter=0;counter<s;counter++)
+			if (max<L1.get(counter)+L2.get(s-counter)){
+				max=L1.get(counter)+L2.get(s-counter);
+				k=counter+1;
+			}
+		return k;
+	}
+
+
+public static void main(String[] args)
+{
+	HirshbergAlgorithm hsb = new HirshbergAlgorithm();
+	System.out.println(hsb.AlgorithmC(new StringBuilder("ABBB"), new StringBuilder("BBBA"), new StringBuilder("")).toString());
+}
+}

@@ -1,0 +1,18 @@
+
+ class Peer {
+
+String IPaddress;
+String portNumber;
+Byte[] pieceIfno;
+
+Peer(String IPaddress, String portNumber)
+	{
+	
+	}
+Peer(String IPaddress, String portNumber, Byte[] pieceIfno)
+	{
+	
+	}	
+	
+	
+}

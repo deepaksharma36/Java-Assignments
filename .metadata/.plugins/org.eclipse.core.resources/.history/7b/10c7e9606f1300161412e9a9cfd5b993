@@ -1,0 +1,55 @@
+
+public class Naive implements Algo {
+	private String s;
+	private String r;
+	private StringBuilder commSequance;
+	private int numberOfRecursiveCall=0;
+	
+	public Result execute(String stringA, String stringB) {
+		this.r=stringA;
+		this.s=stringB;
+		numberOfRecursiveCall=0;
+		tempRecord records=new tempRecord(new StringBuilder(), 0);
+		long sTime = System.currentTimeMillis();
+		 records=naiveRecusriveLCS(stringA, stringB,records);
+		long stTime = System.currentTimeMillis();
+	    long timeTaken = sTime - stTime;
+		return new Result(records.length, records.commSubSequance.toString(), timeTaken, numberOfRecursiveCall-1, stringA.length(), stringB.length()) ;
+	}
+	
+	public tempRecord naiveRecusriveLCS(String A, String B, tempRecord tempRecords){
+		 if(A.length()<1 || B.length()<1)
+			return tempRecords;
+		numberOfRecursiveCall++;
+		int l1 = A.length();
+		int l2 = B.length();
+		tempRecord temp1,temp2 ;
+		if(A.charAt(l1-1)==B.charAt(l2-1))
+		{	tempRecords.commSubSequance.append(A.charAt(l1-1));
+			tempRecords.length++;
+			tempRecords=naiveRecusriveLCS(A.substring(0,l1-1), B.substring(0,l2-1),tempRecords);
+			return tempRecords;
+		}	
+		else{
+			temp1=new tempRecord(tempRecords.commSubSequance, tempRecords.length);
+			temp1=naiveRecusriveLCS(A.substring(0,l1-1), B,tempRecords);
+			temp2=naiveRecusriveLCS(A, B.substring(0,l2-1),tempRecords);
+			return temp1.length>temp2.length?temp1 : temp2;
+		
+	} 
+	}
+
+	class tempRecord{
+		public tempRecord(StringBuilder commSubSequance, int length) {
+		
+			this.commSubSequance = commSubSequance;
+			this.length = length;
+		}
+		StringBuilder commSubSequance;
+		int length;
+		
+		
+	}
+
+
+}

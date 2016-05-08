@@ -48,6 +48,9 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
+	<section name="WorkingSetModelAwareSelectionDialog">
+		<item value="true" key="ShowVisibleOnly"/>
+	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="updateSimilarElements"/>
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>

@@ -1,0 +1,18 @@
+import java.util.Hashtable;
+
+
+public class PeerRecord  {
+
+	public PeerRecord(int yourPeerId, String fileName,
+			Hashtable<Integer, Peer> peerRecord) {
+		super();
+		this.yourPeerId = yourPeerId;
+		this.fileName = fileName;
+		this.peerRecord = peerRecord;
+	}
+	int yourPeerId;
+	String fileName;
+	Hashtable<Integer,Peer> peerRecord;
+	
+
+}

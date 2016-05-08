@@ -1,0 +1,28 @@
+
+public class DynamicAlgorithm implements Algo {
+
+	public Result execute(String stringA, String stringB) {
+		
+		return null;
+	}
+
+	public void dynmicAlgorithm(String A, String B){
+		int[][] table = new int[A.length()][B.length()];
+		
+		for (int counter=0;counter< A.length();counter++){
+			for (int innerCounter=0;innerCounter< B.length();innerCounter++)
+			{
+				if(innerCounter==0 || counter==0)
+				table[counter][innerCounter]=0;
+				else if(A.charAt(counter)==B.charAt(innerCounter))
+					table[counter][innerCounter]=table[counter-1][innerCounter-1];
+				else
+					table[counter][innerCounter]=table[counter][innerCounter-1]>table[counter-1][innerCounter]?table[counter][innerCounter-1]:table[counter-1][innerCounter];
+			}
+		}
+			
+		
+	} 
+
+
+}

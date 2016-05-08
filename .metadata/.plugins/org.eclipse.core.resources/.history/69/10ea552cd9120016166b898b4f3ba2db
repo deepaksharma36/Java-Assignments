@@ -1,0 +1,46 @@
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Hashtable;
+
+
+public class Tracker implements TrackerInterface {
+HashMap<String , File > fileRecord = new HashMap<String , File >();	
+public void addPeer(String IPaddress, String portNumber,String fileName, byte[] peciesAvailabel){
+	fileRecord.get(fileName).addPeer(new Peer(IPaddress,portNumber,peciesAvailabel));}
+public Hashtable<Integer,Peer> getPeer(String fileName)
+{
+	return fileRecord.get(fileName).getPeerRecord();
+	
+}
+/**
+ * To connect with Client Which asked for File
+ * @param hostName
+ * @param RMIport
+ * @return
+ * @throws RemoteException
+ */
+public ClientInterface getRemoteClient(String hostName, String RMIport) throws RemoteException{
+
+
+		String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+		try {
+			ClientInterface aClient = (ClientInterface) Naming
+					.lookup(registryURL);
+			return aClient;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	
+}
+
+
+

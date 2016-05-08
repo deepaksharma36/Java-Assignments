@@ -1,0 +1,56 @@
+import java.util.BitSet;
+import java.util.HashMap;
+
+class Testing  {
+	
+	private byte[] peiceInfo = new byte[10]; 
+	private GUI torrentGUI = new GUI();
+	private Client Client;
+	
+ 	public int totalReceivedPackets(byte[] peiceInfo){
+		   BitSet bitset = BitSet.valueOf(peiceInfo);  
+		    return bitset.cardinality();
+	}
+	public HashMap<String,FetchPieces> inProgress;
+	Testing(Client Client){
+		this.Client=Client;
+	}
+	public void receivedPeice(int packetNumber){
+		this.peiceInfo[packetNumber/8]=(byte)(this.peiceInfo[packetNumber/8]| 1<< packetNumber%8-1);
+		
+	}
+	public void getMap(){
+		inProgress=Client.inProgress;
+	}
+	
+	public void updateGUI()
+	{	String fileName;
+	
+		for(String file:inProgress.keySet())
+		{
+			
+		}
+			
+	}
+	
+	private void guiUpdatetor(){
+		Thread guiUpdatetor = new Thread(new Runnable() 
+		{
+			public void run() {
+				while(true){
+				getMap();
+				updateGUI();
+			}
+		}});
+	
+	
+
+	}
+	
+}
+
+
+	
+	
+	
+	

@@ -1,0 +1,58 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class SwingGridLayout {
+	public static void main(String args[]) {
+		JFrame window = new JFrame("LCS Profiler");
+		window.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+
+		/*
+		 * System.out.println("Provide below arguments for sucessful execution");
+		 * System.out.println(
+		 * "Provide names of Algorithm, comma separated\n<space>\n path/Name of the excel File(.xls)"
+		 * +
+		 * "\n<Space>\nNumber of test Cases\n<Space>\n type of elements required(comma Separated)"
+		 * ); System.out.println(
+		 * "\t Name of Algorithms\n\tNaive\n\tRecursive\n\tMemoization\n\tHSB\n\tDynamic"
+		 * ); System.out.println(
+		 * "\t type of Elements\n\talphabetics\n\tDNA\n\tnumaric\n\tbinary");
+		 */
+
+		String[] algoSet = { "Naive Recursive", "Recursive Memoization", "HSB",
+				"Dynamic" };
+
+		window.getContentPane().setLayout(new GridLayout(4, 5));
+		// window.getContentPane().setLayout( new GridLayout(10,10) );
+		// window.getContentPane().setLayout( new GridLayout(4,4) );
+		
+		window.getContentPane().add(new JLabel("Select Algorithm"));
+		window.getContentPane().add(new JCheckBox("Naive Recursive"));
+		window.getContentPane().add(new JCheckBox("Recursive Memoization"));
+		window.getContentPane().add(new JCheckBox("HSB"));
+		window.getContentPane().add(new JCheckBox("Dynamic"));
+
+		window.getContentPane().add(new JLabel("Number of test Cases"));
+		window.getContentPane().add(new JTextField());
+		
+		window.getContentPane().add(new JLabel("Types of Elements"));
+		window.getContentPane().add(new JCheckBox("Binary[0-1]"));
+		window.getContentPane().add(new JCheckBox("alphabetics[a-z]"));
+		window.getContentPane().add(new JCheckBox("DNA[A,C,G,T]"));
+		window.getContentPane().add(new JCheckBox("Numaric[0-9]"));
+		
+		window.getContentPane().add(new JLabel("Path/Name of Experiment File"));
+		
+		window.getContentPane().add(new JButton(String.valueOf("Submit")));
+		
+		window.pack();
+		window.show();
+	}
+} // SwingFrame

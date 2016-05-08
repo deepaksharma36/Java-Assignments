@@ -1,0 +1,21 @@
+class Peer {
+int peerId;
+String IPaddress;
+String portNumber;
+Byte[] pieceIfno;
+
+Peer(String IPaddress, String portNumber)
+	{
+	this.IPaddress=IPaddress;
+	this.portNumber=portNumber;
+	}
+Peer(String IPaddress, String portNumber, Byte[] pieceIfno)
+	{
+
+	this.IPaddress=IPaddress;
+	this.portNumber=portNumber;
+	this.pieceIfno=pieceIfno;
+	}	
+	
+	
+}

@@ -1,0 +1,56 @@
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+
+
+public class Tracker implements TrackerInterface {
+HashMap<String , File > fileRecord = new HashMap<String , File >();	
+public synchronized int  addPeer(String IPaddress, String portNumber,String fileName, byte[] peciesAvailabel) throws RemoteException{
+	Peer requester =new Peer(IPaddress,portNumber,peciesAvailabel);
+	fileRecord.get(fileName).addPeer(requester);
+	return requester.getPeerId();
+	}
+public  HashMap<Integer,Peer> getPeers(String fileName) throws RemoteException
+{
+	return fileRecord.get(fileName).getPeers();
+	
+}
+
+/**
+ * We can maintain a que for the purpose of resolving   
+ */
+public  void updatePeerStatus(String fileName,int peerID, byte[] pieceInfo) throws RemoteException {
+	if (fileRecord.containsValue(fileName))
+	{
+		
+	
+	Peer aPeer =fileRecord.get(fileName).getPeerRecord().get(peerID);
+	aPeer.setPieceInfo(pieceInfo);
+	fileRecord.get(fileName).getPeerRecord().put(peerID, aPeer);
+	}
+}
+
+/*
+public ClientInterfaceForTracker getRemoteClient(String hostName, String RMIport) throws RemoteException{
+
+
+	String registryURL = "rmi://" + hostName + ":" + RMIport + "/server";
+	try {
+		ClientInterfaceForTracker aClient = (ClientInterfaceForTracker) Naming
+				.lookup(registryURL);
+		return aClient;
+	} catch (MalformedURLException e) {
+		e.printStackTrace();
+	} catch (NotBoundException e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+
+	*/
+}
+
+
+

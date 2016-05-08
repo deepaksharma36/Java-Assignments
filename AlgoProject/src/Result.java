@@ -16,6 +16,9 @@ private int Rlength;
 private int LCSlength;
 private String comSubSeq;
 private long timeTaken;
+public void setTimeTaken(long timeTaken) {
+	this.timeTaken = timeTaken;
+}
 private int numberOfRecursiveCalls;
 /**
  * return the length of Common LCS

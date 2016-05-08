@@ -1,0 +1,40 @@
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Hashtable;
+
+/**
+ * This interface will be at Client side for creating remote object of Client
+ * Create a remote reference of this interface, get Remote object of tracker 
+ * then call method add peer for get registered.
+ * it will return a peer ID, keep it with you
+ * @author deepak
+ *
+ */
+public interface TrackerInterface extends Remote {
+	//hashTable getPeers
+	//statusUpdate 
+	//
+	/**
+	 * Call the method to get registered as a peer for a particular file if partial file available
+	 * @param IPaddress give your IP address or HostName
+	 * @param portNumber GIve your RMI port name
+	 * @param fileName Give the file name your are interested
+	 * @param peciesAvailabel And if you have partial file give details of species 
+	 * @return
+	 * @throws RemoteException
+	 */
+	public int addPeer(String IPaddress, String portNumber,String fileName, byte[] peciesAvailabel) throws RemoteException;
+	/**
+	 * Call the method to get registered as a peer for a particular file if partial file not available
+	 * @param IPaddress give your IP address or HostName
+	 * @param portNumber GIve your RMI port name
+	 * @param fileName Give the file name your are interested
+	 * @param peciesAvailabel And if you have partial file give details of species 
+	 * @return
+	 * @throws RemoteException
+	 */	
+	public int addPeer(String IPaddress, String portNumber,String fileName) throws RemoteException;
+	public HashMap<Integer,Peer> getPeers(String fileName) throws RemoteException;
+	public void updatePeerStatus(int peerID, byte[] packetInfo) throws RemoteException;
+}
