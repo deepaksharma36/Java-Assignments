@@ -11,6 +11,7 @@ public CSRequest(int[] time, int processID, int[] localTime) {
 	
 	this.processID=processID;
 	this.localTime=Arrays.copyOf(localTime, localTime.length);
+	System.out.println();
 }
 
 

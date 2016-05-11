@@ -1,0 +1,55 @@
+import java.util.HashMap;
+
+
+
+
+public class RecursiveMemoizationTable implements Algo {
+	int numberOfRecursiveCall=0;
+
+	int[][] table ;
+	//commSequance=new StringBuilder();
+	public Result execute(String stringA, String stringB) {
+		
+		numberOfRecursiveCall=0;
+		table = new int[stringA.length()][stringB.length()];
+		long sTime = System.currentTimeMillis();
+		int l1 = stringA.length();
+		int l2 = stringB.length();
+		RecursiveMemoization(stringA, stringB,l1,l2);
+		
+		for (int i=0;i<stringA.length();i++)
+		{
+			for(int j=0;j<stringB.length();j++)
+				table[i][j]=-1;
+		}
+		long stTime = System.currentTimeMillis();
+	    long timeTaken = stTime - sTime;
+	}
+
+	
+	public int RecursiveMemoization(String A, String B, int i, int j){
+
+	
+		if (i<-1 || j<-1)
+			return 0;
+		else if (table[i][j]==-1){
+		numberOfRecursiveCall++;
+		if(A.charAt(i)==B.charAt(j)){
+				table[i][j] = 1+ RecursiveMemoization(A,B,i-1,j-1);
+				return table[i][j];
+			}
+		
+			
+		else{
+			int temp1 =RecursiveMemoization(A,B,i-1,j);
+			int temp2 = RecursiveMemoization(A,B,i,j-1);
+					table[i][j]= temp1>temp2 ? temp1:temp2;
+					return table[i][j];
+				} 
+		}
+		return table[i][j];
+	}
+
+
+
+}

@@ -18,13 +18,17 @@ public class GUI implements ActionListener {
 	JCheckBox HSB = new JCheckBox("HSB");
 	JCheckBox Dynamic = new JCheckBox("Dynamic");
 	JTextField numberofTestCase=new JTextField("100");
-	
+	JTextField StartPoint=new JTextField("1000");
+	JTextField EndPoint=new JTextField("100000");
+	JTextField Deference=new JTextField("1000");
 	JCheckBox Binary =new JCheckBox("Binary[0-1]");
 	JCheckBox alphabetics =new JCheckBox("alphabetics[a-z]");
 	JCheckBox DNA =new JCheckBox("DNA[A,C,G,T]");
 	JCheckBox Numaric =new JCheckBox("Numaric[0-9]");
 	JTextField outfile=new JTextField("Results.xls");
     
+	JCheckBox Heavy =new JCheckBox("Heavy Test Cases");
+	
 	
 	public static void main(String args[]) {
 		GUI aGui = new GUI();
@@ -59,6 +63,11 @@ public class GUI implements ActionListener {
 		panelHolder[1][0].add(new JLabel("Number of test Cases"));
 		numberofTestCase.setText("40000");
 		panelHolder[1][1].add(numberofTestCase);
+		panelHolder[4][0].add(new JLabel("Heavy Tests"));
+		panelHolder[4][1].add(Heavy);
+		panelHolder[4][2].add(StartPoint);
+		panelHolder[4][3].add(EndPoint);
+		panelHolder[4][4].add(Deference);
 		
 		panelHolder[2][0].add(new JLabel("Types of Elements"));
 		panelHolder[2][1].add(Binary);
@@ -82,7 +91,7 @@ public class GUI implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		String[] args = new String[4];
+		String[] args = new String[8];
 		args[0]="";
 		if(naive.isSelected())	     args[0]=args[0]+"Naive";
 		if(Memoization.isSelected()) args[0]=args[0]+",Memoization";
@@ -93,13 +102,17 @@ public class GUI implements ActionListener {
 		args[1]=outfile.getText();
 		
 		args[2]=numberofTestCase.getText();
+		if (Heavy.isSelected()) args[4]="Heavy"; 
 		
 		args[3]="";
 		if(Binary.isSelected())	     args[3]=args[3]+"Binary";
 		if(DNA.isSelected()) args[3]=args[3]+",DNA";
 		if(alphabetics.isSelected())     args[3]=args[3]+",alphabets";
 		if(Numaric.isSelected())         args[3]=args[3]+",numeric";
-		if(args[3].charAt(0)==',')  args[3]=args[3].substring(1);	
+		if(args[3].charAt(0)==',')  args[3]=args[3].substring(1);
+		args[5]=StartPoint.getText();
+		args[6]=EndPoint.getText();
+		args[7]=Deference.getText();
 	controller(args);	
 	}
 	
@@ -118,8 +131,13 @@ public class GUI implements ActionListener {
 		
 		try {
 			//creating test Cases in text.txt file
-			File testCaseFile =
-				aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");
+			File testCaseFile;
+			if(!args[4].equalsIgnoreCase("Heavy")){
+			testCaseFile=
+				aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");}
+			else{
+			testCaseFile =
+					aTestCaseGenerator.heavytestCasesGenerator(Integer.parseInt(args[5]),Integer.parseInt(args[6]),Integer.parseInt(args[7]),testType, "test.txt");}
 			//Executing the textCases
 				aTestCaseExecutor.TestExecutor(testCaseFile);
 			

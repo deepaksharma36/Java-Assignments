@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="java.util.ArrayDeque"/>
-<fullyQualifiedTypeName name="java.net.UnknownHostException"/>
-<fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-<fullyQualifiedTypeName name="java.nio.file.Paths"/>
-<fullyQualifiedTypeName name="java.nio.file.Files"/>
-<fullyQualifiedTypeName name="java.nio.file.Path"/>
-<fullyQualifiedTypeName name="java.net.InetAddress"/>
-<fullyQualifiedTypeName name="ServerInterface"/>
-<fullyQualifiedTypeName name="ArrayLine"/>
-<fullyQualifiedTypeName name="LinkListSum"/>
-<fullyQualifiedTypeName name="java.lang.Boolean"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="Transaction"/>
 <fullyQualifiedTypeName name="TransactionsLog"/>
-<fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="javax.swing.plaf.SliderUI"/>
 <fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
 <fullyQualifiedTypeName name="ProcessInterface"/>
 <fullyQualifiedTypeName name="Process"/>
 <fullyQualifiedTypeName name="ChannelSnapShot"/>
-<fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="Snapshot"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -34,8 +19,6 @@
 <fullyQualifiedTypeName name="AlgoFactory"/>
 <fullyQualifiedTypeName name="java.util.Queue"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
-<fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.lang.InterruptedException"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
@@ -46,10 +29,8 @@
 <fullyQualifiedTypeName name="ClientInterface"/>
 <fullyQualifiedTypeName name="TrackerInterface"/>
 <fullyQualifiedTypeName name="java.rmi.Remote"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.lang.Comparable"/>
 <fullyQualifiedTypeName name="tempRecord"/>
 <fullyQualifiedTypeName name="Algo"/>
@@ -60,4 +41,23 @@
 <fullyQualifiedTypeName name="Naive.tempRecord"/>
 <fullyQualifiedTypeName name="RecursiveAlgorithmMemoization.tempRecord"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.awt.event.ComponentListener"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
+<fullyQualifiedTypeName name="GUI"/>
+<fullyQualifiedTypeName name="java.util.BitSet"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="FetchPieces"/>
+<fullyQualifiedTypeName name="Client"/>
+<fullyQualifiedTypeName name="Peer"/>
+<fullyQualifiedTypeName name="javax.swing.JTable"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="javax.swing.table.AbstractTableModel"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
 </qualifiedTypeNameHistroy>

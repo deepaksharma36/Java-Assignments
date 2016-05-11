@@ -82,11 +82,44 @@ class Strings {
 		   return false;
 	   
    }
-   public boolean equals(Object B)
-   {
-	 Strings guest = (Strings)B; 
-	return compare(guest.A,guest.B);   
-   }
+   @Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + getOuterType().hashCode();
+	result = prime * result + ((A == null) ? 0 : A.hashCode());
+	result = prime * result + ((B == null) ? 0 : B.hashCode());
+	return result;
+}
+@Override
+public boolean equals(Object obj) {
+	
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Strings other = (Strings) obj;
+	if (A.equals(other.B) && B.equals(other.A))
+		return true;
+	if (!getOuterType().equals(other.getOuterType()))
+		return false;
+	if (A == null) {
+		if (other.A != null)
+			return false;
+	} else if (!A.equals(other.A))
+		return false;
+	if (B == null) {
+		if (other.B != null)
+			return false;
+	} else if (!B.equals(other.B))
+		return false;
+	return true;
+}
+private RecursiveAlgorithmMemoization getOuterType() {
+	return RecursiveAlgorithmMemoization.this;
+}
    
 }
 

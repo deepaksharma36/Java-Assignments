@@ -16,10 +16,14 @@ private int Rlength;
 private int LCSlength;
 private String comSubSeq;
 private long timeTaken;
+private double numberOfRecursiveCalls;
+
+public void setNumberOfRecursiveCalls(int numberOfRecursiveCalls) {
+	this.numberOfRecursiveCalls = numberOfRecursiveCalls;
+}
 public void setTimeTaken(long timeTaken) {
 	this.timeTaken = timeTaken;
 }
-private int numberOfRecursiveCalls;
 /**
  * return the length of Common LCS
  * 
@@ -49,6 +53,10 @@ public Result(int LCSlenght, String comSubSeq, long timeTaken, int numberOfRecur
 	this.numberOfRecursiveCalls=numberOfRecursiveCalls;
 	this.SLength=Slength;
 	this.Rlength=Rlength;
+}
+public double getNumberOfRecursiveCalls() {
+	// TODO Auto-generated method stub
+	return this.numberOfRecursiveCalls;
 }
 
 

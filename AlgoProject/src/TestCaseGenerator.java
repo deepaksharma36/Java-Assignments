@@ -81,6 +81,45 @@ public  File TestCasesGenerator(int length ,ArrayList<String> requiredType,Strin
  * @param container this contain all the distinct elements that can be part of target String 
  * @return byte code of target String, for writing in text file
  */
+
+
+
+public  File heavytestCasesGenerator(int StartPoint, int endPoint, int Difference ,ArrayList<String> requiredType,String fileName) throws IOException
+{
+	int sampleCounter=StartPoint;
+    File testCases = new File(fileName+"_Heavy");
+	if (!testCases.exists()) {
+		testCases.createNewFile();
+	}
+
+    FileOutputStream fileWriter = new FileOutputStream(testCases);
+    //Container is mix bag, according to need of the test case
+    // all type of the required charactors will be inserted into the same
+    ArrayList<String> container=createContainer(requiredType);
+    
+    while(sampleCounter<=endPoint){
+    	
+	byte[] sequance1 = stringGenerator(sampleCounter,container);
+	
+	//while(secondStringCounter<=sampleCounter){
+	byte[] sequance2 = stringGenerator(sampleCounter,container);
+	fileWriter.write(sequance1);
+	fileWriter.write("\t".getBytes());
+	fileWriter.write(sequance2);
+	fileWriter.write("\n".getBytes());
+	fileWriter.flush();
+	//}
+	sampleCounter+=Difference;
+    }
+	fileWriter.close();
+
+	return testCases;
+}
+
+
+
+
+
 private byte[] stringGenerator(int length , ArrayList<String> container)
    {
 	StringBuilder sampleString = new StringBuilder();

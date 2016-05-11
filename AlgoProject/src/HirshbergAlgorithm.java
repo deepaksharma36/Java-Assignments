@@ -68,14 +68,14 @@ int numberofRecursiveCall=0;
 	        ArrayList<Integer> L1 = AlgorithmB(A1, B);
 	        ArrayList<Integer> L2 = AlgorithmB(A2, B2);
 	        int k = getK(L1,L2);
-	        System.out.println(k);
+	        //System.out.println(k);
 	        
 	        StringBuilder B3 =new StringBuilder(B.substring(0,k));
 	        StringBuilder B4 =new StringBuilder(B.substring(k,n));
 	        StringBuilder C1= AlgorithmC(A1, B3);
-	        System.out.println(C1.toString());
+	        //System.out.println(C1.toString());
 	        StringBuilder C2 = AlgorithmC(A3, B4);
-	        System.out.println(C2.toString());
+	        //System.out.println(C2.toString());
 	        return  new StringBuilder(C1.append(C2.toString()));
 	
 }

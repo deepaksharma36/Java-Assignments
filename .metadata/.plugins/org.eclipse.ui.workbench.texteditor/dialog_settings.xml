@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="getPeerRecord" key="selection"/>
+		<item value="server" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="server"/>
+			<item value="naming"/>
+			<item value="ip"/>
+			<item value="Server"/>
+			<item value="myAddress"/>
+			<item value="FetchPieces"/>
 			<item value="getPeerRecord"/>
 			<item value="Election Message Has Received from"/>
-			<item value="Election Message Has Received from:2"/>
-			<item value="ElectionMessage"/>
-			<item value="initiateElection"/>
-			<item value="initi"/>
-			<item value="sendCoordinatorMessage"/>
-			<item value="Waiting For Time Keeper Lock"/>
 		</list>
 		<list key="replacehistory">
 			<item value="&quot;,&quot;"/>
@@ -30,10 +30,10 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="490" key="DIALOG_WIDTH"/>
+		<item value="510" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="716" key="DIALOG_HEIGHT"/>
-		<item value="8" key="DIALOG_Y_ORIGIN"/>
-		<item value="0" key="DIALOG_X_ORIGIN"/>
+		<item value="764" key="DIALOG_HEIGHT"/>
+		<item value="311" key="DIALOG_Y_ORIGIN"/>
+		<item value="303" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

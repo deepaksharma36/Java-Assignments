@@ -21,7 +21,7 @@ class AlgoFactory {
     	   return new Naive();
         }
        else if(algoType. equalsIgnoreCase ("Memoization")){
-    	   return new RecursiveAlgorithmMemoization();
+    	   return new RecursiveMemoizationTable();
         }
        else if(algoType. equalsIgnoreCase ("HSB")){
     	   return new HirshbergAlgorithm();

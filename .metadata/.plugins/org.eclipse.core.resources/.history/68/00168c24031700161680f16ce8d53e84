@@ -1,0 +1,95 @@
+import java.util.HashMap;
+
+
+
+
+public class RecursiveMemoizationTable implements Algo {
+	int numberOfRecursiveCall=0;
+	StringBuilder commSequance = new StringBuilder();
+
+	int[][] table ;
+	//commSequance=new StringBuilder();
+	public Result execute(String stringA, String stringB) {
+		
+		numberOfRecursiveCall=0;
+		table = new int[stringA.length()][stringB.length()];
+		int l1 = stringA.length();
+		int l2 = stringB.length();
+
+		long sTime = System.currentTimeMillis();
+
+		
+		for (int i=0;i<stringA.length();i++)
+		{
+			for(int j=0;j<stringB.length();j++)
+				table[i][j]=-1;
+		}
+		RecursiveMemoization(stringA, stringB,l1-1,l2-1);
+		
+		Result memoResult = solution(table,stringA,stringB);
+		long stTime = System.currentTimeMillis();
+	    long timeTaken = stTime - sTime;
+	    memoResult.setTimeTaken(timeTaken);
+	    return memoResult;
+	}
+	public Result solution(int[][] table, String A, String B){
+		//showTable(table);
+		int counter1=A.length()-1;
+		int counter2=B.length()-1;
+		int LCSlenght=table[counter1][counter2];
+		while(counter1>=0 && counter2>=0){
+		if(A.charAt(counter1)==B.charAt(counter2)){
+			commSequance.append(A.charAt(counter1));
+			counter1--;
+			counter2--;
+		}
+		else if(table[counter1-1][counter2]>table[counter1][counter2-1])
+			   counter1--;
+		else
+			 counter2--;
+		}
+		return new Result(LCSlenght, commSequance.toString(),0 , 0, A.length(), B.length());
+	}
+	
+	public int RecursiveMemoization(String A, String B, int i, int j){
+
+	
+		if (i<=-1 || j<=-1)
+			return 0;
+		else if (table[i][j]==-1){
+		numberOfRecursiveCall++;
+		if(A.charAt(i)==B.charAt(j)){
+				table[i][j] = 1+ RecursiveMemoization(A,B,i-1,j-1);
+				return table[i][j];
+			}
+		
+			
+		else{
+			int temp1 =RecursiveMemoization(A,B,i-1,j);
+			int temp2 = RecursiveMemoization(A,B,i,j-1);
+					table[i][j]= temp1>temp2 ? temp1:temp2;
+					return table[i][j];
+				} 
+		}
+		else
+		return table[i][j];
+	}
+
+	public static void main(String[] args)
+	{
+		RecursiveMemoizationTable hsb = new RecursiveMemoizationTable();
+
+		System.out.println(hsb.execute("101", "10").getComSubSeq());
+		hsb.showTable(hsb.table);
+		//System.out.println(hsb.solution(hsb.table,"1101","10"));
+		//System.out.println("Final");
+	}
+
+	public void showTable(int[][] table){
+		for(int counter=0;counter<table.length;counter++){
+			System.out.println();
+			for(int innerCounter=0; innerCounter<table[0].length;innerCounter++)
+				System.out.print(table[counter][innerCounter]);}
+		System.out.println();
+	}
+}

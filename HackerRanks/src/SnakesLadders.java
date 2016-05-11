@@ -1,25 +1,21 @@
-import geography.GeographicPoint;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 
-class graph{
-	
-}
+
+
 public class SnakesLadders {
-	Map <int, ArrayList<int>> map;
-
-	setup()
-	{
-		map = new HashMap<int, ArrayList<int>>();
-	}
 
 	public static void main(String[] args) {
       
-      
+      try {
+		System.out.println(InetAddress.getLocalHost().getHostAddress());
+		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
+	}
+    
 }

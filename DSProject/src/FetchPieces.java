@@ -22,20 +22,18 @@ public class FetchPieces extends UnicastRemoteObject implements FetchPiecesInter
 		return peerMap;
 	}
 
-	private MetaData MD;
 	public MetaData getMD() {
 		return MD;
 	}
 
-	private HashMap<Integer, Integer> handshakeStatus;
-	private String IP, port, path;
-	private int selfId;
 	public int getSelfId() {
 		return selfId;
 	}
 
-	
-
+	private MetaData MD;
+	private HashMap<Integer, Integer> handshakeStatus;
+	private String IP, port, path;
+	private int selfId;
 	private Queue<Integer> handshakeList;
 	private Object handshakelock;
 	

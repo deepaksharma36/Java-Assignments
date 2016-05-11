@@ -1,0 +1,144 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class GUI implements ActionListener {
+	JPanel[][] panelHolder = new JPanel[5][5];
+	JFrame window = new JFrame("LCS Profiler");
+	JCheckBox naive = new JCheckBox("Naive Recursive");
+	JCheckBox Memoization = new JCheckBox("Recursive Memoization");
+	JCheckBox HSB = new JCheckBox("HSB");
+	JCheckBox Dynamic = new JCheckBox("Dynamic");
+	JTextField numberofTestCase=new JTextField("100");
+	
+	JCheckBox Binary =new JCheckBox("Binary[0-1]");
+	JCheckBox alphabetics =new JCheckBox("alphabetics[a-z]");
+	JCheckBox DNA =new JCheckBox("DNA[A,C,G,T]");
+	JCheckBox Numaric =new JCheckBox("Numaric[0-9]");
+	JTextField outfile=new JTextField("Results.xls");
+    
+	JCheckBox Heavy =new JCheckBox("Heavy Test Cases");
+	
+	
+	public static void main(String args[]) {
+		GUI aGui = new GUI();
+		aGui.loadGUI();
+	}
+
+	public void loadGUI(){
+		
+		window.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		    
+		String[] algoSet = { "Naive Recursive", "Recursive Memoization", "HSB","Dynamic" };
+		
+		window.getContentPane().setLayout(
+		new GridLayout(5,5, 0,0));
+		// window.getContentPane().setLayout( new GridLayout(10,10) );
+		// window.getContentPane().setLayout( new GridLayout(4,4) );
+		for(int m = 0; m < 5; m++) {
+			   for(int n = 0; n < 5; n++) {
+			      panelHolder[m][n] = new JPanel();
+			      window.getContentPane().add(panelHolder[m][n]);
+			   }}
+		panelHolder[0][0].add(new JLabel("Select Algorithm"));
+		panelHolder[0][1].add(naive);
+		panelHolder[0][2].add(Memoization);
+		panelHolder[0][3].add(HSB);
+		panelHolder[0][4].add(Dynamic);
+
+		panelHolder[1][0].add(new JLabel("Number of test Cases"));
+		numberofTestCase.setText("40000");
+		panelHolder[1][1].add(numberofTestCase);
+		panelHolder[1][3].add(new JLabel("Heavy Tests Only"));
+		panelHolder[1][4].add(Heavy);
+		
+		panelHolder[2][0].add(new JLabel("Types of Elements"));
+		panelHolder[2][1].add(Binary);
+		panelHolder[2][2].add(alphabetics);
+		panelHolder[2][3].add(DNA);
+		panelHolder[2][4].add(Numaric);
+		
+		panelHolder[3][0].add(new JLabel("Path/Name of Experiment File"));
+		outfile.setText("Resutls.xls");
+		panelHolder[3][1].add(outfile);
+	    
+		JButton submit =new JButton(String.valueOf("Start Experiment"));
+		submit.addActionListener(this);
+		panelHolder[3][4].add(submit);
+		
+		
+		window.pack();
+		window.show();
+	}
+	
+
+
+	public void actionPerformed(ActionEvent e) {
+		String[] args = new String[5];
+		args[0]="";
+		if(naive.isSelected())	     args[0]=args[0]+"Naive";
+		if(Memoization.isSelected()) args[0]=args[0]+",Memoization";
+		if(Dynamic.isSelected())     args[0]=args[0]+",Dynamic";
+		if(HSB.isSelected())         args[0]=args[0]+",HSB";
+		if(args[0].charAt(0)==',')  args[0]=args[0].substring(1);
+		
+		args[1]=outfile.getText();
+		
+		args[2]=numberofTestCase.getText();
+		if (Heavy.isSelected()) args[4]="Heavy"; 
+		args[3]="";
+		if(Binary.isSelected())	     args[3]=args[3]+"Binary";
+		if(DNA.isSelected()) args[3]=args[3]+",DNA";
+		if(alphabetics.isSelected())     args[3]=args[3]+",alphabets";
+		if(Numaric.isSelected())         args[3]=args[3]+",numeric";
+		if(args[3].charAt(0)==',')  args[3]=args[3].substring(1);	
+	controller(args);	
+	}
+	
+	public  void controller(String[] args) {
+		//Creating a generator
+		TestCaseGenerator aTestCaseGenerator = new TestCaseGenerator();
+		//creating an executor for user mentioned algorithms
+		TestCaseExecutor aTestCaseExecutor = new TestCaseExecutor(args[0],args[1]);
+		//creating a list of type of element(numeric/alphabetic) required in strings
+		ArrayList<String> testType=new ArrayList<String>();
+		int numberofTestCases=Integer.parseInt(args[2]);
+		int counter=0;
+		String[] stringType=args[3].split(",");
+		while(counter<stringType.length)
+			testType.add(stringType[counter++]);
+		
+		try {
+			//creating test Cases in text.txt file
+			File testCaseFile;
+			if(args[4].equalsIgnoreCase("Heavy"));
+			testCaseFile=
+				aTestCaseGenerator.TestCasesGenerator(numberofTestCases,testType ,"test.txt");
+			testCaseFile =
+					aTestCaseGenerator.heavytestCasesGenerator(numberofTestCases, testType, "test.txt");
+			//Executing the textCases
+				aTestCaseExecutor.TestExecutor(testCaseFile);
+			
+		} catch (IOException e) {
+			//if test case file were not found then IO exception will be raised by
+			//executor or generator
+			e.printStackTrace();
+	
+		}
+	}
+
+	
+ // SwingFrame
+}

@@ -1,0 +1,41 @@
+import java.awt.BorderLayout;
+import java.util.HashMap;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+
+ class GUI {
+		JFrame frame = new JFrame();
+	 
+private void init()
+{
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    Object rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+        { "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
+    Object columnNames[] = { "File Name", "Packet Received", "Total Packets" };
+    JTable table = new JTable(rowData, columnNames);
+
+    JScrollPane scrollPane = new JScrollPane(table);
+    frame.add(scrollPane, BorderLayout.CENTER);
+    frame.setSize(700, 150);
+    frame.setVisible(true);
+
+
+}
+	 
+
+public void addFileOnGUI(String FileName, int totalNumberofPeices ){
+
+	}	 
+	 
+	 
+public void inform(Object[][] data){
+	//int progress=numberofPeices/totalNumberofPeices;
+	
+	
+}	 
+
+}
